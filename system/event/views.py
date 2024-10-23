@@ -63,3 +63,27 @@ def team(request):
             cursor.execute(query, (rollNo, name, position, phoneNo, emailId, password))
         transaction.commit()
         return JsonResponse({'status': 'success', 'message': 'Competition added successfully.'})
+
+@csrf_exempt
+def event(request):
+    if(request.method=="GET"):
+        query = "select * from event_event"
+        event_list = []
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            event_list= cursor.fetchall()
+        event_data = []
+        for event in event_list:
+            event_data.append({"name": event[0], "venue": event[1], "dateTime": event[2], "id": event[3]})
+        return JsonResponse(event_data, safe=False)
+    if(request.method=="POST"):
+        data = json.loads(request.body)
+        name = data["name"]
+        venue = data["venue"]
+        dateTime = data["dateTime"]
+        query = """
+                    insert into event_event (eventName, eventVenue, eventTime) values(%s,%s,%s)"""
+        with connection.cursor() as cursor:
+            cursor.execute(query, (name, venue, dateTime))
+        transaction.commit()
+        return JsonResponse({'status': 'success', 'message': 'Competition added successfully.'})
