@@ -8,13 +8,13 @@ const Navbar = () => {
                 <a href="#" className="logo">
                     FLUXUS
                 </a>
-                <nav className="navbar">
+                <div className="navbar">
                     <a href="#">Events</a>
                     <a href="#">Competitions</a>
                     <a href="#">Speakers</a>
                     <a href="#">Past Artists</a>
                     <a href="#">Team</a>
-                </nav>
+                </div>
             </header>
 
         </>

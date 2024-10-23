@@ -40,18 +40,23 @@
     cursor: pointer;
 }
 
+.navbar{
+    display: flex;
+    gap: 40px;
+}
+
 .navbar a {
     color: #fff;
     font-size: 20px;
     letter-spacing: 1px;
     text-decoration: none;
-    margin-left: 35px;
+    /* margin-left: 35px; */
     transition: 0.3s;
 }
 
 .navbar a:hover {
     text-shadow: 1px 1px 10px rgba(255, 217, 0, 0.776);
-    transform: scale(1.3);
+    transform: scale(1.15);
 }
 #menu-icon {
     font-size: 36px;
