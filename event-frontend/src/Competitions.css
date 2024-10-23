@@ -1,0 +1,20 @@
+
+.swiper {
+  width: 100%;
+  padding-top: 23vh;
+  padding-bottom: 10vh;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 550px;
+  height: 400px;
+}
+
+.swiper-slide img {
+  /* display: block; */
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
