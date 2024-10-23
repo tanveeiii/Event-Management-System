@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 
 class Team(models.Model):
     rollNo = models.IntegerField(primary_key=True)
@@ -18,7 +19,7 @@ class Attendees(models.Model):
     name = models.CharField(max_length=50)
     phoneNo = models.IntegerField()
     emailId = models.EmailField()
-    ticketId = models.CharField(primary_key=True, max_length=255)
+    ticketId = models.UUIDField(primary_key=True, editable=False)
     accommodation = models.BooleanField()
 
 class Competitions(models.Model):
@@ -31,7 +32,7 @@ class Participants(models.Model):
     name = models.CharField(max_length=50)
     phoneNo = models.IntegerField()
     emailId = models.EmailField()
-    registrationId = models.CharField(primary_key=True, max_length=255)
+    registrationId = models.UUIDField(primary_key=True, editable=False)
     accommodation = models.BooleanField()
     competitionId = models.ForeignKey(Competitions, on_delete=models.CASCADE)
 
