@@ -1,11 +1,13 @@
 body {
   margin: 0;
   padding: 0;
-  background-image: url('./assets/IMG_9052[1].JPG');
+  /* background-image: url('./assets/IMG_9052[1].JPG');
   background-size: cover;
-  background-repeat: no-repeat;
-  height: 97vh;
   background-position: center;
+  background-repeat: no-repeat; */
+  height: 98vh;
+  /* background-color: #FF3CAC; */
+  background: linear-gradient(90deg, rgba(1,1,19,1) 0%, rgba(54,4,84,1) 30%, rgb(85, 9, 122) 50%, rgba(54,3,74,1) 70%, rgba(1,1,23,1) 100%);
 }
 
 *{
