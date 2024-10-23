@@ -11,6 +11,15 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+USER_NAME = os.getenv("USER_NAME")
+HOST = os.getenv("HOST")
+PASSWORD = os.getenv("PASSWORD")
+PORT = os.getenv("PORT")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -77,7 +86,11 @@ WSGI_APPLICATION = 'system.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'EVENT_MANANGEMENT',
+        'NAME': 'EVENT_MANAGEMENT',
+        'USER' : USER_NAME,
+        'HOST' : HOST,
+        'PASSWORD' : PASSWORD, 
+        'PORT': PORT
     }
 }
 
