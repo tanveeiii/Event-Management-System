@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 
 class Team(models.Model):
     rollNo = models.IntegerField(primary_key=True)
@@ -18,7 +19,7 @@ class Attendees(models.Model):
     name = models.CharField(max_length=50)
     phoneNo = models.CharField(max_length=20)
     emailId = models.EmailField()
-    ticketId = models.UUIDField(primary_key=True, editable=False)
+    ticketId = models.UUIDField(primary_key=True , editable=False, default=uuid.uuid4)
     accommodation = models.BooleanField()
 
 class Competitions(models.Model):
@@ -31,7 +32,7 @@ class Participants(models.Model):
     name = models.CharField(max_length=50)
     phoneNo = models.CharField(max_length=20)
     emailId = models.EmailField()
-    registrationId = models.UUIDField(primary_key=True, editable=False)
+    registrationId = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
     accommodation = models.BooleanField()
     competitionId = models.ForeignKey(Competitions, on_delete=models.CASCADE)
 
@@ -41,7 +42,7 @@ class Speakers(models.Model):
     image = models.TextField()
 
 class Sponsors(models.Model):
-    logo = models.ImageField()
+    logo = models.TextField()
     name = models.CharField(primary_key=True, max_length=50)
     sponsorshipAmount = models.IntegerField()
     dealBy = models.ForeignKey(Team, on_delete=models.DO_NOTHING)
