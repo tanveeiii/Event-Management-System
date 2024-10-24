@@ -5,6 +5,7 @@ from django.http import JsonResponse
 import json
 import uuid
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.hashers import make_password
 import base64
 
 # Create your views here.
@@ -56,11 +57,12 @@ def team(request):
         phoneNo = data['phoneNo']
         emailId = data['emailId']
         password = data['password']
+        hashed_password = make_password(password)
         query = """
                     insert into event_team (rollNo, name, position, phoneNo, emailId, password) values (%s,%s,%s,%s,%s,%s) 
                 """
         with connection.cursor() as cursor:
-            cursor.execute(query, (rollNo, name, position, phoneNo, emailId, password))
+            cursor.execute(query, (rollNo, name, position, phoneNo, emailId, hashed_password))
         transaction.commit()
         return JsonResponse({'status': 'success', 'message': 'Team Member added successfully.'})
 
