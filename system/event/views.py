@@ -147,4 +147,65 @@ def speakers(request):
             cursor.execute(query, (name, desc, encoded_image))
         transaction.commit()
         return JsonResponse({"status":"success", "message": "Speaker data added successfully"})
+
+@csrf_exempt
+def attendees(request):
+    if(request.method=="POST"):
+        data = json.loads(request.body)
+        name = data['name']
+        phoneNo = data['phoneNo']
+        emailId = data['emailId']
+        accommodation = data['accommodation']
+        ticketId = uuid.uuid4()
+        with connection.cursor() as cursor:
+            
+            query = """
+                        insert into event_attendees (name, phoneNo, emailId, ticketId, accommodation) values(%s,%s,%s,%s,%s)
+                    """
+            cursor.execute(query, (name, phoneNo, emailId, ticketId, accommodation ))
+        transaction.commit()
+        return JsonResponse({'status':'success', 'message': 'Ticket bought successfully', 'ticketid': ticketId})
+    if(request.method=="GET"):
+        query = "select * from event_attendees"
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            attendees_list = cursor.fetchall()
+        attendees_data=[]
+        for attendee in attendees_list:
+            attendees_data.append({"name": attendee[0], "phoneNo": attendee[1], "emailId":attendee[2], "ticketid": attendee[3], "accommodation": attendee[4]})
+        return JsonResponse(attendees_data, safe=False)
+    
+@csrf_exempt
+def sponsors(request):
+    if(request.method=="GET"):
+        query = "select * from event_sponsors"
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            sponsors_list = cursor.fetchall()
+        sponsors_data = []
+        for sponsor in sponsors_list:
+            data_url = f"data:image/jpeg;base64,{sponsor[0]}"
+            print(sponsor)
+            sponsors_data.append({"name": sponsor[1], "amt" : sponsor[2], "dealBy" : sponsor[5], "phoneNo":sponsor[3], "emailId": sponsor[4], "logo": data_url})
+        return JsonResponse(sponsors_data, safe=False)
+    if(request.method=="POST"):
+        name = request.POST.get('name')
+        amt = request.POST.get('amt')
+        dealBy = request.POST.get('dealBy')
+        phoneNo = request.POST.get('phoneNo')
+        emailId = request.POST.get('emailId')
+        image = request.FILES['logo']
+        image_data = image.read()
+        encoded_image = base64.b64encode(image_data).decode('utf-8')
+        with connection.cursor() as cursor:
+            fetch_rollNo = f"select rollNo from event_team where name = '{dealBy}'"
+            cursor.execute(fetch_rollNo)
+            dealBy_rollNo = cursor.fetchone()[0]
+            query = """
+                        insert into event_sponsors (name, sponsorshipAmount, logo, dealBy_id, phoneNo, emailId) values (%s,%s,%s,%s,%s,%s)
+                    """
+            cursor.execute(query, (name, amt, encoded_image, dealBy_rollNo, phoneNo, emailId ))
+        transaction.commit()
+        return JsonResponse({"status":"success", "message": "Sponsor data added successfully"})
+
     
