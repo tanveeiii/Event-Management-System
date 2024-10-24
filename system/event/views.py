@@ -5,6 +5,7 @@ from django.http import JsonResponse
 import json
 import uuid
 from django.views.decorators.csrf import csrf_exempt
+import base64
 
 # Create your views here.
 
@@ -118,3 +119,30 @@ def participants(request):
         for participant in participants_list:
             participants_data.append({"name": participant[0], "phoneNo": participant[1], "emailId":participant[2], "registrationid": participant[3], "accommodation": participant[4], "competitionId": participant[5]})
         return JsonResponse(participants_data, safe=False)
+    
+@csrf_exempt
+def speakers(request):
+    if(request.method=="GET"):
+        query = "select * from event_speakers"
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            speakers_list = cursor.fetchall()
+        speakers_data = []
+        for speaker in speakers_list:
+            data_url = f"data:image/jpeg;base64,{speaker[3]}"
+            speakers_data.append({"name": speaker[1], "desc" : speaker[2], "image" : data_url})
+        return JsonResponse(speakers_data, safe=False)
+    if(request.method=="POST"):
+        name = request.POST.get('name')
+        desc = request.POST.get('desc')
+        image = request.FILES['image']
+        image_data = image.read()
+        encoded_image = base64.b64encode(image_data).decode('utf-8')
+        with connection.cursor() as cursor:
+            query = """
+                        insert into event_speakers (name, description, image) values (%s,%s,%s)
+                    """
+            cursor.execute(query, (name, desc, encoded_image))
+        transaction.commit()
+        return JsonResponse({"status":"success", "message": "Speaker data added successfully"})
+    

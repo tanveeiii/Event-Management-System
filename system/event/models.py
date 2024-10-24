@@ -39,7 +39,7 @@ class Participants(models.Model):
 class Speakers(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=1000)
-    image = models.ImageField()
+    image = models.TextField()
 
 class Sponsors(models.Model):
     logo = models.ImageField()
