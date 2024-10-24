@@ -109,3 +109,12 @@ def participants(request):
             cursor.execute(query, (name, phoneNo, emailId, registrationId, accommodation, competitionId ))
         transaction.commit()
         return JsonResponse({'status':'success', 'message': 'Successfully registered for the competition', 'registrationid': registrationId})
+    if(request.method=="GET"):
+        query = "select * from event_participants"
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            participants_list = cursor.fetchall()
+        participants_data=[]
+        for participant in participants_list:
+            participants_data.append({"name": participant[0], "phoneNo": participant[1], "emailId":participant[2], "registrationid": participant[3], "accommodation": participant[4], "competitionId": participant[5]})
+        return JsonResponse(participants_data, safe=False)
