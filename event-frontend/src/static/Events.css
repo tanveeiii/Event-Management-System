@@ -30,6 +30,7 @@
   .tab-link:hover,
   .tab-link.active {
     background-color: #f76c6c;
+    box-shadow: 5px 5px 20px white;
   }
 
   
