@@ -290,7 +290,7 @@ const particlesConfig = {
         mode: "delete",
         value: 0
       },
-      value: 400
+      value: 350
     },
     opacity: {
       value: 1,
