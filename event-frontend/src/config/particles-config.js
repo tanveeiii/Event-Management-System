@@ -266,7 +266,7 @@ const particlesConfig = {
       },
       random: true,
       size: false,
-      speed: 0.5,
+      speed: 0.2,
       spin: {
         acceleration: 0,
         enable: false
@@ -325,7 +325,7 @@ const particlesConfig = {
       type: "circle"
     },
     size: {
-      value: 3,
+      value: 2.5,
       random: true,
       anim: {
         enable: false,
