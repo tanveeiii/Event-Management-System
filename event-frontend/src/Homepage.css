@@ -40,7 +40,7 @@
     cursor: pointer;
 }
 
-.navbar{
+.navbar {
     display: flex;
     gap: 40px;
 }
@@ -58,6 +58,7 @@
     text-shadow: 1px 1px 10px rgba(255, 217, 0, 0.776);
     transform: scale(1.15);
 }
+
 #menu-icon {
     font-size: 36px;
     color: #fff;
@@ -113,9 +114,10 @@
 }
 
 
-.count{
+.count {
     height: 97vh;
     padding-top: 60vh;
+    z-index: 100;
 }
 
 .countdown {
@@ -125,7 +127,7 @@
 }
 
 .countdown .time {
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(255, 255, 255, 0.15);
     margin: 0 15px;
     padding: 20px;
     border-radius: 10px;
@@ -150,7 +152,7 @@
     margin-top: 10px;
 }
 
-.countOver{
+.countOver {
     font-size: 30px;
     letter-spacing: 2px;
     color: white;

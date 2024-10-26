@@ -4,7 +4,7 @@ import './Homepage.css'
 const Button = () => {
   return (
     <>
-        <a href="#" class="btn">Get Your Tickets</a>
+        <a href="#" className="btn">Get Your Tickets</a>
     </>
   )
 }
