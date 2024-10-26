@@ -109,19 +109,19 @@ const particlesConfig = {
         quantity: 2
       },
       repulse: {
-        distance: 200,
-        duration: 0.4,
+        distance: 250,
+        duration: 0.6,
         factor: 100,
-        speed: 1,
-        maxSpeed: 50,
-        easing: "ease-out-quad",
+        speed: 2,
+        maxSpeed: 30,
+        easing: "cubic-bezier",
         divs: {
-          distance: 200,
-          duration: 0.4,
+          distance: 250,
+          duration: 0.6,
           factor: 100,
-          speed: 1,
-          maxSpeed: 50,
-          easing: "ease-out-quad",
+          speed: 3,
+          maxSpeed: 30,
+          easing: "cubic-bezier",
           selectors: []
         }
       },
@@ -266,7 +266,7 @@ const particlesConfig = {
       },
       random: true,
       size: false,
-      speed: 0.5,
+      speed: 0.2,
       spin: {
         acceleration: 0,
         enable: false
@@ -325,7 +325,7 @@ const particlesConfig = {
       type: "circle"
     },
     size: {
-      value: 3,
+      value: 2.5,
       random: true,
       anim: {
         enable: false,
@@ -419,12 +419,12 @@ const particlesConfig = {
     },
     twinkle: {
       lines: {
-        enable: false,
+        enable: true,
         frequency: 0.05,
         opacity: 1
       },
       particles: {
-        enable: false,
+        enable: true,
         frequency: 0.05,
         opacity: 1
       }
