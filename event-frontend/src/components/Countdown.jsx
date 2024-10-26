@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Homepage.css'
+import '../static/Homepage.css'
 import Button from './Button';
 
 function Countdown() {
