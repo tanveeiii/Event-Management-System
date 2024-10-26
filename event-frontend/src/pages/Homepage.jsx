@@ -1,6 +1,6 @@
 import React from 'react'
-import Navbar from './components/Navbar'
-import Countdown from './components/Countdown'
+import Navbar from '../components/Navbar'
+import Countdown from '../components/Countdown'
 
 const Homepage = () => {
     return (
