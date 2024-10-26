@@ -1,6 +1,6 @@
 import React from 'react'
-import Navbar from './Navbar'
-import CompSwiper from './CompSwiper'
+import Navbar from './components/Navbar'
+import CompSwiper from './components/CompSwiper'
 
 const Competitions = () => {
   return (

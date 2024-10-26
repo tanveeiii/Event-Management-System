@@ -1,7 +1,7 @@
-import './App.css'
+import './static/App.css'
 import Starfield from './components/Starfield'
 import Homepage from './Homepage'
-import Competitions from './Competitions'
+// import Competitions from './Competitions'
 
 
 function App() {
