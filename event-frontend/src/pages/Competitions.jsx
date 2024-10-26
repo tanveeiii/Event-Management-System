@@ -30,7 +30,6 @@ const Competitions = () => {
 
   return (
     <>
-        <Navbar/>
         <CompSwiper competitions={comps}/>
     </>
   )

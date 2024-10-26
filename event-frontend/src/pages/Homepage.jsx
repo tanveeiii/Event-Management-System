@@ -6,7 +6,6 @@ import FluxusTitle from '../components/FluxusTitle'
 const Homepage = () => {
     return (
         <>
-            <Navbar />
             <Countdown />
             <FluxusTitle/>
         </>
