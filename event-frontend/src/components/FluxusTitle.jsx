@@ -3,10 +3,12 @@ import '../static/FluxusTitle.css'
 
 const FluxusTitle = () => {
     return (
-        <div class='main'>
-            <h2 class="first">FLUXUS</h2>
-            <h2 class="second">FLUXUS</h2>
-        </div> 
+        <div class="container">
+            <span className="text1">FLUXUS 2025</span>
+            <span className="text2">
+                Annual Techno-Cultural Fest
+            </span>
+        </div>
     )
 }
 
