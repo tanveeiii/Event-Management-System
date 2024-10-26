@@ -1,4 +1,4 @@
-import particlesConfig from '../particles-config'
+import particlesConfig from '../config/particles-config'
 import '../index.css'
 import Particles from 'react-tsparticles';
 import { loadFull } from 'tsparticles';
