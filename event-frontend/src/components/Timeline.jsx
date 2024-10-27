@@ -12,10 +12,10 @@ const Timeline = ({ events }) => {
   return (
     <div className='timeline-box'>
       <VerticalTimeline>
-        {events.map((event) => {
+        {events.map((event , index) => {
           return (
             <VerticalTimelineElement
-              key={event.id}
+              key={index}
               date=/* {event.date} */"4:00 - 5:00"
               dateClassName="date"
             >
