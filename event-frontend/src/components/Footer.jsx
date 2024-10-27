@@ -35,7 +35,7 @@ const footerStyle = {
   padding: "10px 20px",
   color: "#FFFFFF", // White text
   fontFamily: "Arial, sans-serif",
-  fontSize: "16px",
+  fontSize: "18px",
 //   backgroundColor: "red",
 };
 
