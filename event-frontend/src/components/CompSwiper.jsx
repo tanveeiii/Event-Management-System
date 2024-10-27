@@ -31,7 +31,7 @@ const CompSwiper = ( { competitions } ) => {
         }}
         // autoplay={{delay:3000,}}
         // loop='true'
-        pagination={true}
+        pagination={false}
         modules={[EffectCoverflow, Pagination, Autoplay]}
         className="swiper"
       >
