@@ -29,6 +29,7 @@
     font-size: 25px;
     color: #FFE997;
     letter-spacing: 2px;
+    text-shadow: 0 0 20px white;
   }
   
   @keyframes text {
