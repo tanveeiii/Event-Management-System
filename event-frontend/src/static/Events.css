@@ -26,6 +26,7 @@
     margin: 0 10px;
     transition: background-color 0.3s;
     border-radius: 10px;
+    width: 100px;
   }
   
   .tab-link:hover,
