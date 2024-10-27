@@ -11,11 +11,26 @@ const MainLayout = () => {
     <>  
         <Starfield/>
         <Navbar />
-        <Outlet />
-        <ToastContainer />
+        <div style={pageContainerStyle}>
+          <div style={contentStyle}>
+            <Outlet />
+            <ToastContainer />
+          </div>
+        </div>
         <Footer />
     </>
   );
+};
+
+
+const pageContainerStyle = {
+  display: "flex",
+  flexDirection: "column",
+  minHeight: "94vh", // Full viewport height
+};
+
+const contentStyle = {
+  flex: "1", // Takes remaining space, pushing the footer to the bottom
 };
 
 export default MainLayout
