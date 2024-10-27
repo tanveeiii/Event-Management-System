@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import Starfield from "../components/Starfield"
+import Footer from '../components/Footer';
 
 const MainLayout = () => {
   return (
@@ -12,6 +13,7 @@ const MainLayout = () => {
         <Navbar />
         <Outlet />
         <ToastContainer />
+        <Footer />
     </>
   );
 };
