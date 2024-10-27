@@ -16,7 +16,6 @@ const styles = {
     width: '250px',
     padding: '20px',
     borderRadius: '15px',
-    boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
     textAlign: 'center',
     backgroundColor: '#f76c6c',
     boxShadow: "0px 0px 25px #f76c6c ",
