@@ -1,10 +1,14 @@
 import razorpay
 from django.http import JsonResponse
+from dotenv import load_dotenv
+import os
 
-client = razorpay.Client(auth=("rzp_test_9q5xdxurtQtIt2", "lOLKN750Yh3MnGvimhpfj0hT"))
+load_dotenv()
+RAZORPAY_ID = os.getenv("RAZORPAY_ID")
+RAZORPAY_KEY = os.getenv("RAZORPAY_SECRET_KEY")
+client = razorpay.Client(auth=(RAZORPAY_ID, RAZORPAY_KEY))
 
 def create_order():
-    # receipt_id = uuid.uuid4()
     data = { "amount": 500, "currency": "INR", "receipt": "11" }
     payment = client.order.create(data=data)
     return JsonResponse({"order_id": payment['id']})
