@@ -1,8 +1,21 @@
 import React from 'react'
+import { useState } from 'react';
 import '../static/Homepage.css'
 import { NavLink } from "react-router-dom"
 
+
 const Navbar = () => {
+
+    const [isDropdownVisible, setDropdownVisible] = useState(false);
+
+    const handleMouseEnter = () => {
+        setDropdownVisible(true);
+    };
+
+    const handleMouseLeave = () => {
+        setDropdownVisible(false);
+    };
+
     return (
         <>
             <header className="header">
@@ -13,7 +26,7 @@ const Navbar = () => {
                     <NavLink to="/events">Events</NavLink>
                     <NavLink to="/competitions">Competitions</NavLink>
                     <NavLink to="/speakers">Speakers</NavLink>
-                    <NavLink to="/past-artists">Past Artists</NavLink>
+                    {/* <NavLink to="/past-artists">Past Artists</NavLink> */}
                     <NavLink to="/team">Team</NavLink>
                 </div>
             </header>

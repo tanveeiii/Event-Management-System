@@ -5,6 +5,7 @@ import Events from './pages/Events'
 import PastArtists from './pages/PastArtists'
 import Team from './pages/Team'
 import Speakers from './pages/Speakers'
+import Login from './pages/Login'
 import { RouterProvider , createBrowserRouter } from 'react-router-dom'
 import MainLayout from './pages/MainLayout'
 
@@ -24,13 +25,17 @@ const App = () => {
           path: "/events",
           element: <Events />
         },
-        {
-          path: "/past-artists",
-          element: <PastArtists />
-        },
+        // {
+        //   path: "/past-artists",
+        //   element: <PastArtists />
+        // },
         {
           path: "/team",
           element: <Team />
+        },
+        {
+          path: "/login",
+          element: <Login />
         },
         {
           path: "/speakers",
