@@ -13,7 +13,7 @@ import '../static/Competitions.css'
 // import required modules
 import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules';
 
-export default function App() {
+const CompSwiper = ( { competitions } ) => {
   return (
     <>
       <Swiper
@@ -35,7 +35,22 @@ export default function App() {
         modules={[EffectCoverflow, Pagination, Autoplay]}
         className="swiper"
       >
-        <SwiperSlide className="swiper-slide">
+        {
+          competitions.map( (comp) => (
+            <SwiperSlide className="swiper-slide" key={comp.id}>
+              <img src={comp} />
+            </SwiperSlide>
+          ) )
+        }
+        
+      </Swiper>
+    </>
+  );
+}
+
+export default CompSwiper
+
+{/* <SwiperSlide className="swiper-slide">
           <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
         </SwiperSlide>
         <SwiperSlide className="swiper-slide">
@@ -58,8 +73,4 @@ export default function App() {
         </SwiperSlide>
         <SwiperSlide className="swiper-slide">
           <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-        </SwiperSlide>
-      </Swiper>
-    </>
-  );
-}
+        </SwiperSlide> */}

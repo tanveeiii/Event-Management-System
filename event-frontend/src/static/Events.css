@@ -1,0 +1,36 @@
+
+  .schedule-title {
+    font-size: 4em;
+    font-family: cursive ;
+    margin-bottom: 20px;
+    color: white;
+    margin-top: 100px;
+    text-align:center;
+    text-shadow: 5px 5px 60px #fff
+  }
+  
+  .tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .tab-link {
+    background-color: #222;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin: 0 10px;
+    transition: background-color 0.3s;
+    border-radius: 10px;
+  }
+  
+  .tab-link:hover,
+  .tab-link.active {
+    background-color: #f76c6c;
+    box-shadow: 5px 5px 60px white;
+  }
+
+  

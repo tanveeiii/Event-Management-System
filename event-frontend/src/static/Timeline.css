@@ -1,0 +1,42 @@
+.timeline-box{
+  margin: 100px;
+  font-family: poppins, sans-serif;
+  color: #03022d;
+
+}
+
+.vertical-timeline-element-content {
+  /* box-shadow: 0 0.25em 0.5em 0 rgba(0, 0, 0, 0.25),
+    0 0.4em 1.25em 0 rgba(0, 0, 0, 0.15) !important; */
+  padding: 1.8em 2.7em !important;
+  background-color: #f76c6c;
+  box-shadow: 0px 2px 500px #f76c6c;
+  font-size: 1.75rem;
+  text-transform: uppercase ;
+}
+
+.vertical-timeline-element-date {
+  color: white;
+}
+
+.vertical-timeline-element-icon{
+  background-color: #de5426;
+}
+
+.desc{
+
+  font-size: 1.25rem;
+
+}
+
+.poppins-bold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.poppins-extrabold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}

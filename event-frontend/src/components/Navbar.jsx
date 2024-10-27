@@ -1,19 +1,20 @@
 import React from 'react'
 import '../static/Homepage.css'
+import { NavLink } from "react-router-dom"
 
 const Navbar = () => {
     return (
         <>
             <header className="header">
-                <a href="#" className="logo">
+                <NavLink to="/" className="logo">
                     FLUXUS
-                </a>
+                </NavLink>
                 <div className="navbar">
-                    <a href="#">Events</a>
-                    <a href="#">Competitions</a>
-                    <a href="#">Speakers</a>
-                    <a href="#">Past Artists</a>
-                    <a href="#">Team</a>
+                    <NavLink to="/events">Events</NavLink>
+                    <NavLink to="/competitions">Competitions</NavLink>
+                    <NavLink to="/speakers">Speakers</NavLink>
+                    <NavLink to="/past-artists">Past Artists</NavLink>
+                    <NavLink to="/team">Team</NavLink>
                 </div>
             </header>
 
