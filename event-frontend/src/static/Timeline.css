@@ -10,7 +10,7 @@
     0 0.4em 1.25em 0 rgba(0, 0, 0, 0.15) !important; */
   padding: 1.8em 2.7em !important;
   background-color: #f76c6c;
-  box-shadow: 0px 2px 500px #f76c6c;
+  box-shadow: 0px 2px 50px #f76c6c;
   font-size: 1.75rem;
   text-transform: uppercase ;
 }
