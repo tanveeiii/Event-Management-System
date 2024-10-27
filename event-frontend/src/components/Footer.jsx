@@ -35,7 +35,7 @@ const footerStyle = {
   padding: "10px 20px",
   color: "#FFFFFF", // White text
   fontFamily: "Arial, sans-serif",
-  fontSize: "14px",
+  fontSize: "18px",
 //   backgroundColor: "red",
 };
 
@@ -50,11 +50,11 @@ const separatorStyle = {
 
 const socialIconsStyle = {
   display: "flex",
-  gap: "10px",
+  gap: "12px",
 };
 
 const iconStyle = {
-  fontSize: "20px",
+  fontSize: "22px",
   color: "#FFFFFF", // White icons
   cursor: "pointer",
 };
