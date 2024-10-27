@@ -1,6 +1,7 @@
 import "../static/Events.css";
 import Timeline from '../components/Timeline';
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios'
 
 const Events = () => {
 
@@ -10,28 +11,25 @@ const Events = () => {
     setActiveDay(day);
   };
 
-  const events = ["Event1" , "Event2" , "Event3" ,"Event4"]
 
-  /* const [events , setevents] = useState([]);
-  
-  useEffect( () => {
-    const fetchevents = async () => {
-      var apiurl = "";
-      apiurl = activeDay == "Day1" && "";
-      apiurl = activeDay == "Day2" && "";
-      apiurl = activeDay == "Day3" && "";
-      apiurl = activeDay == "Day4" && "";
+  const eventListURL = 'http://localhost:8000/api/event/'
+  useEffect(() => {
+    const fetchEvents = async () => {
       try {
-        const res = await fetch(apiurl);
-        const data = await res.json();
-        setevents(data);
+        const response = await fetch(eventListURL);
+        console.log(response)
+        const eventsData = await response.json();
+        console.log(eventsData);
       } catch (error) {
-        console.log("Error fetching data");
+        console.error('Error fetching events:', error);
       }
-    }
+    };
+    fetchEvents();
+  }, []);
 
-    fetchevents();
-  } , []); */
+
+  const events = ["Event1", "Event2", "Event3", "Event4"]
+
 
   return (
     <>
@@ -63,7 +61,7 @@ const Events = () => {
         </button>
       </div>
 
-      <Timeline events={events}/>
+      <Timeline events={events} />
     </>
   )
 }

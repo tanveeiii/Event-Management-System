@@ -4,27 +4,20 @@ import CompSwiper from '../components/CompSwiper'
 import { useState , useEffect } from 'react'
 
 const Competitions = () => {
-  //LINK WITH BACKEND
-  /* const [comps , setcomps] = useState([]);
-
-  useEffect( () => {
-
-    const fetchdata = async () => {
-      const apiurl = ""
+  const compListURL = 'http://localhost:8000/api/competitions/'
+  useEffect(() => {
+    const fetchCompetitions = async () => {
       try {
-        const res = await fetch(apiurl);
-        const data = await res.json();
-        setcomps(data);
+        const response = await fetch(compListURL);
+        console.log(response)
+        const compData = await response.json();
+        console.log(compData);
       } catch (error) {
-        console.log("Error fetching data" , error);
+        console.error('Error fetching competitions:', error);
       }
-    }
-
-    fetchdata();
-
-  } , []); */
-
-  //TEMPORARY PLACEHOLDER
+    };
+    fetchCompetitions();
+  }, []);
   const comps = ["https://swiperjs.com/demos/images/nature-1.jpg" , "https://swiperjs.com/demos/images/nature-2.jpg" , "https://swiperjs.com/demos/images/nature-3.jpg" , "https://swiperjs.com/demos/images/nature-4.jpg" , "https://swiperjs.com/demos/images/nature-5.jpg" , "https://swiperjs.com/demos/images/nature-6.jpg" , "https://swiperjs.com/demos/images/nature-7.jpg" , "https://swiperjs.com/demos/images/nature-8.jpg"]
 
 
