@@ -1,11 +1,9 @@
-from django.shortcuts import render
-from .models import Speakers, Competitions, Team
 from django.db import connection, transaction
 from django.http import JsonResponse
 import json
 import uuid
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password, check_password
 import base64
 
 # Create your views here.
@@ -207,5 +205,22 @@ def sponsors(request):
             cursor.execute(query, (name, amt, encoded_image, dealBy_rollNo, phoneNo, emailId ))
         transaction.commit()
         return JsonResponse({"status":"success", "message": "Sponsor data added successfully"})
+    
+@csrf_exempt
+def login(request):
+    if(request.method == "POST"):
+        data = json.loads(request.body)
+        rollNo = data['rollNo']
+        password = data['password']
+        with connection.cursor() as cursor:
+            query = f"select password from event_team where rollNo = {rollNo}"
+            cursor.execute(query)
+            password_stored = cursor.fetchone()[0]
+            print(password_stored)
+            if(check_password(password, password_stored)):
+                return JsonResponse({"status":"success", "message": "User exists... Login successful", "rollNo" : rollNo}) 
+            else:
+                return JsonResponse({"status":"failure", "message":"User not found"})  
+
 
     
