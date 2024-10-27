@@ -30,6 +30,7 @@ const Competitions = () => {
 
   return (
     <>
+        <h1 className="competitions-title">Competitions</h1>
         <CompSwiper competitions={comps}/>
     </>
   )
