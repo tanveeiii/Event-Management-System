@@ -25,7 +25,7 @@ const Timeline = ({ events }) => {
               <h5 className="vertical-timeline-element-subtitle">
                 {/* {event.location} */} Event location
               </h5>
-              <p id="description">{/* {element.description} */} about event </p>
+              <p className="desc" id="description">{/* {element.description} */} about event </p>
             </VerticalTimelineElement>
           );
         })}
