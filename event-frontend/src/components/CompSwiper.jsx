@@ -36,8 +36,8 @@ const CompSwiper = ( { competitions } ) => {
         className="swiper"
       >
         {
-          competitions.map( (comp) => (
-            <SwiperSlide className="swiper-slide" key={comp.id}>
+          competitions.map( (comp , index) => (
+            <SwiperSlide className="swiper-slide" key={index}>
               <img src={comp} />
             </SwiperSlide>
           ) )

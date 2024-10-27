@@ -1,12 +1,13 @@
 
   .schedule-title {
-    font-size: 3.5em;
-    font-family: cursive ;
+    font-size: 5em;
+    font-family: poppins , sans-serif ;
     margin-bottom: 20px;
     color: white;
     margin-top: 100px;
     text-align:center;
-    text-shadow: 5px 5px 60px #fff
+    text-shadow: 0px 0px 60px white;
+    text-transform: uppercase;
   }
   
   .tabs {
