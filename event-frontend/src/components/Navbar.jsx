@@ -28,6 +28,7 @@ const Navbar = () => {
                     <NavLink to="/speakers">Speakers</NavLink>
                     {/* <NavLink to="/past-artists">Past Artists</NavLink> */}
                     <NavLink to="/team">Team</NavLink>
+                    <NavLink to="/login">Login</NavLink>
                 </div>
             </header>
 
