@@ -6,8 +6,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import make_password, check_password
 import base64
 
-# Create your views here.
-
 @csrf_exempt
 def competitions(request):
     if(request.method=="GET"):
@@ -210,17 +208,19 @@ def sponsors(request):
 def login(request):
     if(request.method == "POST"):
         data = json.loads(request.body)
-        rollNo = data['rollNo']
+        print(data)
+        rollNo = int(data['rollNo'])
         password = data['password']
         with connection.cursor() as cursor:
             query = f"select password from event_team where rollNo = {rollNo}"
             cursor.execute(query)
-            password_stored = cursor.fetchone()[0]
-            print(password_stored)
-            if(check_password(password, password_stored)):
-                return JsonResponse({"status":"success", "message": "User exists... Login successful", "rollNo" : rollNo}) 
+            result = cursor.fetchone()
+            if(result is None):
+                return JsonResponse({"status":"failure", "message":"User not found"})
             else:
-                return JsonResponse({"status":"failure", "message":"User not found"})  
-
-
-    
+                password_stored = result[0]
+                print(password_stored)
+                if(check_password(password, password_stored)):
+                    return JsonResponse({"status":"success", "message": "User exists... Login successful", "rollNo" : rollNo}) 
+                else:
+                    return JsonResponse({"status":"failure", "message":"User not found"})  
