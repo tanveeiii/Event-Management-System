@@ -41,6 +41,10 @@ const App = () => {
           path: "/speakers",
           element: <Speakers />
         },
+        {
+          path: "/login",
+          element: <Login/>
+        },
       ]
     },
   ]);

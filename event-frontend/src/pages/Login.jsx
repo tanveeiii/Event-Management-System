@@ -8,12 +8,29 @@ const Login = () => {
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
+    const apiurl = "http://localhost:8000/api/login/";
+    const login = async(event) =>{
+        event.preventDefault()
+        const rollNo = event.target.username.value
+        const password = event.target.password.value
+        const res = await fetch(apiurl, {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+                "rollNo": rollNo,
+                "password":password
+            })
+        })
+        const message = await res.json()
+    }
 
     return (
         <>
-            <form method='post'>
+            <form method='post' onSubmit={login}>
                 <h3>Welcome</h3>
-                <label htmlFor="username">Roll No.</label>
+                <label htmlFor="username" type="number">Roll No.</label>
                 <input type="text" placeholder="Roll No." id="username" />
                 <label htmlFor="password">Password</label>
                 <div className="password-container">
@@ -31,7 +48,7 @@ const Login = () => {
                         {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
                     </span>
                 </div>
-                <button>Log In</button>
+                <button type='submit'>Log In</button>
             </form>
         </>
     );
