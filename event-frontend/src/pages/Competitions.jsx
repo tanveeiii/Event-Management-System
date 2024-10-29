@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from '../components/Navbar';
 import CompSwiper from '../components/CompSwiper';
+import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 
 const Competitions = () => {
   const compListURL = 'http://localhost:8000/api/competitions/';
@@ -37,14 +37,12 @@ const Competitions = () => {
     fetchCompetitions();
   }, []);
 
-  // Handle forward button (increments indices)
   const handleForward = () => {
     setX((prevX) => (prevX + 1) % arrayLength);
     setY((prevY) => (prevY + 1) % arrayLength);
     setZ((prevZ) => (prevZ + 1) % arrayLength);
   };
 
-  // Handle backward button (decrements indices)
   const handleBackward = () => {
     setX((prevX) => (prevX - 1 + arrayLength) % arrayLength);
     setY((prevY) => (prevY - 1 + arrayLength) % arrayLength);
@@ -53,10 +51,19 @@ const Competitions = () => {
 
   return (
     <>
-      <h1 className="competitions-title">Competitions</h1>
+      {/* <h1 className="competitions-title">Competitions</h1> */}
       <CompSwiper competitions={comps} />
       {/* <button onClick={handleBackward}>Previous</button>
       <button onClick={handleForward}>Next</button> */}
+      <div className="navigation">
+        <button className="nav-button" onClick={handleBackward}>
+          <AiOutlineLeft />
+        </button>
+        <button className="nav-button" onClick={handleForward}>
+          <AiOutlineRight />
+        </button>
+      </div>
+
     </>
   );
 };

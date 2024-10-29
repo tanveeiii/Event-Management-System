@@ -22,8 +22,14 @@
 
 .swiper {
   width: 100%;
-  padding-top: 2vh;
-  padding-bottom: 10vh;
+  padding-top: 3vh;
+  padding-bottom: 6vh;
+  margin-top: 100px;
+}
+
+.swiper-slide{
+  display: flex;
+  justify-content: center;
 }
 
 .competitions-title {
@@ -64,11 +70,6 @@ p {
 }
 
 /* CARD COMPONENT */
-
-.swiper-slide{
-  display: flex;
-  justify-content: center;
-}
 
 .card {
   display: grid;
@@ -211,5 +212,37 @@ p {
     transition: opacity 500ms ease-in, transform 500ms ease-in;
     transition-delay: 500ms;
   }
+}
+
+.navigation {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  /* margin-top: 20px; */
+}
+
+.nav-button {
+  width: 40px;  /* Set width for circle */
+  height: 40px; /* Set height for circle */
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  border-radius: 50%;  /* Makes the button circular */
+  font-size: 20px;     /* Adjust icon size */
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0;
+}
+
+.nav-button:hover {
+  background-color: rgb(56, 56, 56);
+  color: white;
+}
+
+.nav-button:active {
+  transform: scale(0.95);
 }
 
