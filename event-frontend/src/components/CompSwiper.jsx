@@ -14,6 +14,7 @@ import '../static/Competitions.css'
 import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules';
 
 const CompSwiper = ({ competitions }) => {
+  console.log(competitions)
   return (
     <>
       <Swiper
@@ -35,23 +36,22 @@ const CompSwiper = ({ competitions }) => {
         modules={[EffectCoverflow, Pagination, Autoplay]}
         className="swiper"
       >
-        {
+        {competitions && competitions.length > 0 ? 
           competitions.map((comp, index) => (
             <SwiperSlide className="swiper-slide" key={index}>
               <article className="card">
                 <img
                   className="card__background"
-                  src="https://i.imgur.com/QYWAcXk.jpeg"
+                  src={comp.poster}
                   alt=""
                   width={1920}
                   height={2193}
                 />
                 <div className="card__content | flow">
                   <div className="card__content--container | flow">
-                    <h2 className="card__title">Colombia</h2>
+                    <h2 className="card__title">{comp.name}</h2>
                     <p className="card__description">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum in
-                      labore laudantium deserunt fugiat numquam.
+                      {comp.prizeMoney}
                     </p>
                   </div>
                   <button className="card__button">Read more</button>
@@ -59,7 +59,8 @@ const CompSwiper = ({ competitions }) => {
               </article>
 
             </SwiperSlide>
-          ))
+          )): 
+            <p>No competitions available.</p>
         }
 
       </Swiper>
