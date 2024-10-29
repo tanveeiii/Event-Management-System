@@ -16,18 +16,25 @@ def competitions(request):
             competitions_list=cursor.fetchall()
         competitions_data = []
         for competition in competitions_list:
-            competitions_data.append({"name": competition[0], "prizeMoney": competition[1], "date": competition[2], "id": competition[3]})
+            data_url = f"data:image/jpeg;base64,{competition[4]}"
+            competitions_data.append({"name": competition[0], "prizeMoney": competition[1], "date": competition[2], "id": competition[3], "poster":data_url})
         return JsonResponse(competitions_data, safe=False)
     if(request.method=="POST"):
-        data = json.loads(request.body)
-        name = data['name']
-        prizeMoney = data['prizeMoney']
-        date = data['date']
+        # data = json.loads(request.body)
+        # name = data['name']
+        # prizeMoney = data['prizeMoney']
+        # date = data['date']
+        name = request.POST.get('name')
+        prizeMoney = request.POST.get('prizeMoney')
+        date = request.POST.get("date")
+        image = request.FILES['image']
+        image_data = image.read()
+        encoded_image = base64.b64encode(image_data).decode('utf-8')
         query = """
-                    insert into event_competitions(competitionName, prizeMoney, date) values (%s,%s,%s)
+                    insert into event_competitions(competitionName, prizeMoney, date, poster) values (%s,%s,%s,%s)
                 """
         with connection.cursor() as cursor:
-            cursor.execute(query, (name, prizeMoney, date))
+            cursor.execute(query, (name, prizeMoney, date, encoded_image))
         
         transaction.commit()
         return JsonResponse({'status': 'success', 'message': 'Competition added successfully.'})
@@ -208,7 +215,6 @@ def sponsors(request):
 def login(request):
     if(request.method == "POST"):
         data = json.loads(request.body)
-        print(data)
         rollNo = int(data['rollNo'])
         password = data['password']
         with connection.cursor() as cursor:
@@ -219,7 +225,6 @@ def login(request):
                 return JsonResponse({"status":"failure", "message":"User not found"})
             else:
                 password_stored = result[0]
-                print(password_stored)
                 if(check_password(password, password_stored)):
                     return JsonResponse({"status":"success", "message": "User exists... Login successful", "rollNo" : rollNo}) 
                 else:
