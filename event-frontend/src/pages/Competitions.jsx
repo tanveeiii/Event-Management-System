@@ -18,7 +18,10 @@ const Competitions = () => {
     };
     fetchCompetitions();
   }, []);
-  const comps = ["https://swiperjs.com/demos/images/nature-1.jpg" , "https://swiperjs.com/demos/images/nature-2.jpg" , "https://swiperjs.com/demos/images/nature-3.jpg"  ]
+  const comps1 = ["https://swiperjs.com/demos/images/nature-1.jpg" , "https://swiperjs.com/demos/images/nature-2.jpg" , "https://swiperjs.com/demos/images/nature-3.jpg" , "https://swiperjs.com/demos/images/nature-4.jpg" , "https://swiperjs.com/demos/images/nature-5.jpg" , "https://swiperjs.com/demos/images/nature-6.jpg" , "https://swiperjs.com/demos/images/nature-7.jpg" , "https://swiperjs.com/demos/images/nature-8.jpg"]
+
+  const comps = comps1.slice(1,4)
+
 
 
   return (
