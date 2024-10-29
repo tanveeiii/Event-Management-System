@@ -26,6 +26,7 @@ class Competitions(models.Model):
     competitionName = models.CharField(max_length=50)
     prizeMoney = models.IntegerField()
     date = models.DateField()
+    poster = models.TextField()
     competitionId = models.AutoField(primary_key=True)
 
 class Participants(models.Model):
