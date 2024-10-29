@@ -117,7 +117,7 @@ p {
 .card__title {
   position: relative;
   width: fit-content;
-  width: -moz-fit-content; /* Prefijo necesario para Firefox  */
+  width: -moz-fit-content;
 }
 
 .card__title::after {
@@ -133,7 +133,7 @@ p {
 .card__button {
   padding: 0.75em 1.6em;
   width: fit-content;
-  width: -moz-fit-content; /* Prefijo necesario para Firefox  */
+  width: -moz-fit-content;
   font-variant: small-caps;
   font-weight: bold;
   border-radius: 0.45em;
@@ -176,7 +176,7 @@ p {
 
   .card:hover,
   .card:focus-within {
-    transform: scale(1.05);
+    transform: scale(1.03);
     transition: transform 500ms ease-in;
   }
 
@@ -222,13 +222,13 @@ p {
 }
 
 .nav-button {
-  width: 40px;  /* Set width for circle */
-  height: 40px; /* Set height for circle */
+  width: 40px;
+  height: 40px; 
   background-color: white;
   color: black;
   border: 2px solid black;
-  border-radius: 50%;  /* Makes the button circular */
-  font-size: 20px;     /* Adjust icon size */
+  border-radius: 50%; 
+  font-size: 20px;  
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
   display: flex;

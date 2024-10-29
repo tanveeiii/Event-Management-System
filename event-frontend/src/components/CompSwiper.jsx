@@ -27,12 +27,10 @@ const CompSwiper = ({ competitions }) => {
         coverflowEffect={{
           rotate: 0,
           stretch: 0,
-          depth: 100,
+          depth: 80,
           modifier: 2.5,
           slideShadows: false,
         }}
-        // autoplay={{delay:3000,}}
-        // loop='true'
         pagination={false}
         modules={[EffectCoverflow, Pagination, Autoplay]}
         className="swiper"
