@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import EmblaCarousel from '../components/EmblaCarousel';
+import '../static/Competitions.css'
 
 const Competitions = () => {
   const compListURL = 'http://localhost:8000/api/competitions/';
