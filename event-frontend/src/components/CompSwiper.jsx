@@ -38,7 +38,9 @@ const CompSwiper = ( { competitions } ) => {
         {
           competitions.map( (comp , index) => (
             <SwiperSlide className="swiper-slide" key={index}>
-              <img src={comp} />
+              <div className="container1">
+                
+              </div>
             </SwiperSlide>
           ) )
         }

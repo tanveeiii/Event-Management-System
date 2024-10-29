@@ -27,8 +27,17 @@
   margin-top: 100px;
   text-align: center;
   margin-top: 100px;
-  font-size: 5rem;
+  font-size: 3.5rem;
   text-transform: uppercase;
-  font-family: poppins , sans-serif;
+  font-family: poppins, sans-serif;
   text-shadow: 0px 0px 60px white;
+}
+
+.container1 {
+  background-color: #f76c6c;
+  box-shadow: 0px 0px 25px #f76c6c;
+  border: 2px solid white;
+  border-radius: 5px;
+  height: 80%;
+  width: 550px;
 }
