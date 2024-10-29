@@ -24,11 +24,12 @@ const Competitions = () => {
   return (
     <>
       <h1 className="competitions-title">Competitions</h1>
-      {compData.length > 0 ? (
+      {/* {compData.length > 0 ? (
         <EmblaCarousel slides={compData} /> 
       ) : (
         <p>Loading competitions...</p>
-      )}
+      )} */}
+      <EmblaCarousel slides={compData} /> 
     </>
   );
 }
