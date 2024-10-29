@@ -71,7 +71,10 @@ const EmblaCarousel = (props) => {
         const tweenValue = 1 - Math.abs(diffToTarget * tweenFactor.current)
         const scale = numberWithinRange(tweenValue, 0, 1).toString()
         const tweenNode = tweenNodes.current[slideIndex]
-        tweenNode.style.transform = `scale(${scale})`
+        // tweenNode.style.transform = `scale(${scale})`
+        if (tweenNode) {
+          tweenNode.style.transform = `scale(${scale})`;
+        }
       })
     })
   }, [])
@@ -95,7 +98,7 @@ const EmblaCarousel = (props) => {
     <div className="embla">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
-          {slides.map((index) => (
+          {slides.map((comp, index) => (
             <div className="embla__slide" key={index}>
               <article className="card">
                 <img
