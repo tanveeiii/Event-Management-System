@@ -73,7 +73,6 @@ button{
 
 .password-container input {
     flex: 1;
-    /* padding-right: 40px;  */
 }
 
 .toggle-password {
@@ -83,7 +82,7 @@ button{
     right: 10px;
     cursor: pointer;
     font-size: 1.2em;
-    color: #999; /* Optional: color for the icon */
+    color: #999;
     top: 50%;
-    transform: translateY(-50%); /* Center the icon vertically */
+    transform: translateY(-50%); 
 }
