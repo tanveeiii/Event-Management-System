@@ -1,4 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
+import '../static/Competitions.css';
+
 
 export const usePrevNextButtons = (emblaApi, onButtonClick) => {
   const [prevBtnDisabled, setPrevBtnDisabled] = useState(true)

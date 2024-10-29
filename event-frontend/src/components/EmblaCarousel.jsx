@@ -7,6 +7,8 @@ import {
 } from './EmblaCarouselArrowButtons'
 import { DotButton, useDotButton } from './EmblaCarouselDotButton'
 
+import '../static/Competitions.css'
+
 const TWEEN_FACTOR_BASE = 0.21
 
 const numberWithinRange = (number, min, max) =>

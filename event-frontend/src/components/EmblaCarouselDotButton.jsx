@@ -1,4 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
+import '../static/Competitions.css';
+
 
 export const useDotButton = (emblaApi, onButtonClick) => {
   const [selectedIndex, setSelectedIndex] = useState(0)
