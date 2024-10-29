@@ -13,15 +13,17 @@ import '../static/Competitions.css'
 // import required modules
 import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules';
 
-const CompSwiper = ( { competitions } ) => {
+const CompSwiper = ({ competitions }) => {
   return (
     <>
       <Swiper
         effect={'coverflow'}
         grabCursor={true}
         centeredSlides={true}
-        slidesPerView={'auto'}
-        initialSlide={4}
+        slidesPerView={3}
+        initialSlide={1}
+        loop={false}
+        spaceBetween={50}
         coverflowEffect={{
           rotate: 0,
           stretch: 0,
@@ -36,15 +38,32 @@ const CompSwiper = ( { competitions } ) => {
         className="swiper"
       >
         {
-          competitions.map( (comp , index) => (
+          competitions.map((comp, index) => (
             <SwiperSlide className="swiper-slide" key={index}>
-              <div className="container1">
-                
-              </div>
+              <article className="card">
+                <img
+                  className="card__background"
+                  src="https://i.imgur.com/QYWAcXk.jpeg"
+                  alt=""
+                  width={1920}
+                  height={2193}
+                />
+                <div className="card__content | flow">
+                  <div className="card__content--container | flow">
+                    <h2 className="card__title">Colombia</h2>
+                    <p className="card__description">
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum in
+                      labore laudantium deserunt fugiat numquam.
+                    </p>
+                  </div>
+                  <button className="card__button">Read more</button>
+                </div>
+              </article>
+
             </SwiperSlide>
-          ) )
+          ))
         }
-        
+
       </Swiper>
     </>
   );
