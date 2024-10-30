@@ -38,18 +38,19 @@
     box-shadow: 0 8px 20px #f76c6c;
 }
 
-.Stext-title, .Stext-body{
+.Stext-name, .Stext-title{
     font-family: "Oswald", sans-serif;
+    text-align: center;
 }
 
-.Stext-title{
+.Stext-name{
     font-weight: 500;
-    font-size: 16px;
+    font-size: 24px;
     margin-bottom: 0;
 }
 
-.Stext-body{
-    font-size: 12px;
+.Stext-title{
+    font-size: 18px;
     font-weight: 500;
     margin-bottom: 0;
 }

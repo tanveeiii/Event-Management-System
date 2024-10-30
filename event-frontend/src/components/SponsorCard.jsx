@@ -9,11 +9,11 @@ const SponsorCard = () => {
                 <img alt="" className="Scard-img" src="https://2k21.s3.amazonaws.com/images/Canva.png" />
             </a>
             <div className="Scard-info">
+                <p className="Stext-name" style={{ color: "black" }}>
+                    Canva
+                </p>
                 <p className="Stext-title" style={{ color: "black" }}>
                     Creative Partner
-                </p>
-                <p className="Stext-body" style={{ color: "black" }}>
-                    Premium 6 months subscription to top ambassadors
                 </p>
             </div>
         </div>
