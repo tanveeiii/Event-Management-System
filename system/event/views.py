@@ -79,17 +79,20 @@ def event(request):
             event_list= cursor.fetchall()
         event_data = []
         for event in event_list:
-            event_data.append({"name": event[0], "venue": event[1], "dateTime": event[2], "id": event[3]})
+            event_data.append({"name": event[0], "venue": event[1], "time": event[2], "id": event[3], "desc": event[4], "dayNo":event[5], "eventDate":event[6]})
         return JsonResponse(event_data, safe=False)
     if(request.method=="POST"):
         data = json.loads(request.body)
         name = data["name"]
         venue = data["venue"]
-        dateTime = data["dateTime"]
+        time = data["time"]
+        desc = data["desc"]
+        date = data['date']
+        dayNo = data['dayNo']
         query = """
-                    insert into event_event (eventName, eventVenue, eventTime) values(%s,%s,%s)"""
+                    insert into event_event (eventName, eventVenue, eventTime, eventDesc, dayNo, eventDate) values(%s,%s,%s,%s,%s,%s)"""
         with connection.cursor() as cursor:
-            cursor.execute(query, (name, venue, dateTime))
+            cursor.execute(query, (name, venue, time, desc, dayNo, date))
         transaction.commit()
         return JsonResponse({'status': 'success', 'message': 'Event added successfully.'})
     

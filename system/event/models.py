@@ -12,7 +12,10 @@ class Team(models.Model):
 class Event(models.Model):
     eventName = models.CharField(max_length=50)
     eventVenue = models.CharField(max_length=100)
-    eventTime = models.DateTimeField()
+    dayNo = models.IntegerField(choices=((1,1), (2,2), (3,3), (4,4)))
+    eventDate = models.DateField()
+    eventTime = models.TimeField()
+    eventDesc = models.CharField(max_length=250)
     eventId = models.AutoField(primary_key=True)
 
 class Attendees(models.Model):
