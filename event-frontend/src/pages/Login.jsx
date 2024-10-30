@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'; // Import eye icons
 import '../static/Login.css';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
-
+    const navigate = useNavigate()
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
@@ -24,6 +25,12 @@ const Login = () => {
             })
         })
         const message = await res.json()
+        console.log(message)
+        if(message['status']=="success"){
+            navigate('/dashboard', {state:{
+                rollNo: rollNo
+            }})
+        }
     }
 
     return (
