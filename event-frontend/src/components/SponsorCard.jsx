@@ -1,25 +1,28 @@
-import React from 'react'
-import '../static/Partners.css'
+import React from 'react';
+import '../static/Partners.css';
 
-
-const SponsorCard = ({sponsors}) => {
-    console.log(sponsors)
+const SponsorCard = ({ sponsors }) => {
     return (
-        <div className="Scard">
-            <a target='_blank' href="https://www.geekster.in/">
-                <img alt="" className="Scard-img" src="https://2k21.s3.amazonaws.com/images/Canva.png" />
-            </a>
-            <div className="Scard-info">
-                <p className="Stext-name" style={{ color: "black" }}>
-                    Canva
-                </p>
-                <p className="Stext-title" style={{ color: "black" }}>
-                    Creative Partner
-                </p>
-            </div>
+        <div className="Scontainer">
+            {sponsors.map((sponsor, index) => (
+                <div className="Scell">
+                    <div key={index} className="Scard">
+                        <a target='_blank' rel="noopener noreferrer" href={sponsor.link}>
+                            <img alt={sponsor.name} className="Scard-img" src={sponsor.logo} />
+                        </a>
+                        <div className="Scard-info">
+                            <p className="Stext-name" style={{ color: "black" }}>
+                                {sponsor.name}
+                            </p>
+                            <p className="Stext-title" style={{ color: "black" }}>
+                                {sponsor.title}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            ))}
         </div>
+    );
+};
 
-    )
-}
-
-export default SponsorCard
+export default SponsorCard;
