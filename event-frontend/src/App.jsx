@@ -6,13 +6,14 @@ import PastArtists from './pages/PastArtists'
 import Team from './pages/Team'
 import Speakers from './pages/Speakers'
 import Login from './pages/Login'
-import { RouterProvider , createBrowserRouter } from 'react-router-dom'
+import { RouterProvider, createBrowserRouter, useLocation } from 'react-router-dom'
 import MainLayout from './pages/MainLayout'
+// import { useLocation } from 'react-router-dom'
 
 const App = () => {
   const router = createBrowserRouter([
-      {
-        path: "/", element: <MainLayout />, children: [
+    {
+      path: "/", element: <MainLayout />, children: [
         {
           path: "/",
           element: <Homepage />,
@@ -35,15 +36,20 @@ const App = () => {
         },
         {
           path: "/login",
-          element: <Login />
+          element: <Login />,
+          // action: loginAction
         },
         {
           path: "/speakers",
           element: <Speakers />
         },
         {
+          path: "/dashboard",
+          element: <p style={{ "color": "white", "margin": "200px" }}>Hello</p>
+        },
+        {
           path: "/login",
-          element: <Login/>
+          element: <Login />
         },
       ]
     },
