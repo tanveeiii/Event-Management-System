@@ -2,7 +2,8 @@ import React from 'react'
 import '../static/Partners.css'
 
 
-const SponsorCard = () => {
+const SponsorCard = ({sponsors}) => {
+    console.log(sponsors)
     return (
         <div className="Scard">
             <a target='_blank' href="https://www.geekster.in/">
