@@ -192,7 +192,7 @@ def sponsors(request):
         for sponsor in sponsors_list:
             data_url = f"data:image/jpeg;base64,{sponsor[0]}"
             print(sponsor)
-            sponsors_data.append({"name": sponsor[1], "amt" : sponsor[2], "dealBy" : sponsor[5], "phoneNo":sponsor[3], "emailId": sponsor[4], "logo": data_url})
+            sponsors_data.append({"name": sponsor[1], "amt" : sponsor[2], "dealBy" : sponsor[5], "phoneNo":sponsor[3], "emailId": sponsor[4], "logo": data_url, "link": sponsor[6], "title":sponsor[7]})
         return JsonResponse(sponsors_data, safe=False)
     if(request.method=="POST"):
         name = request.POST.get('name')
@@ -201,6 +201,8 @@ def sponsors(request):
         phoneNo = request.POST.get('phoneNo')
         emailId = request.POST.get('emailId')
         image = request.FILES['logo']
+        title = request.POST.get('title')
+        link = request.POST.get('link')
         image_data = image.read()
         encoded_image = base64.b64encode(image_data).decode('utf-8')
         with connection.cursor() as cursor:
@@ -208,9 +210,9 @@ def sponsors(request):
             cursor.execute(fetch_rollNo)
             dealBy_rollNo = cursor.fetchone()[0]
             query = """
-                        insert into event_sponsors (name, sponsorshipAmount, logo, dealBy_id, phoneNo, emailId) values (%s,%s,%s,%s,%s,%s)
+                        insert into event_sponsors (name, sponsorshipAmount, logo, dealBy_id, phoneNo, emailId, title, link) values (%s,%s,%s,%s,%s,%s,%s,%s)
                     """
-            cursor.execute(query, (name, amt, encoded_image, dealBy_rollNo, phoneNo, emailId ))
+            cursor.execute(query, (name, amt, encoded_image, dealBy_rollNo, phoneNo, emailId, title, link))
         transaction.commit()
         return JsonResponse({"status":"success", "message": "Sponsor data added successfully"})
     
