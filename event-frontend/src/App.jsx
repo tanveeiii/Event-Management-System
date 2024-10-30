@@ -3,6 +3,7 @@ import Homepage from './pages/Homepage'
 import Competitions from './pages/Competitions'
 import Events from './pages/Events'
 import PastArtists from './pages/PastArtists'
+import Gallery from './pages/Gallery'
 import Team from './pages/Team'
 import Speakers from './pages/Speakers'
 import Login from './pages/Login'
@@ -25,6 +26,10 @@ const App = () => {
         {
           path: "/events",
           element: <Events />
+        },
+        {
+          path: "/gallery",
+          element: <Gallery />
         },
         // {
         //   path: "/past-artists",
