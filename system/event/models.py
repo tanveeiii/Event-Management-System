@@ -52,3 +52,7 @@ class Sponsors(models.Model):
     dealBy = models.ForeignKey(Team, on_delete=models.DO_NOTHING)
     phoneNo = models.CharField(max_length=20)
     emailId = models.EmailField()
+
+class Gallery(models.Model):
+    image = models.TextField()
+    imageId = models.AutoField(primary_key=True)
