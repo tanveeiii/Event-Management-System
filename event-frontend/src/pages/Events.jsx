@@ -2,33 +2,42 @@ import "../static/Events.css";
 import Timeline from '../components/Timeline';
 import React, { useState, useEffect } from "react";
 import axios from 'axios'
+import FadeLoader from 'react-spinners/FadeLoader'
 
 const Events = () => {
 
   const [activeDay, setActiveDay] = useState("Day1");
+  const [loading, setloading] = useState(true)
 
   const handleTabClick = (day) => {
     setActiveDay(day);
   };
 
+  const [eventsData, setEventsData] = useState([])
+
 
   const eventListURL = 'http://localhost:8000/api/event/'
   useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const response = await fetch(eventListURL);
-        console.log(response)
-        const eventsData = await response.json();
-        console.log(eventsData);
-      } catch (error) {
-        console.error('Error fetching events:', error);
-      }
-    };
     fetchEvents();
   }, []);
+  useEffect(() => {
+    console.log("Updated eventsData:", eventsData); 
+  }, [eventsData]);
+  useEffect(() => { 
+  }, [activeDay]);
 
+  const fetchEvents = async () => {
+    try {
+      const response = await fetch(eventListURL);
+      const data = await response.json();
+      setEventsData(data)
+    } catch (error) {
+      console.error('Error fetching events:', error);
+    }finally {
+      setloading(false);
+    }
+  };
 
-  const events = ["Event1", "Event2", "Event3", "Event4"]
 
 
   return (
@@ -60,8 +69,16 @@ const Events = () => {
           Day 4
         </button>
       </div>
-
-      <Timeline events={events} />
+      {
+        !loading?(
+      <Timeline events={eventsData} day={activeDay}/>):
+      (
+      <div className="loading">
+        <FadeLoader color='#f76c6c' radius={6} height={20} width={5} />
+        <p>Loading Events...</p>
+      </div>
+      )
+      }
     </>
   )
 }

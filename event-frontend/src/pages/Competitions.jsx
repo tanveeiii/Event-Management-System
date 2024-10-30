@@ -7,7 +7,8 @@ import FadeLoader from 'react-spinners/FadeLoader'
 const Competitions = () => {
   let [loading, setLoading] = useState(true);
   let [color, setColor] = useState("#ffffff");
-  const compListURL = 'https://run.mocky.io/v3/2a6fbd11-ed93-4cb8-b8d8-883b5a041d74';
+  // const compListURL = 'https://run.mocky.io/v3/2a6fbd11-ed93-4cb8-b8d8-883b5a041d74';
+  const compListURL = "http://localhost:8000/api/competitions/";
   const [compData, setCompData] = useState([]);
 
   useEffect(() => {
@@ -18,7 +19,7 @@ const Competitions = () => {
     try {
       const response = await fetch(compListURL);
       const data = await response.json();
-      setCompData(data['competitions']);
+      setCompData(data);
       console.log(data); // Log the fetched data
     } catch (error) {
       console.error('Error fetching competitions:', error);
