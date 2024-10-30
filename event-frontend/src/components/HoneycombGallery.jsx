@@ -10,7 +10,7 @@ const HoneycombGallery = ({ gallery }) => {
                     gallery.map((images,index)=>(
                     <li key={index} className="hex-grid__item">
                         <div className="hex-grid__content"><img src={images.image} alt="" /></div>
-                    </li>)):<p>Loading images</p>
+                    </li>)):<div className='loading'></div>
             }
             {/* <li className="hex-grid__item">
                 <div className="hex-grid__content">2</div>
