@@ -2,7 +2,7 @@ import './static/App.css'
 import Homepage from './pages/Homepage'
 import Competitions from './pages/Competitions'
 import Events from './pages/Events'
-import PastArtists from './pages/PastArtists'
+import Partners from './pages/Partners'
 import Gallery from './pages/Gallery'
 import Team from './pages/Team'
 import Speakers from './pages/Speakers'
@@ -30,10 +30,10 @@ const App = () => {
           path: "/gallery",
           element: <Gallery />
         },
-        // {
-        //   path: "/past-artists",
-        //   element: <PastArtists />
-        // },
+        {
+          path: "/partners",
+          element: <Partners />
+        },
         {
           path: "/team",
           element: <Team />

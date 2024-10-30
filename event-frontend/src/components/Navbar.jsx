@@ -27,7 +27,7 @@ const Navbar = () => {
                     <NavLink to="/competitions">Competitions</NavLink>
                     <NavLink to="/speakers">Speakers</NavLink>
                     <NavLink to="/gallery">Gallery</NavLink>
-                    {/* <NavLink to="/past-artists">Past Artists</NavLink> */}
+                    <NavLink to="/partners">Partners</NavLink>
                     <NavLink to="/team">Team</NavLink>
                     <NavLink to="/login">Login</NavLink>
                 </div>

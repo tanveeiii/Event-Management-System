@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+
+.Scard{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    width: 250px;
+    height: 310px;
+    background-color: white;
+    box-shadow: none;
+    padding: 0.8rem;
+    border-radius: 0.375rem;
+    align-items: center;
+
+    margin: 200px;
+}
+
+.Scard:hover{
+    box-shadow: 0 0 15px 2px #bbbdfa;
+    transform: scale(1.1);
+    transition: .2s;
+}
+
+.Scard-img{
+    width: 200px;
+    height: 200px;
+    margin-top: 10px;
+    border-radius: .5rem;
+    transition: .3s ease;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.Scard-img:hover{
+    transform: translateY(-50px);
+    box-shadow: 0 8px 20px #f76c6c;
+}
+
+.Stext-title, .Stext-body{
+    font-family: "Oswald", sans-serif;
+}
+
+.Stext-title{
+    font-weight: 500;
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+.Stext-body{
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
