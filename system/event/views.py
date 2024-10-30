@@ -231,4 +231,32 @@ def login(request):
                 if(check_password(password, password_stored)):
                     return JsonResponse({"status":"success", "message": "User exists... Login successful", "rollNo" : rollNo}) 
                 else:
-                    return JsonResponse({"status":"failure", "message":"User not found"})  
+                    return JsonResponse({"status":"failure", "message":"User not found"}) 
+
+@csrf_exempt
+def gallery(request):
+    if(request.method=="POST"):
+        image = request.FILES['image']
+        image_data = image.read()
+        encoded_image = base64.b64encode(image_data).decode('utf-8')
+        with connection.cursor() as cursor:
+            query = "insert into event_gallery (image) values (%s)"
+            cursor.execute(query, [encoded_image])
+            transaction.commit()
+            return JsonResponse({"status":"success", "message":"Image added successfully"})
+        return JsonResponse({"status":"failure", "message":"Unable to add image to gallery"})
+    if(request.method=="GET"):
+        with connection.cursor() as cursor:
+            query = "select * from event_gallery"
+            cursor.execute(query)
+            images = cursor.fetchall()
+        images_data = []
+        for image in images:
+            image_url = f"data:image/jpeg;base64,{image[0]}"
+            images_data.append({
+                "image":image_url,
+                "imageId":image[1]
+            })
+        return JsonResponse(images_data, safe=False)
+
+
