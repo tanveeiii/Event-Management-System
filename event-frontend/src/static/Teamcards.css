@@ -1,0 +1,32 @@
+.team-card{
+    background-color:white;
+    /* padding: 5rem 5rem; */
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    width:fit-content;
+    min-height: 15rem ;
+    min-width: 15rem;
+}
+
+.contacts{
+    /* width: 500px; */
+    padding 2rem 1rem;
+}
+
+.contacts-list{
+    list-style-type: none;
+    padding:  0 20px;
+}
+
+.person-img{
+    width: 15rem;
+    border-radius: 15px;
+}
+
+.break{
+    
+    flex-basis: 100%; /* Forces a line break */
+    height: 0; /* Optional: make it invisible */
+      
+}
