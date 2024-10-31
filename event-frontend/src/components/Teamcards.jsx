@@ -65,7 +65,7 @@ const Teamcards = ({ image, name, contacts }) => {
                     </motion.div>
 
                     <div className="break"></div>
-
+                    {/* Have to add on a new line */}
                     <motion.div  
                         className='person-title'
                         initial={{ opacity: 0 }}
