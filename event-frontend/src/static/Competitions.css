@@ -142,7 +142,7 @@ p {
 
 /* CARD COMPONENT */
 
-.card {
+.card-comp {
   display: grid;
   place-items: center;
   width: 300px;
@@ -153,7 +153,7 @@ p {
 
 }
 
-.card>* {
+.card-comp>* {
   grid-column: 1 / 2;
   grid-row: 1 / 2;
 }

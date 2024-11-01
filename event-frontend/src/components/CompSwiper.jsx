@@ -31,7 +31,7 @@ const CompSwiper = ({ competitions }) => {
         {competitions && competitions.length > 0 ?
           competitions.map((comp, index) => (
             <SwiperSlide className="swiper-slide" key={index}>
-              <article className="card">
+              <article className="card-comp">
                 <img
                   className="card__background"
                   src={comp.poster}
