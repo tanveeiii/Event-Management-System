@@ -191,7 +191,7 @@ def sponsors(request):
         sponsors_data = []
         for sponsor in sponsors_list:
             data_url = f"data:image/jpeg;base64,{sponsor[0]}"
-            print(sponsor)
+            # print(sponsor)
             sponsors_data.append({"name": sponsor[1], "amt" : sponsor[2], "dealBy" : sponsor[5], "phoneNo":sponsor[3], "emailId": sponsor[4], "logo": data_url, "link": sponsor[6], "title":sponsor[7]})
         return JsonResponse(sponsors_data, safe=False)
     if(request.method=="POST"):
