@@ -8,7 +8,7 @@ const Sidebar = ({ team_names }) => {
       <ul className="sidebar-list">
         {
             team_names.map((team , index) => (
-                <li key={index} > <a href="#" className='unstyled-link'>{team} </a></li>
+                <li key={index} > <a href={`#${team}`} className='unstyled-link'>{team} </a></li>
             ))
         }
       </ul>

@@ -22,7 +22,7 @@
 }
 
 .teams-box{
-    display:flex;
+    /* display:flex; */
 }
 
 .sidebar{
@@ -32,4 +32,16 @@
 .card{
     flex: 0 0 30%;
     max-width: 30%;
+}
+
+.teams-subheading{
+    font-size: 2em;
+    font-family: poppins , sans-serif ;
+    margin-bottom: 20px;
+    color: white;
+    margin-top: 100px;
+    text-align:center;
+    text-shadow: 0px 0px 30px white;
+    text-transform: uppercase;
+    margin-left: 150px ;
 }

@@ -78,14 +78,24 @@ const Team = () => {
       <h1 className="teams-title">Team Members</h1>
       <div className='teams-box'>
       <Sidebar className='sidebar' team_names={team_names} />
-      <div className='card-container'>
-        {
-          team_members.map((person , index) => (
-            <Teamcards className='card' key={index} name={person.name} image={person.image} contacts={person.contacts}/>
-          ))
+      {
+        team_names.map((team_name , index) => (
+          <div id={team_name} key={index}>
+          <h1 className='teams-subheading'> {team_name}</h1>
+          <div className='card-container'>
+            {
+              team_members.map((person , index) => (
+                <Teamcards className='card' key={index} name={person.name} image={person.image} contacts={person.contacts}/>
+              ))
 
-        }
-      </div>
+            }
+          </div>
+          </div>
+
+        ))
+
+      }
+      
       </div>
     </>
   )

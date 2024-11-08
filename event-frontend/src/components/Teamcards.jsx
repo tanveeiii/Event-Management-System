@@ -19,7 +19,8 @@ const Teamcards = ({ image, name, contacts }) => {
             layout className='team-card'
             onMouseEnter={() => setisOpen(true)} onMouseLeave={() => setisOpen(false)}
             style={{ borderRadius: "1rem", boxShadow: "#ffffffc2 0px 2px 10px" }}
-        >
+        >   
+            <div className='team-card-box'>
             <motion.img layout="position" src={image} alt={name} className='person-img' ></motion.img>
             {isOpen &&
                 <>
@@ -64,18 +65,22 @@ const Teamcards = ({ image, name, contacts }) => {
                         </ul>
                     </motion.div>
 
-                    <div className="break"></div>
-                    {/* Have to add on a new line */}
-                    <motion.div  
+                    
+                    
+                </>
+            }
+            </div>
+
+            {isOpen && <motion.div  
                         className='person-title'
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 1 }}
                         layout>
-                        {/* <h1 >{name}</h1> */}
-                    </motion.div>
-                </>
-            }
+                        <h1 >{name}</h1>
+                    </motion.div>}
+            {/* Have to add on a new line */}
+            
 
         </motion.div>
     )
