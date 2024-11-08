@@ -8,7 +8,7 @@ import FadeLoader from 'react-spinners/FadeLoader'
 const Gallery = () => {
   const [gallery, setGalleryData] = useState([])
 
-const galleryListURL = 'http://localhost:8000/api/gallery/'
+const galleryListURL = 'https://run.mocky.io/v3/4a6fb8af-4dbd-4e18-832b-bcb413050438'
   useEffect(() => {
     fetchGallery();
   }, []);
