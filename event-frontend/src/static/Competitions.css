@@ -243,38 +243,38 @@ p {
     transition: transform 500ms ease-out, opacity 500ms ease-out;
   }
 
-  .card:hover,
-  .card:focus-within {
+  .card-comp:hover,
+  .card-comp:focus-within {
     transform: scale(1.03);
     transition: transform 500ms ease-in;
   }
 
-  .card:hover .card__content,
-  .card:focus-within .card__content {
+  .card-comp:hover .card__content,
+  .card-comp:focus-within .card__content {
     transform: translateY(0);
     transition: transform 500ms ease-in;
   }
 
-  .card:focus-within .card__content {
+  .card-comp:focus-within .card__content {
     transition-duration: 0ms;
   }
 
-  .card:hover .card__background,
-  .card:focus-within .card__background {
+  .card-comp:hover .card__background,
+  .card-comp:focus-within .card__background {
     transform: scale(1.3);
   }
 
-  .card:hover .card__content--container> :not(.card__title),
-  .card:hover .card__button,
-  .card:focus-within .card__content--container> :not(.card__title),
-  .card:focus-within .card__button {
+  .card-comp:hover .card__content--container> :not(.card__title),
+  .card-comp:hover .card__button,
+  .card-comp:focus-within .card__content--container> :not(.card__title),
+  .card-comp:focus-within .card__button {
     opacity: 1;
     transition: opacity 500ms ease-in;
     transition-delay: 1000ms;
   }
 
-  .card:hover .card__title::after,
-  .card:focus-within .card__title::after {
+  .card-comp:hover .card__title::after,
+  .card-comp:focus-within .card__title::after {
     opacity: 1;
     transform: scaleX(1);
     transform-origin: left;
