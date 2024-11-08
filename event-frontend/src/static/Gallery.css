@@ -5,8 +5,10 @@
 .hex-grid__list {
     --amount: 5;
     position: relative;
+    overflow: hidden;
     padding: 50px;
     margin-top: 80px;
+    margin-bottom: 50px;
     list-style-type: none;
     display: grid;
     grid-template-columns: repeat(var(--amount), 1fr 2fr) 1fr;
@@ -37,6 +39,12 @@
     text-align: center;
     transition: transform 0.24s ease-out;
 }
+
+.hex-grid__content img{
+    height: 600px;
+    object-fit: contain;
+}
+
 @media screen and (min-width: 1440px) {
     .hex-grid__list {
         --amount: 5;

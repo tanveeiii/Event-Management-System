@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import Starfield from "../components/Starfield"
 import Footer from '../components/Footer';
+import ChatAssistant from '../components/ChatAssistant';
 
 const MainLayout = () => {
   return (
@@ -14,6 +15,8 @@ const MainLayout = () => {
         <div style={pageContainerStyle}>
           <div style={contentStyle}>
             <Outlet />
+            {/* ChatAssistant will load on every page */}
+            <ChatAssistant />
             <ToastContainer />
           </div>
         </div>
