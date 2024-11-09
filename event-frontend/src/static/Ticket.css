@@ -48,10 +48,20 @@
 }
 
 /* autofill css not working */
-.T-input:-webkit-autofill {
+/* .T-input:-webkit-autofill {
     color: white !important;
-    transition: background-color 5000s ease-in-out 0s !important; 
+    } */
+input:-webkit-autofill {
+    -webkit-text-fill-color: white;
+    -webkit-box-shadow: 0 0 0 50px rgb(0, 0, 19) inset;
+    transition: background-color 2000s ease-in-out 0s !important;
 }
+
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 50px rgb(0, 0, 19) inset;
+    -webkit-text-fill-color: white;
+}
+
 
 .poster img {
     height: 450px;
@@ -96,7 +106,7 @@
     padding: 10px 0;
 }
 
-.T-input:not(:placeholder-shown):not(:focus)+label{
+.T-input:not(:placeholder-shown):not(:focus)+label {
     transform: translateY(-30px);
     font-size: 0.80em;
     color: white;
