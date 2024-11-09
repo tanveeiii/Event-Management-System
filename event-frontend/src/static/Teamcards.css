@@ -1,12 +1,13 @@
 .team-card{
-    background-color:#b4a4a4;
+    background-color:#ffffff;
     /* padding: 5rem 5rem; */
     justify-content: center;
     align-items:center;
     width:fit-content;
     min-height: 15rem ;
     min-width: 15rem;
-    border-radius: 12px ;
+    border-radius: 15px ;
+    box-shadow: 0 0 20px #ffffff8c;
 }
 
 .team-card-box{
