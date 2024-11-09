@@ -17,13 +17,13 @@
 .contacts{
     /* width: 500px; */
     margin-top: 20px;
-    padding 2rem 1rem;
+    padding 0rem 1rem;
 }
 
 .contacts-list{
     list-style-type: none;
-    padding:  0 20px;
-    margin-left: 175px;
+    padding: 0 15px;
+    margin-left: 185px;
 }
 
 .img-box{
@@ -45,8 +45,8 @@
 }
 
 .person-title{
-    margin: -30px 10px;
-    align-text: center;
+    margin: -30px 20px;
+    /* align-text: center; */
     /* position: absolute; */
 
 }
