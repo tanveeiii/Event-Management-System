@@ -10,9 +10,12 @@ import {
     FaLinkedin,
 } from "react-icons/fa";
 
-const Teamcards = ({ image, name, contacts }) => {
+const Teamcards = ({ name, image, contacts }) => {
+    console.log(contacts)
+    const emailId = "mailto:"+contacts.emailId
     return (
-        <div className='team-card'>   
+        <div className='team-card'>
+               
             <div className='team-card-box'>
             <div className='img-box'>
                 <img layout="position" src={image} alt={name} className='person-img' ></img>
@@ -22,17 +25,17 @@ const Teamcards = ({ image, name, contacts }) => {
                         {
                             <>
                                 <li>
-                                    <a href={contacts.phone} target="_blank" rel="noopener noreferrer">
+                                    <a href={contacts.phoneNo} target="_blank" rel="noopener noreferrer">
                                         <FaPhone size={24} style={{ color: '#333', marginBottom: '15px' }} />
                                     </a>
                                 </li>
                                 <li>
-                                    <a href={contacts.email} target="_blank" rel="noopener noreferrer">
+                                    <a href={emailId} target="_blank" rel="noopener noreferrer">
                                         <FaEnvelope size={24} style={{ color: '#333', marginBottom: '15px' }} />
                                     </a>
                                 </li>
                                 <li>
-                                    <a href={contacts.instagram} target="_blank" rel="noopener noreferrer">
+                                    <a href={contacts.instagramId} target="_blank" rel="noopener noreferrer">
                                         <FaInstagram size={24} style={{ color: '#333', marginBottom: '15px' }} />
                                     </a>
                                 </li>
@@ -42,7 +45,7 @@ const Teamcards = ({ image, name, contacts }) => {
                                     </a>
                                 </li>
                                 <li>
-                                    <a href={contacts.linkedin} target="_blank" rel="noopener noreferrer">
+                                    <a href={contacts.linkedinId} target="_blank" rel="noopener noreferrer">
                                         <FaLinkedin size={24} style={{ color: '#333', marginBottom: '15px' }} />
                                     </a>
                                 </li>
