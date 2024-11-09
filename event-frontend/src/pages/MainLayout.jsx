@@ -15,11 +15,10 @@ const MainLayout = () => {
         <div style={pageContainerStyle}>
           <div style={contentStyle}>
             <Outlet />
-            {/* ChatAssistant will load on every page */}
-            <ChatAssistant />
             <ToastContainer />
           </div>
         </div>
+        {/* <ChatAssistant /> */}
         <Footer />
     </>
   );
