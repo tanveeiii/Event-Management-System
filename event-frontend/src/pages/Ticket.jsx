@@ -1,10 +1,9 @@
 import React from 'react'
 import '../static/Ticket.css'
 import LogoImg from "../assets/logo.png"
+import { useEffect } from 'react'
 
 const Ticket = () => {
-
-    
 
     // Function to fetch order_id from Django backend
     const fetchOrderId = async () => {
