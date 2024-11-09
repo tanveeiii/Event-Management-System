@@ -9,6 +9,7 @@ import Speakers from './pages/Speakers'
 import Login from './pages/Login'
 import { RouterProvider, createBrowserRouter, useLocation } from 'react-router-dom'
 import MainLayout from './pages/MainLayout'
+import Ticket from './pages/Ticket'
 // import { useLocation } from 'react-router-dom'
 
 const App = () => {
@@ -18,6 +19,10 @@ const App = () => {
         {
           path: "/",
           element: <Homepage />,
+        },
+        {
+          path: "/ticket",
+          element: <Ticket />,
         },
         {
           path: "/competitions",
