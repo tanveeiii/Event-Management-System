@@ -1,34 +1,32 @@
-/* form{
-    background-image: url("../assets/IMG_9052[1].JPG");
-} */
-
-.T-form{
+.T-form {
     background-color: black;
     border: 1px solid white;
-    width: 750px;
+    width: 770px;
     height: auto;
     background-color: rgba(0, 0, 255, 0.075);
     display: flex;
     justify-content: space-around;
     align-items: center;
+    gap: 40px;
 }
 
-.T-field{
-    height: 70px;
+.T-field {
+    height: 72px;
     width: 300px;
 }
 
-.T-input{
-    background-color: transparent;
-    border-bottom: 1px solid white;
-    border-radius: 0;
-    padding-left: 5px;
-    padding-bottom: 0;
-    height: 50px;
-    transition: all 0.2s ease-out;
+.T-input {
+    background-color: transparent !important;
+    border-bottom: 1px solid white !important;
+    border-radius: 0 !important;
+    padding-left: 5px !important;
+    padding-bottom: 0 !important;
+    height: 50px !important;
+    transition: all 0.2s ease-out !important;
+    /* padding-left: 5px !important; */
 }
 
-.input-label{
+.input-label {
     position: relative;
     bottom: 60px;
     font-weight: 400;
@@ -37,7 +35,7 @@
     transition: all 0.2s ease-out;
 }
 
-.T-input:focus + label{
+.T-input:focus+label {
     transform: translateY(-30px);
     font-size: 0.80em;
     color: #f76c6c;
@@ -45,19 +43,63 @@
     letter-spacing: 2px;
 }
 
-.T-input:focus{
-    border-bottom: 3px solid #f76c6c;
+.T-input:focus {
+    border-bottom: 3px solid #f76c6c !important;
 }
 
-.pay{
+/* autofill css not working */
+.T-input:-webkit-autofill {
+    color: white !important;
+    transition: background-color 5000s ease-in-out 0s !important; 
+}
+
+.poster img {
+    height: 450px;
+    border-radius: 5px;
+}
+
+.T-radio {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.T-radio span {
+    margin-top: 5px;
+    margin-bottom: 3px;
+    letter-spacing: 1px;
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    margin-top: 3px;
+    margin-left: 10px;
+}
+
+.radio-label {
+    margin-top: 0;
+    font-weight: 300;
+    font-size: 14px;
+    width: 30px;
+}
+
+.radio-text {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.pay {
     width: 300px !important;
-    /* height: 60px; */
+    margin-top: 40px;
     padding: 10px 0;
 }
 
-.poster img{
-    height: 350px;
-    border-radius: 5px;
-    /* border: 1px solid white; */
-    width: 250px;
+.T-input:not(:placeholder-shown):not(:focus)+label{
+    transform: translateY(-30px);
+    font-size: 0.80em;
+    color: white;
+    font-weight: 500;
+    letter-spacing: 2px;
 }

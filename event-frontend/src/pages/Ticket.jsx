@@ -1,6 +1,7 @@
 import React from 'react'
 import '../static/Ticket.css'
-import LogoImg from "../assets/logo.png"
+import LogoImg from "../assets/pronites.jpeg"
+import LogoImg2 from "../assets/logo.png"
 
 const Ticket = () => {
     return (
@@ -9,19 +10,29 @@ const Ticket = () => {
                 {/* <h3>Welcome</h3> */}
                 <div className="form-details">
                     <div className="T-field">
-                        <input type="text" className='T-input' id="name" />
+                        <input type="text" className='T-input' placeholder='' id="name" />
                         <label htmlFor="name" className='input-label'>Name</label>
                     </div>
                     <div className="T-field">
-                        <input type="text" className='T-input' id="email" />
+                        <input type="text" className='T-input' placeholder='' id="email" />
                         <label htmlFor="email" className='input-label'>Email ID</label>
                     </div>
                     <div className="T-field">
-                        <input type="text" className='T-input' id="contact" />
+                        <input type="text" className='T-input' placeholder='' id="contact" />
                         <label htmlFor="contact" className='input-label'>Contact No.</label>
                     </div>
-                    <div className="T-field">
-                        Accomodation
+                    <div className="T-radio">
+                        <span>Accommodation</span>
+                        <div className="radio-group">
+                            <input type="radio" id='Acc1' name="accommodation" value="Yes" />
+                            <label className='radio-label' htmlFor='Acc1'>Yes</label>
+                            <div className="radio-text">(Ticket Price: ₹2000)</div>
+                        </div>
+                        <div className="radio-group">
+                            <input type="radio" id='Acc0' name="accommodation" value="No" />
+                            <label className='radio-label' htmlFor='Acc0'>No</label>
+                            <div className="radio-text">(Ticket Price: ₹500)</div>
+                        </div>
                     </div>
                     <button type='submit' className='pay'>Buy Now</button>
                 </div>
