@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, transform } from 'framer-motion'
 import "../static/Teamcards.css"
 import {
     FaPhone,
