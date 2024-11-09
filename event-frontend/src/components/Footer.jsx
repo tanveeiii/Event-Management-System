@@ -16,12 +16,13 @@ const Footer = () => {
         <span style={separatorStyle}>•</span>
       </div>
       <div style={socialIconsStyle}>
-        <FaWhatsapp style={iconStyle} />
-        <FaTwitter style={iconStyle} />
-        <FaInstagram style={iconStyle} />
-        <FaYoutube style={iconStyle} />
-        <FaFacebook style={iconStyle} />
-        <FaLinkedin style={iconStyle} />
+        <a href="https://www.whatsapp.com/"><FaWhatsapp style={iconStyle} /></a>
+        <a href="https://x.com"><FaTwitter style={iconStyle} /></a>
+        <a href="https://www.instagram.com/"><FaInstagram style={iconStyle} /></a>
+        <a href="https://www.youtube.com/"><FaYoutube style={iconStyle} /></a>
+        <a href="https://www.facebook.com/"><FaFacebook style={iconStyle} /></a>
+        <a href="https://in.linkedin.com/"><FaLinkedin style={iconStyle} /></a>
+        
       </div>
     </footer>
   );
