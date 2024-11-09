@@ -5,6 +5,23 @@ import uuid
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import make_password, check_password
 import base64
+import razorpay
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+RAZORPAY_ID = os.getenv("RAZORPAY_ID")
+RAZORPAY_KEY = os.getenv("RAZORPAY_SECRET_KEY")
+client = razorpay.Client(auth=(RAZORPAY_ID, RAZORPAY_KEY))
+
+@csrf_exempt
+@transaction.atomic()
+def create_order(request):
+    if(request.method=="POST"):
+        data = { "amount": 500, "currency": "INR", "receipt": "11" }
+        payment = client.order.create(data=data)
+        print(payment)
+        return JsonResponse({"razorpay_order_id": payment['id']})
 
 @csrf_exempt
 def competitions(request):
