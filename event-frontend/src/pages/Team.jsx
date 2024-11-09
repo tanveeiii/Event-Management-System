@@ -76,8 +76,8 @@ const Team = () => {
   return (
     <>
       <h1 className="teams-title">Team Members</h1>
-      <div className='teams-box'>
       <Sidebar className='sidebar' team_names={team_names} />
+      <div className='teams-box'>
       {
         team_names.map((team_name , index) => (
           <div id={team_name} key={index}>
