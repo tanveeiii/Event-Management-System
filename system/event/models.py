@@ -8,6 +8,10 @@ class Team(models.Model):
     phoneNo =  models.CharField(max_length=20)
     emailId = models.EmailField()
     password = models.CharField(max_length=500)
+    instagramId = models.URLField()
+    linkedinId = models.URLField()
+    teamName = models.CharField(max_length=50)
+    image = models.TextField()
 
 class Event(models.Model):
     eventName = models.CharField(max_length=50)
