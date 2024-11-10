@@ -6,9 +6,9 @@ import '../static/Dashboard.css'; // Custom styles for TeamLogin page
 const Dashboard = () => {
 
     const teamDictionary = {
-        "core Team": false,
-        "marketing Team": false,
-        "outreach Team": false
+        "Core Team": false,
+        "Marketing Team": false,
+        "Outreach Team": false
     }
 
     const [showComponents, setShowComponents] = useState(

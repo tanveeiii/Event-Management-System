@@ -14,7 +14,7 @@ const Speakers = () => {
   //                   {id:"8" , image:"https://swiperjs.com/demos/images/nature-2.jpg" , title:"Gamer" , description:"gersagh"} , 
   //                   {id:"9" , image:"https://swiperjs.com/demos/images/nature-3.jpg" , title:"Youtube Watcher" , description:"bdhjsbgfsvz"},
   // ];
-   const [speakers , setspeakers] = useState([]);
+  const [speakers , setspeakers] = useState([]);
   
   useEffect( () => {
     const fetchspeakers = async () => {
