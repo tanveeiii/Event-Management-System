@@ -12,6 +12,7 @@ import MainLayout from './pages/MainLayout'
 // import TeamLogin from './pages/TeamLogin'
 import Dashboard from './pages/Dashboard'
 import Ticket from './pages/Ticket'
+import PaymentSuccess from './pages/PaymentSuccess'
 import Register from './pages/Register'
 // import { useLocation } from 'react-router-dom'
 
@@ -63,6 +64,10 @@ const App = () => {
         {
           path: "/login",
           element: <Login />
+        },
+        {
+          path: "/success",
+          element: <PaymentSuccess/>
         },
         {
           path: "/register/:compName",
