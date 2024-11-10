@@ -37,7 +37,7 @@ const footerStyle = {
   color: "#FFFFFF", // White text
   fontFamily: "Arial, sans-serif",
   fontSize: "18px",
-  borderTop: "2px solid rgba(255, 255, 255, 0.2)",
+  // borderTop: "2px solid rgba(255, 255, 255, 0.2)",
   backgroundColor: "black",
 };
 
