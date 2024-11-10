@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Link, NavLink } from 'react-router-dom';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -46,7 +47,10 @@ const CompSwiper = ({ competitions }) => {
                       {comp.prizeMoney}
                     </p>
                   </div>
-                  <button className="card__button">Register</button>
+                  <Link to={`/register/${index}`}>
+                    <button className="card__button">Register</button>
+                  </Link>
+
                 </div>
               </article>
 

@@ -42,7 +42,7 @@ class Participants(models.Model):
     phoneNo = models.CharField(max_length=20)
     emailId = models.EmailField()
     registrationId = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
-    accommodation = models.BooleanField()
+    # accommodation = models.BooleanField()
     competitionId = models.ForeignKey(Competitions, on_delete=models.CASCADE)
 
 class Speakers(models.Model):

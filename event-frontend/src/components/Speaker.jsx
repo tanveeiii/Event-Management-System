@@ -17,8 +17,8 @@ const styles = {
     padding: '20px',
     borderRadius: '15px',
     textAlign: 'center',
-    backgroundColor: '#f76c6c',
-    boxShadow: "0px 0px 25px #f76c6c ",
+    backgroundColor: 'white',
+    boxShadow: "0px 0px 25px white ",
   },
   image: {
     width: '200px',

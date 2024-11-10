@@ -27,7 +27,13 @@ def create_order(request):
 @csrf_exempt
 def competitions(request):
     if(request.method=="GET"):
-        query = "select * from event_competitions"
+        id = request.GET.get("id")
+        print(id)
+        if(id):
+            query = f"select * from event_competitions where competitionId = {id}"
+        else:
+            query = "select * from event_competitions"
+        print(query)
         competitions_list=[]
         with connection.cursor() as cursor:
             cursor.execute(query)
@@ -145,7 +151,7 @@ def participants(request):
         phoneNo = data['phoneNo']
         emailId = data['emailId']
         competitionName = data['competitionName']
-        accommodation = data['accommodation']
+        # accommodation = data['accommodation']
         registrationId = uuid.uuid4()
         with connection.cursor() as cursor:
             query = f"select competitionId from event_competitions where competitionName= '{competitionName}'"
@@ -153,11 +159,11 @@ def participants(request):
             competitionId = cursor.fetchone()[0]
             print(competitionId)
             query = """
-                        insert into event_participants (name, phoneNo, emailId, registrationId, accommodation, competitionId_id) values(%s,%s,%s,%s,%s,%s)
+                        insert into event_participants (name, phoneNo, emailId, registrationId,  competitionId_id) values(%s,%s,%s,%s,%s)
                     """
-            cursor.execute(query, (name, phoneNo, emailId, registrationId, accommodation, competitionId ))
+            cursor.execute(query, (name, phoneNo, emailId, registrationId, competitionId ))
         transaction.commit()
-        return JsonResponse({'status':'success', 'message': 'Successfully registered for the competition', 'registrationid': registrationId})
+        return JsonResponse({'status':'success', 'message': 'Successfully registered for the competition', 'registrationid': registrationId, "competitionName":competitionName})
     if(request.method=="GET"):
         query = "select * from event_participants"
         with connection.cursor() as cursor:
@@ -165,7 +171,7 @@ def participants(request):
             participants_list = cursor.fetchall()
         participants_data=[]
         for participant in participants_list:
-            participants_data.append({"name": participant[0], "phoneNo": participant[1], "emailId":participant[2], "registrationid": participant[3], "accommodation": participant[4], "competitionId": participant[5]})
+            participants_data.append({"name": participant[0], "phoneNo": participant[1], "emailId":participant[2], "registrationid": participant[3],  "competitionId": participant[4]})
         return JsonResponse(participants_data, safe=False)
     
 @csrf_exempt

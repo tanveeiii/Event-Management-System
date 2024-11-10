@@ -9,10 +9,9 @@ import Speakers from './pages/Speakers'
 import Login from './pages/Login'
 import { RouterProvider, createBrowserRouter, useLocation } from 'react-router-dom'
 import MainLayout from './pages/MainLayout'
-// import TeamLogin from './pages/TeamLogin'
-import Dashboard from './pages/Dashboard'
 import Ticket from './pages/Ticket'
 import PaymentSuccess from './pages/PaymentSuccess'
+import Dashboard from './pages/Dashboard'
 import Register from './pages/Register'
 // import { useLocation } from 'react-router-dom'
 
@@ -59,19 +58,15 @@ const App = () => {
         },
         {
           path: "/dashboard",
-          element: <Dashboard />
+          element: <Dashboard/>
         },
         {
           path: "/login",
           element: <Login />
         },
         {
-          path: "/success",
-          element: <PaymentSuccess/>
-        },
-        {
-          path: "/register/:compName",
-          element: <Register />
+          path: "/register/:index",
+          element: <Register/>
         },
       ]
     },
