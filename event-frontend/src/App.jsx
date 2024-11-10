@@ -9,14 +9,8 @@ import Speakers from './pages/Speakers'
 import Login from './pages/Login'
 import { RouterProvider, createBrowserRouter, useLocation } from 'react-router-dom'
 import MainLayout from './pages/MainLayout'
-// import TeamLogin from './pages/TeamLogin'
-import Dashboard from './pages/Dashboard'
 import Ticket from './pages/Ticket'
-<<<<<<< HEAD
 import PaymentSuccess from './pages/PaymentSuccess'
-=======
-import Register from './pages/Register'
->>>>>>> bb4a517a3153a4aa1e2f146c53fec2dfdad75ca6
 // import { useLocation } from 'react-router-dom'
 
 const App = () => {
@@ -62,20 +56,15 @@ const App = () => {
         },
         {
           path: "/dashboard",
-          element: <Dashboard />
+          element: <p style={{ "color": "white", "margin": "200px" }}>Hello</p>
         },
         {
           path: "/login",
           element: <Login />
         },
         {
-<<<<<<< HEAD
           path: "/success",
           element: <PaymentSuccess/>
-=======
-          path: "/register/:compName",
-          element: <Register />
->>>>>>> bb4a517a3153a4aa1e2f146c53fec2dfdad75ca6
         },
       ]
     },
