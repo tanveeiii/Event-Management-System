@@ -28,7 +28,7 @@ const MainLayout = () => {
 const pageContainerStyle = {
   display: "flex",
   flexDirection: "column",
-  minHeight: "94vh", // Full viewport height
+  minHeight: "93vh", // Full viewport height
 };
 
 const contentStyle = {

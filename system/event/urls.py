@@ -11,4 +11,5 @@ urlpatterns = [
     path('api/sponsors/', views.sponsors, name="sponsors"),
     path('api/login/', views.login, name="login"),
     path('api/gallery/', views.gallery, name="gallery"),
+    path('api/create_order/', views.create_order, name="create_order"),
 ]

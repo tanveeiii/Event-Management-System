@@ -11,6 +11,8 @@ import { RouterProvider, createBrowserRouter, useLocation } from 'react-router-d
 import MainLayout from './pages/MainLayout'
 // import TeamLogin from './pages/TeamLogin'
 import Dashboard from './pages/Dashboard'
+import Ticket from './pages/Ticket'
+import Register from './pages/Register'
 // import { useLocation } from 'react-router-dom'
 
 const App = () => {
@@ -20,6 +22,10 @@ const App = () => {
         {
           path: "/",
           element: <Homepage />,
+        },
+        {
+          path: "/ticket",
+          element: <Ticket />,
         },
         {
           path: "/competitions",
@@ -57,6 +63,10 @@ const App = () => {
         {
           path: "/login",
           element: <Login />
+        },
+        {
+          path: "/register/:compName",
+          element: <Register />
         },
       ]
     },

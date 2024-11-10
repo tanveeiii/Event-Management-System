@@ -5,6 +5,23 @@ import uuid
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import make_password, check_password
 import base64
+import razorpay
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+RAZORPAY_ID = os.getenv("RAZORPAY_ID")
+RAZORPAY_KEY = os.getenv("RAZORPAY_SECRET_KEY")
+client = razorpay.Client(auth=(RAZORPAY_ID, RAZORPAY_KEY))
+
+@csrf_exempt
+@transaction.atomic()
+def create_order(request):
+    if(request.method=="POST"):
+        data = { "amount": 500, "currency": "INR", "receipt": "11" }
+        payment = client.order.create(data=data)
+        print(payment)
+        return JsonResponse({"razorpay_order_id": payment['id']})
 
 @csrf_exempt
 def competitions(request):
@@ -49,23 +66,30 @@ def team(request):
             team_members = cursor.fetchall()
         team_data=[]
         for member in team_members:
-            team_data.append({"name": member[1], "rollNo": member[0], "position": member[2], "phoneNo": member[3], "emailId": member[4]})
+            data_url = f"data:image/jpeg;base64,{member[8]}"
+            team_data.append({"name": member[1], "rollNo": member[0],"image":data_url, "position": member[2], "teamName": member[8], "contacts":{ "phoneNo": member[3], "emailId": member[4], "instagramId": member[6], "linkedinId": member[7]}})
         return JsonResponse(team_data, safe=False)
     
     if(request.method=="POST"):
-        data = json.loads(request.body)
-        name = data['name']
-        rollNo = data['rollNo']
-        position = data['position']
-        phoneNo = data['phoneNo']
-        emailId = data['emailId']
-        password = data['password']
+        # data = json.loads(request.body)
+        name = request.POST.get('name')
+        rollNo = request.POST.get('rollNo')
+        position = request.POST.get('position')
+        phoneNo = request.POST.get('phoneNo')
+        emailId = request.POST.get('emailId')
+        password = request.POST.get('password')
+        instagramId = request.POST.get('instagramId')
+        linkedinId = request.POST.get('linkedinId')
+        teamName = request.POST.get('teamName')
+        image = request.FILES['image']
+        image_data = image.read()
+        encoded_image = base64.b64encode(image_data).decode('utf-8')
         hashed_password = make_password(password)
         query = """
-                    insert into event_team (rollNo, name, position, phoneNo, emailId, password) values (%s,%s,%s,%s,%s,%s) 
+                    insert into event_team (rollNo, name, position, phoneNo, emailId, password, instagramId, linkedinId, teamName, image) values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) 
                 """
         with connection.cursor() as cursor:
-            cursor.execute(query, (rollNo, name, position, phoneNo, emailId, hashed_password))
+            cursor.execute(query, (rollNo, name, position, phoneNo, emailId, hashed_password, instagramId, linkedinId, teamName, encoded_image))
         transaction.commit()
         return JsonResponse({'status': 'success', 'message': 'Team Member added successfully.'})
 
@@ -162,6 +186,7 @@ def attendees(request):
         phoneNo = data['phoneNo']
         emailId = data['emailId']
         accommodation = data['accommodation']
+        amt = data['amt']
         ticketId = uuid.uuid4()
         with connection.cursor() as cursor:
             
