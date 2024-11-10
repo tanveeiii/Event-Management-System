@@ -15,10 +15,11 @@ RAZORPAY_KEY = os.getenv("RAZORPAY_SECRET_KEY")
 client = razorpay.Client(auth=(RAZORPAY_ID, RAZORPAY_KEY))
 
 @csrf_exempt
-@transaction.atomic()
+@transaction.atomic
 def create_order(request):
+    data = json.loads(request.body)
     if(request.method=="POST"):
-        data = { "amount": 500, "currency": "INR", "receipt": "11" }
+        data = { "amount": data['amount'], "currency": "INR" }
         payment = client.order.create(data=data)
         print(payment)
         return JsonResponse({"razorpay_order_id": payment['id']})
@@ -37,10 +38,6 @@ def competitions(request):
             competitions_data.append({"name": competition[0], "prizeMoney": competition[1], "date": competition[2], "id": competition[3], "poster":data_url})
         return JsonResponse(competitions_data, safe=False)
     if(request.method=="POST"):
-        # data = json.loads(request.body)
-        # name = data['name']
-        # prizeMoney = data['prizeMoney']
-        # date = data['date']
         name = request.POST.get('name')
         prizeMoney = request.POST.get('prizeMoney')
         date = request.POST.get("date")
@@ -56,6 +53,25 @@ def competitions(request):
         transaction.commit()
         return JsonResponse({'status': 'success', 'message': 'Competition added successfully.'})
     
+    if(request.method=="PUT"):
+        data = json.loads(request.body)
+        competitionId = data['competitionId']
+        updatedList = data['updations']
+        query = f"update event_competitions set competitionName='{updatedList[0]}', prizeMoney={updatedList[1]} date='{updatedList[2]}', poster={updatedList[3]} where competitionId={competitionId}"
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+        transaction.commit()
+        return JsonResponse({"status":"success", "message":"Data edited successfully"})
+    
+    if(request.method=="DELETE"):
+        data = json.loads(request.body)
+        competitionId = data[competitionId]
+        query = f"delete from event_competitions where competitionId = {competitionId}"
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+        transaction.commit()
+        return JsonResponse({"status":"success", "message": "Deleted competition successfully"})
+
 @csrf_exempt
 def team(request):
     if(request.method=="GET"):
@@ -186,14 +202,15 @@ def attendees(request):
         phoneNo = data['phoneNo']
         emailId = data['emailId']
         accommodation = data['accommodation']
-        amt = data['amt']
+        amt = data['amount']
+        transactionId = data['payment_id']
         ticketId = uuid.uuid4()
         with connection.cursor() as cursor:
             
             query = """
-                        insert into event_attendees (name, phoneNo, emailId, ticketId, accommodation) values(%s,%s,%s,%s,%s)
+                        insert into event_attendees (name, phoneNo, emailId, ticketId, accommodation,transactionId) values(%s,%s,%s,%s,%s,%s)
                     """
-            cursor.execute(query, (name, phoneNo, emailId, ticketId, accommodation ))
+            cursor.execute(query, (name, phoneNo, emailId, ticketId, accommodation,transactionId ))
         transaction.commit()
         return JsonResponse({'status':'success', 'message': 'Ticket bought successfully', 'ticketid': ticketId})
     if(request.method=="GET"):
@@ -203,7 +220,7 @@ def attendees(request):
             attendees_list = cursor.fetchall()
         attendees_data=[]
         for attendee in attendees_list:
-            attendees_data.append({"name": attendee[0], "phoneNo": attendee[1], "emailId":attendee[2], "ticketid": attendee[3], "accommodation": attendee[4]})
+            attendees_data.append({"name": attendee[0], "phoneNo": attendee[1], "emailId":attendee[2], "ticketid": attendee[3], "accommodation": attendee[4], "transactionId":attendee[5]})
         return JsonResponse(attendees_data, safe=False)
     
 @csrf_exempt
@@ -248,15 +265,16 @@ def login(request):
         rollNo = int(data['rollNo'])
         password = data['password']
         with connection.cursor() as cursor:
-            query = f"select password from event_team where rollNo = {rollNo}"
+            query = f"select password, teamName from event_team where rollNo = {rollNo}"
             cursor.execute(query)
             result = cursor.fetchone()
             if(result is None):
                 return JsonResponse({"status":"failure", "message":"User not found"})
             else:
                 password_stored = result[0]
+                teamName = result[1]
                 if(check_password(password, password_stored)):
-                    return JsonResponse({"status":"success", "message": "User exists... Login successful", "rollNo" : rollNo}) 
+                    return JsonResponse({"status":"success", "message": "User exists... Login successful", "rollNo" : rollNo, "team": teamName}) 
                 else:
                     return JsonResponse({"status":"failure", "message":"User not found"}) 
 
