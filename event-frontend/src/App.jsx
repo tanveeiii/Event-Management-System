@@ -12,6 +12,7 @@ import MainLayout from './pages/MainLayout'
 import Ticket from './pages/Ticket'
 import PaymentSuccess from './pages/PaymentSuccess'
 import Dashboard from './pages/Dashboard'
+import Register from './pages/Register'
 // import { useLocation } from 'react-router-dom'
 
 const App = () => {
@@ -64,8 +65,8 @@ const App = () => {
           element: <Login />
         },
         {
-          path: "/success",
-          element: <PaymentSuccess/>
+          path: "/register/:index",
+          element: <Register/>
         },
       ]
     },

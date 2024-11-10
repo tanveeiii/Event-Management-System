@@ -92,13 +92,15 @@ const Ticket = () => {
                         "amt":amt,
                     }
                     sendEmail(params=params)
-                    // window.location.href = '/success'
+                    alert("Payment successful! Please check your email for ticket")
+                    window.location.href = '/'
                 }
                 
             },
-            theme: {
-                color: "#f76c6c"
-            }
+            prefill: {
+                contact: contact,
+            },        
+            
         };
 
         const rzp1 = new window.Razorpay(options);
