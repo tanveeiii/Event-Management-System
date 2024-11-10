@@ -44,8 +44,8 @@
 
 
 .table-sidebar {
-    width: 300px;
-    margin-top: 200px;
+    width: 280px;
+    margin-top: 80px;
     /* height: 100%; */
     /* background-color: #181818; */
     padding: 20px;
@@ -95,22 +95,25 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.4s ease;
-}
-
-/* Hover effect */
-.table-toggle-button:hover {
-  transform: translateX(10px);
-  background-color: #f44336;
+  width: 200px;
+  text-align: left;
+  letter-spacing: 1px;
 }
 
 /* Click (active) effect */
 .table-toggle-button:active {
-  transform: scale(0.95);
-  background-color: #d32f2f;
+  transform: scale(0.7);
+  background-color: #161d2c;
+
+}
+.table-toggle-button:active, .table-toggle-button:hover {
+  transform: translateX(10px);
 }
 
 
 .table-name{
     color: white;
     text-transform: uppercase;
+    margin-top: 35px;
+    letter-spacing: 7px;
 }
