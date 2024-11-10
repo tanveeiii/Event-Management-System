@@ -1,7 +1,7 @@
 .T-form {
     background-color: black;
     border: 1px solid white;
-    width: 770px;
+    width: auto;
     height: auto;
     background-color: rgba(0, 0, 255, 0.075);
     display: flex;
@@ -118,4 +118,8 @@ input:-webkit-autofill:focus {
     color: white;
     font-weight: 500;
     letter-spacing: 2px;
+}
+
+.R-poster img{
+    height: 380px;
 }

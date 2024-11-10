@@ -43,9 +43,6 @@ const Ticket = () => {
             console.log("empty field")
             alert("Please fill all fields!!")
         }else{
-
-        
-        console.log(accommodation)
         if (accommodation == "Yes") {
             amt = 2000 * 100;
         } else {
@@ -89,7 +86,7 @@ const Ticket = () => {
                         "phoneNo": contact,
                         "emailId": email,
                         "ticketId": resData['ticketId'],
-                        "amt":amt,
+                        "amt":amt/100,
                     }
                     sendEmail(params=params)
                     alert("Payment successful! Please check your email for ticket")
