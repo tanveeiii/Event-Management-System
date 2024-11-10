@@ -1,0 +1,52 @@
+/* Container for TeamLogin page */
+.team-login-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+    margin-top: 200px;
+}
+
+/* Title styling */
+.table-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #f76c6c;
+}
+
+/* Button styling with hover and click effects */
+.table-toggle-button {
+    background-color: #f76c6c;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+/* Hover effect */
+.table-toggle-button:hover {
+    background-color: #f44336;
+}
+
+/* Click (active) effect */
+.table-toggle-button:active {
+    transform: scale(0.95);
+    background-color: #d32f2f;
+}
+
+/* Table container for smooth transition */
+.table-wrapper {
+    margin-top: 20px;
+    transition: opacity 0.3s ease;
+    opacity: 1;
+}
+
+.table-wrapper.hidden {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+}

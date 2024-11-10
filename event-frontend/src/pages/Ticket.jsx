@@ -1,6 +1,6 @@
 import React from 'react'
 import '../static/Ticket.css'
-import LogoImg from "../assets/logo.png"
+import LogoImg from "../assets/pronites.jpeg"
 import { useEffect } from 'react'
 import emailjs from '@emailjs/browser';
 

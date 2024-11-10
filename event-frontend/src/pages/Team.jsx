@@ -79,7 +79,7 @@ const Team = () => {
     <>
       <h1 className="teams-title">Team Members</h1>
       
-      <Sidebar className='sidebar' team_names={team_names} />
+      <Sidebar className='sidebar' title={"Teams"} list_names={team_names} />
       { team.length>0?
       <div className='teams-box'>
       {
