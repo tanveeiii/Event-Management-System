@@ -28,6 +28,7 @@ class Attendees(models.Model):
     emailId = models.EmailField()
     ticketId = models.UUIDField(primary_key=True , editable=False, default=uuid.uuid4)
     accommodation = models.BooleanField()
+    transactionId = models.CharField(max_length=100)
 
 class Competitions(models.Model):
     competitionName = models.CharField(max_length=50)
@@ -53,7 +54,7 @@ class Sponsors(models.Model):
     logo = models.TextField()
     name = models.CharField(primary_key=True, max_length=50)
     sponsorshipAmount = models.IntegerField()
-    dealBy = models.ForeignKey(Team, on_delete=models.DO_NOTHING)
+    dealBy = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True)
     phoneNo = models.CharField(max_length=20)
     emailId = models.EmailField()
     title = models.CharField(max_length=80)

@@ -2,51 +2,96 @@ import React from 'react'
 import '../static/Ticket.css'
 import LogoImg from "../assets/pronites.jpeg"
 import { useEffect } from 'react'
+import emailjs from '@emailjs/browser';
 
 const Ticket = () => {
 
-    // Function to fetch order_id from Django backend
-    const fetchOrderId = async () => {
+    function sendEmail( params) {
+        emailjs.send('service_25t30ys', 'template_m3z1erp', params, "Dyj81X6lDtQ5fmhvw")
+          .then((result) => {
+            console.log(result)
+              window.location.reload()  
+          }, (error) => {
+              console.log(error);
+          });
+      }
+    const fetchOrderId = async (amt) => {
         try {
-            const response = await fetch("http://127.0.0.1:8000/api/create_order/", { 
-                method: "POST"
+            const response = await fetch("http://127.0.0.1:8000/api/create_order/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ amount: amt }),
             });
             const data = await response.json();
-            // setOrderId(data.razorpay_order_id);
             return data.razorpay_order_id;
-            // console.log(orderId)
         } catch (error) {
             console.error("Error fetching order ID:", error);
             return null;
         }
     };
 
-    const handlePayment = async() => {
-        const orderId = await fetchOrderId();
-        console.log(orderId)
+    const handlePayment = async () => {
+        var amt;
+        const accommodationOption = document.querySelector('input[name="accommodation"]:checked');
+        const accommodation = accommodationOption ? accommodationOption.value : "No";
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const contact = document.getElementById("contact").value;
+        console.log(accommodation)
+        if (accommodation == "Yes") {
+            amt = 2000 * 100;
+        } else {
+            amt = 500 * 100;
+        }
+        console.log(amt)
+        const orderId = await fetchOrderId(amt);
         const options = {
             key: "rzp_test_9q5xdxurtQtIt2",
-            amount: "50000", 
+            amt: amt,
             currency: "INR",
-            name: "Acme Corp",
-            description: "Test Transaction",
+            name: "FLUXUS-IIT INDORE",
+            description: "Ticket Purchase",
             image: "https://example.com/your_logo",
-            order_id: orderId, // Order ID from backend
-            handler: function (response) {
-                alert(`Payment ID: ${response.razorpay_payment_id}`);
-                alert(`Order ID: ${response.razorpay_order_id}`);
-                alert(`Signature: ${response.razorpay_signature}`);
-            },
-            prefill: {
-                name: "Gaurav Kumar",
-                email: "gaurav.kumar@example.com",
-                contact: "9000090000"
-            },
-            notes: {
-                address: "Razorpay Corporate Office"
+            order_id: orderId,
+            handler: async function (response) {
+                console.log(response)
+                const body = {
+                    "name":name,
+                    "emailId":email,
+                    "phoneNo":contact,
+                    "accommodation":accommodation==="Yes"?1:0,
+                    "amount":amt,
+                    "payment_id":response['razorpay_payment_id']
+                }
+                const res = await fetch("http://127.0.0.1:8000/api/attendees/",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(body)
+                    }
+
+                )
+                const resData = await res.json()
+                console.log(resData)
+                if(resData['status']=="success"){
+                    var params={
+                        "name": name,
+                        "phoneNo": contact,
+                        "emailId": email,
+                        "ticketId": resData['ticketId'],
+                        "amt":amt,
+                    }
+                    sendEmail(params=params)
+                    // window.location.href = '/success'
+                }
+                
             },
             theme: {
-                color: "#3399cc"
+                color: "#f76c6c"
             }
         };
 
