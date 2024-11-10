@@ -10,6 +10,7 @@ import Login from './pages/Login'
 import { RouterProvider, createBrowserRouter, useLocation } from 'react-router-dom'
 import MainLayout from './pages/MainLayout'
 import Ticket from './pages/Ticket'
+import Register from './pages/Register'
 // import { useLocation } from 'react-router-dom'
 
 const App = () => {
@@ -60,6 +61,10 @@ const App = () => {
         {
           path: "/login",
           element: <Login />
+        },
+        {
+          path: "/register/:compName",
+          element: <Register />
         },
       ]
     },
