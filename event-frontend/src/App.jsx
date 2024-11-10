@@ -11,10 +11,7 @@ import { RouterProvider, createBrowserRouter, useLocation } from 'react-router-d
 import MainLayout from './pages/MainLayout'
 import Ticket from './pages/Ticket'
 import PaymentSuccess from './pages/PaymentSuccess'
-<<<<<<< HEAD
-=======
-import Register from './pages/Register'
->>>>>>> f3eec9d70f2be7a678784e7c9c236263e9b0698a
+import Dashboard from './pages/Dashboard'
 // import { useLocation } from 'react-router-dom'
 
 const App = () => {
@@ -60,7 +57,7 @@ const App = () => {
         },
         {
           path: "/dashboard",
-          element: <p style={{ "color": "white", "margin": "200px" }}>Hello</p>
+          element: <Dashboard/>
         },
         {
           path: "/login",
@@ -69,13 +66,6 @@ const App = () => {
         {
           path: "/success",
           element: <PaymentSuccess/>
-<<<<<<< HEAD
-=======
-        },
-        {
-          path: "/register/:compName",
-          element: <Register />
->>>>>>> f3eec9d70f2be7a678784e7c9c236263e9b0698a
         },
       ]
     },
