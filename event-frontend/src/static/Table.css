@@ -25,7 +25,7 @@
     color: #4a9eff;
     cursor: pointer;
     margin-right: 12px;
-    padding: 0;  
+    padding: 0 175px; 
     border-radius: 4px;
     transition: color 0.2s ease;
     display: flex;

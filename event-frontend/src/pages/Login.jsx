@@ -55,7 +55,7 @@ const Login = () => {
                         {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
                     </span>
                 </div>
-                <button type='submit'>Log In</button>
+                <button className='post-btn'type='submit'>Log In</button>
             </form>
         </>
     );

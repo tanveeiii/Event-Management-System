@@ -2,12 +2,16 @@ import React from 'react';
 import '../static/Table.css';
 
 
-const Table = () => {
-    const data = [
-        { id: 1, name: 'John Doe', age: 25, email: 'john@example.com' },
-        { id: 2, name: 'Jane Smith', age: 30, email: 'jane@example.com' },
-        { id: 3, name: 'Michael Johnson', age: 35, email: 'michael@example.com' }
-    ];
+const Table = ({data = [
+    { id: 1, name: 'John Doe', age: 25, email: 'john@example.com' },
+    { id: 2, name: 'Jane Smith', age: 30, email: 'jane@example.com' },
+    { id: 3, name: 'Michael Johnson', age: 35, email: 'michael@example.com' }
+] }) => {
+    // const data = [
+    //     { id: 1, name: 'John Doe', age: 25, email: 'john@example.com' },
+    //     { id: 2, name: 'Jane Smith', age: 30, email: 'jane@example.com' },
+    //     { id: 3, name: 'Michael Johnson', age: 35, email: 'michael@example.com' }
+    // ];
 
     return (
         <div className="table-container">
