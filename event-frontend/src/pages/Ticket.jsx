@@ -6,7 +6,7 @@ import emailjs from '@emailjs/browser';
 
 const Ticket = () => {
 
-    function sendEmail( params) {
+    function sendEmail(params) {
         emailjs.send('service_25t30ys', 'template_m3z1erp', params, "Dyj81X6lDtQ5fmhvw")
           .then((result) => {
             console.log(result)
@@ -38,7 +38,13 @@ const Ticket = () => {
         const accommodation = accommodationOption ? accommodationOption.value : "No";
         const name = document.getElementById("name").value;
         const email = document.getElementById("email").value;
-        const contact = document.getElementById("contact").value;
+        const contact = document.getElementById("contact").value; 
+        if(contact==null || name==null|| email==null ||accommodationOption==null){
+            console.log("empty field")
+            alert("Please fill all fields!!")
+        }else{
+
+        
         console.log(accommodation)
         if (accommodation == "Yes") {
             amt = 2000 * 100;
@@ -86,13 +92,15 @@ const Ticket = () => {
                         "amt":amt,
                     }
                     sendEmail(params=params)
-                    // window.location.href = '/success'
+                    alert("Payment successful! Please check your email for ticket")
+                    window.location.href = '/'
                 }
                 
             },
-            theme: {
-                color: "#f76c6c"
-            }
+            prefill: {
+                contact: contact,
+            },        
+            
         };
 
         const rzp1 = new window.Razorpay(options);
@@ -102,6 +110,7 @@ const Ticket = () => {
         });
 
         rzp1.open();
+    }
     };
 
     // Load Razorpay script

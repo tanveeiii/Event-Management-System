@@ -101,6 +101,12 @@ input:-webkit-autofill:focus {
 }
 
 .pay {
+    background-color: #ffffff;
+    color: #080710;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
     width: 300px !important;
     margin-top: 40px;
     padding: 10px 0;
