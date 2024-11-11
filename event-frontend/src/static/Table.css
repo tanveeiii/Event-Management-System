@@ -45,7 +45,7 @@
 .table {
     width: 100%;
     border-collapse: separate;
-    border-spacing: 0;
+    border-spacing: 8px 0;
     border-radius: 8px;
     overflow: hidden;
     background-color: #1a2235;  /* Dark blue-grey background */
@@ -58,6 +58,7 @@
     border: none;
     border-bottom: 1px solid #2a3446;  /* Darker border for separation */
     text-align: left;
+    background-color: #1a2235;
 }
 
 .table th {
@@ -185,4 +186,64 @@
 .toolbar-button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+}
+
+/* Header search styles */
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.header-search-icon {
+    background: none;
+    border: none;
+    color: #4a9eff;
+    cursor: pointer;
+    padding: 4px;
+    margin-left: 8px;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.header-search-icon:hover {
+    opacity: 1;
+}
+
+.header-search-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.header-search-input {
+    flex: 1;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #4a9eff;
+    color: #c5d1e8;
+    font-size: 0.85rem;
+    padding: 4px 0;
+    outline: none;
+    width: 100%;
+}
+
+.header-search-input::placeholder {
+    color: rgba(197, 209, 232, 0.5);
+}
+
+.header-search-close {
+    background: none;
+    border: none;
+    color: #ff4d4d;
+    cursor: pointer;
+    padding: 4px;
+    margin-left: 8px;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.header-search-close:hover {
+    opacity: 1;
 }

@@ -1,4 +1,5 @@
-import React ,{useState} from 'react';
+import React ,{useState,useEffect} from 'react';
+import {Search, X} from 'lucide-react';
 import '../static/Table.css';
 
 
@@ -10,6 +11,73 @@ const Table = ({data = [
     const [isEditing, setIsEditing] = useState(false);
     const [editedData, setEditedData] = useState(data);
     const [newRow, setNewRow] = useState(null);
+    const [searchStates, setSearchStates] = useState({
+        name: { isSearching: false, value: '' },
+        age: { isSearching: false, value: '' },
+        email: { isSearching: false, value: '' }
+    });
+    const [filteredData, setFilteredData] = useState(data);
+
+    // Update filtered data whenever search states or edited data changes
+    useEffect(() => {
+        let result = [...editedData];
+        
+        // Apply filters from all active search fields
+        Object.entries(searchStates).forEach(([column, state]) => {
+            if (state.value) {
+                result = result.filter(item => {
+                    const itemValue = item[column].toString().toLowerCase();
+                    const searchValue = state.value.toLowerCase();
+                    return itemValue.includes(searchValue);
+                });
+            }
+        });
+        
+        setFilteredData(result);
+    }, [searchStates, editedData]);
+
+    // Toggle search for a specific column
+    const toggleSearch = (column) => {
+        setSearchStates(prev => ({
+            ...prev,
+            [column]: { 
+                isSearching: !prev[column].isSearching,
+                value: !prev[column].isSearching ? prev[column].value : ''
+            }
+        }));
+        
+        if (!searchStates[column].isSearching) {
+            // Focus the input when opening search
+            setTimeout(() => {
+                const input = document.getElementById(`search-${column}`);
+                if (input) input.focus();
+            }, 0);
+        }
+    };
+
+    // Handle search input changes
+    const handleSearch = (column, value) => {
+        setSearchStates(prev => ({
+            ...prev,
+            [column]: { ...prev[column], value }
+        }));
+
+        // // Filter the data based on all active searches
+        // const newFilteredData = editedData.filter(item => {
+        //     return Object.entries(searchStates).every(([col, state]) => {
+        //         if (col === column) {
+        //             // Use the new value for the current column
+        //             return item[col].toString().toLowerCase().includes(value.toLowerCase());
+        //         } else if (state.value) {
+        //             // Use existing values for other columns
+        //             return item[col].toString().toLowerCase().includes(state.value.toLowerCase());
+        //         }
+        //         return true;
+        //     });
+        // });
+
+        // setFilteredData(newFilteredData);
+    };
 
     // Handle edit button click
     const toggleEdit = () => {
@@ -50,6 +118,7 @@ const Table = ({data = [
     const saveNewRow = () => {
         if (newRow && newRow.name && newRow.age && newRow.email) {
             setEditedData([...editedData, newRow]);
+            setEditedData(updatedData);
             setNewRow(null);
         }
     };
@@ -61,7 +130,9 @@ const Table = ({data = [
 
     // Delete row
     const deleteRow = (id) => {
-        setEditedData(editedData.filter(item => item.id !== id));
+        // setEditedData(editedData.filter(item => item.id !== id));
+        const updatedData = editedData.filter(item => item.id !== id);
+        setEditedData(updatedData);
     };
 
     // Render editable or static cell based on isEditing state
@@ -73,6 +144,7 @@ const Table = ({data = [
                     value={item[field]}
                     onChange={(e) => handleCellChange(item.id, field, e.target.value)}
                     className="editable-cell"
+                    // className="bg-transparent border-none border-b border-blue-400 text-gray-300 text-sm p-1 w-full outline-none"
                     placeholder={`Enter ${field}`}
                 />
             );
@@ -80,12 +152,47 @@ const Table = ({data = [
         return item[field];
     };
 
+    // Render column header with search functionality
+    const renderColumnHeader = (column, label) => {
+        if (searchStates[column]?.isSearching) {
+            return (
+                <div className="header-search-container">
+                    <input
+                        id={`search-${column}`}
+                        type="text"
+                        value={searchStates[column].value}
+                        onChange={(e) => handleSearch(column, e.target.value)}
+                        className="header-search-input"
+                        placeholder={`Search ${label}...`}
+                    />
+                    <button
+                        className="header-search-close"
+                        onClick={() => toggleSearch(column)}
+                    >
+                        <X size={16} />
+                    </button>
+                </div>
+            );
+        }
+        return (
+            <div className="header-content">
+                <span>{label}</span>
+                <button
+                    className="header-search-icon"
+                    onClick={() => toggleSearch(column)}
+                >
+                    <Search size={16} />
+                </button>
+            </div>
+        );
+    };
+
     return (
         <div className="table-container">
             {/* Toolbar */}
             <div className="toolbar">
                 <button className="toolbar-button" title="Download">
-                    ↓
+                    ⤓
                 </button>
                 <button 
                     className={`toolbar-button ${isEditing ? 'active' : ''}`} 
@@ -111,14 +218,14 @@ const Table = ({data = [
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Age</th>
-                        <th>Email</th>
+                        <th>{renderColumnHeader('name','Name')}</th>
+                        <th>{renderColumnHeader('age','Age')}</th>
+                        <th>{renderColumnHeader('email','Email')}</th>
                         {(isEditing || newRow) && <th>Action</th>}
                     </tr>
                 </thead>
                 <tbody>
-                    {editedData.map((item) => (
+                    {filteredData.map((item) => (
                         <tr key={item.id}>
                             <td>{item.id}</td>
                             <td>{renderCell(item, 'name')}</td>
