@@ -191,7 +191,8 @@ const Table = ({data = [
         <div className="table-container">
             {/* Toolbar */}
             <div className="toolbar">
-                <button className="toolbar-button" title="Download">
+            
+                <button style={{fontSize:"18px", fontWeight:"bolder",position:"relative"}} className="toolbar-button" title="Download">
                     ⤓
                 </button>
                 <button 
@@ -206,7 +207,7 @@ const Table = ({data = [
                     className="toolbar-button" 
                     title="Add Row"
                     onClick={addRow}
-                    disabled={newRow !== null}
+                    disabled={newRow !== null} style={{fontSize:"26px"}}
                 >
                     +
                 </button>

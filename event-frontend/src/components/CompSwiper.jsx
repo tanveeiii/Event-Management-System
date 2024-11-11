@@ -47,7 +47,7 @@ const CompSwiper = ({ competitions }) => {
                       {comp.prizeMoney}
                     </p>
                   </div>
-                  <Link to={`/register/${index}`}>
+                  <Link to={`/register/${index+1}`}>
                     <button className="card__button">Register</button>
                   </Link>
 

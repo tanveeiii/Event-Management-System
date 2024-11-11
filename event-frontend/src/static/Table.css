@@ -57,7 +57,8 @@
     padding: 12px 16px;
     border: none;
     border-bottom: 1px solid #2a3446;  /* Darker border for separation */
-    text-align: left;
+    /* text-align: left; */
+    text-align: center;
     background-color: #1a2235;
 }
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import LogoImg from '../assets/pronites.jpeg'
+import emailjs from '@emailjs/browser';
 
 const Register = () => {
     const [data, setdata] = useState([])
@@ -20,6 +21,15 @@ const Register = () => {
     useEffect(() => {
         // console.log(data)
     }, [data])
+    function sendEmail(params) {
+        emailjs.send('service_25t30ys', 'template_nrj0scs', params, "Dyj81X6lDtQ5fmhvw")
+          .then((result) => {
+            console.log(result)
+              window.location.reload()  
+          }, (error) => {
+              console.log(error);
+          });
+      }
     const handleRegister = async()=>{
         const partName = document.getElementById('name').value
         const contact = document.getElementById('contact').value
@@ -43,6 +53,18 @@ const Register = () => {
         )
         const dataReg = await response.json()
         console.log(dataReg)
+        if(dataReg['status']=="success"){
+            var params={
+                "name": partName,
+                "phoneNo": contact,
+                "emailId": email,
+                "registrationId": dataReg['registrationid'],
+                "compName": dataReg['competitionName']
+            }
+            sendEmail(params=params)
+            alert("Registered succesfully!")
+            window.location.href = '/'
+        }
     }
     
     return (

@@ -21,7 +21,7 @@ const Dashboard = () => {
         <div className="table-box">
             <div className='table-sidebar-box'>
                 <div className="table-sidebar">
-                <h3 className="table-sidebar-title">Tables</h3>
+                {/* <h3 className="table-sidebar-title">Tables</h3> */}
                 <ul className="table-sidebar-list">
                     {
                         Object.entries(teamDictionary).map(([key , value] , index) => (
