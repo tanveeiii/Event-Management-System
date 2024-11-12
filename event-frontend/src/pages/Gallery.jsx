@@ -27,9 +27,12 @@ const galleryListURL = 'https://run.mocky.io/v3/4a6fb8af-4dbd-4e18-832b-bcb41305
         gallery.length>0?
         <HoneycombGallery gallery={gallery}/>:
         (
+          <div className="gallery-loader" style={{marginTop:"45vh"}}>
+
           <div className="loading">
             <FadeLoader color='#f76c6c' radius={6} height={20} width={5} />
             <p>Loading Images...</p>
+          </div>
           </div>
           )
       }
