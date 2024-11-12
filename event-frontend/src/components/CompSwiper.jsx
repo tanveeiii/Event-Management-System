@@ -35,7 +35,7 @@ const CompSwiper = ({ competitions }) => {
               <article className="card-comp">
                 <img
                   className="card__background"
-                  src={comp.poster}
+                  src={comp.image}
                   alt=""
                   width={1920}
                   height={2193}
@@ -47,7 +47,7 @@ const CompSwiper = ({ competitions }) => {
                       {comp.prizeMoney}
                     </p>
                   </div>
-                  <Link to={`/register/${index+1}`}>
+                  <Link to={`/register/${comp.id}`}>
                     <button className="card__button">Register</button>
                   </Link>
 

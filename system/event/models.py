@@ -46,13 +46,15 @@ class Participants(models.Model):
     competitionId = models.ForeignKey(Competitions, on_delete=models.CASCADE)
 
 class Speakers(models.Model):
+    speakerId = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=1000)
     image = models.TextField()
 
 class Sponsors(models.Model):
+    sponsorId = models.AutoField(primary_key=True)
     logo = models.TextField()
-    name = models.CharField(primary_key=True, max_length=50)
+    name = models.CharField( max_length=50)
     sponsorshipAmount = models.IntegerField()
     dealBy = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True)
     phoneNo = models.CharField(max_length=20)

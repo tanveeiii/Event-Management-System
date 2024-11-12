@@ -1,22 +1,12 @@
 import React, { useState , useEffect } from 'react'
 import Speaker from '../components/Speaker'
 import "../static/Speakers.css"
+import FadeLoader from 'react-spinners/FadeLoader'
 
 const Speakers = () => {
 
-  // const speakers = [{id:"1" , image:"https://swiperjs.com/demos/images/nature-1.jpg" , title:"Entrepreneur" , description:"ilfbidndshjgb"} , 
-  //                   {id:"2" , image:"https://swiperjs.com/demos/images/nature-2.jpg" , title:"Gamer" , description:"gersagh"} , 
-  //                   {id:"3" , image:"https://swiperjs.com/demos/images/nature-3.jpg" , title:"Youtube Watcher" , description:"bdhjsbgfsvz"},
-  //                   {id:"4" , image:"https://swiperjs.com/demos/images/nature-1.jpg" , title:"Entrepreneur" , description:"ilfbidndshjgb"} , 
-  //                   {id:"5" , image:"https://swiperjs.com/demos/images/nature-2.jpg" , title:"Gamer" , description:"gersagh"} , 
-  //                   {id:"6" , image:"https://swiperjs.com/demos/images/nature-3.jpg" , title:"Youtube Watcher" , description:"bdhjsbgfsvz"},
-  //                   {id:"7" , image:"https://swiperjs.com/demos/images/nature-1.jpg" , title:"Entrepreneur" , description:"ilfbidndshjgb"} , 
-  //                   {id:"8" , image:"https://swiperjs.com/demos/images/nature-2.jpg" , title:"Gamer" , description:"gersagh"} , 
-  //                   {id:"9" , image:"https://swiperjs.com/demos/images/nature-3.jpg" , title:"Youtube Watcher" , description:"bdhjsbgfsvz"},
-  // ];
   const [speakers , setspeakers] = useState([]);
-  
-  useEffect( () => {
+ 
     const fetchspeakers = async () => {
       const apiurl = "http://localhost:8000/api/speaker/";
       try {
@@ -27,20 +17,31 @@ const Speakers = () => {
         console.log("Error fetching data");
       }
     }
-
-    fetchspeakers();
-  } , []); 
+    useEffect(() => {
+      fetchspeakers()
+    }, [speakers])
+    
+     
 
   return (
     <>
       <h1 className="speakers-title">Speakers</h1>
+      {speakers.length>0 ?
+        
       <div className='speakers-container'>
       {
         speakers.map((spkr , index)=>(
-          <Speaker key={index} image={spkr.image} name={spkr.name} title={spkr.title} description={spkr.description}/>
+          <Speaker key={index} image={spkr.image} name={spkr.name}  description={spkr.desc}/>
         ))
       }
-      </div>
+      </div>:
+      (
+        <div className="loading">
+          <FadeLoader color='#f76c6c' radius={6} height={20} width={5} />
+          <p>Loading Speakers...</p>
+        </div>
+        )
+      }
     </>
   )
 }
