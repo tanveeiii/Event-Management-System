@@ -8,14 +8,15 @@ const Table = ( {tableData}) => {
 
     const data = tableData["data"]
     const api = tableData["api"]
+    const team = tableData["team"]
     const [isEditing, setIsEditing] = useState(false);
     const [editedData, setEditedData] = useState(data);
     const [newRow, setNewRow] = useState(null);
     const [searchStates, setSearchStates] = useState({});
     const [filteredData, setFilteredData] = useState(data);
-    const [isSearching, setIsSearching] = useState(false);
     const [imageFile, setImageFile] = useState(null);
     console.log(data)
+    const isCoreTeam = team === 'core';
 
     console.log(api)
     useEffect(() => {
@@ -257,6 +258,8 @@ const Table = ( {tableData}) => {
                 <button style={{fontSize:"18px", fontWeight:"bolder",position:"relative"}} className="toolbar-button" title="Download">
                     ⤓
                 </button>
+                {isCoreTeam && (
+                    <>
                 <button 
                     className={`toolbar-button ${isEditing ? 'active' : ''}`} 
                     title={isEditing ? "Save" : "Edit"}
@@ -273,6 +276,7 @@ const Table = ( {tableData}) => {
                 >
                     +
                 </button>
+                </>)}
                 
             </div>
 
