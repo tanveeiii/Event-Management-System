@@ -35,7 +35,7 @@ const CompSwiper = ({ competitions }) => {
               <article className="card-comp">
                 <img
                   className="card__background"
-                  src={comp.poster}
+                  src={comp.image}
                   alt=""
                   width={1920}
                   height={2193}

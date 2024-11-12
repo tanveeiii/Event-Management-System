@@ -11,14 +11,14 @@ import {
 } from "react-icons/fa";
 
 const Teamcards = ({ name, image, phoneNo, emailId, instagramId, linkedinId }) => {
-    console.log(contacts)
+    // console.log(contacts)
     const emailIdfinal = "mailto:"+emailId
     return (
         <div className='team-card'>
                
             <div className='team-card-box'>
             <div className='img-box'>
-                <img layout="position" src={image} alt={name} className='person-img' ></img>
+                <img layout="position" src={image} alt={name} width={"60px"} className='person-img' ></img>
             </div>
                 <div className='contacts' >
                     <ul className='contacts-list'>
