@@ -36,8 +36,8 @@ const Speakers = () => {
       <h1 className="speakers-title">Speakers</h1>
       <div className='speakers-container'>
       {
-        speakers.map((spkr)=>(
-          <Speaker key={spkr.id} image={spkr.image} name={spkr.name} title={spkr.title} description={spkr.description}/>
+        speakers.map((spkr , index)=>(
+          <Speaker key={index} image={spkr.image} name={spkr.name} title={spkr.title} description={spkr.description}/>
         ))
       }
       </div>
