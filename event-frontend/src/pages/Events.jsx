@@ -42,8 +42,14 @@ const Events = () => {
 
   return (
     <>
-      <h1 className="schedule-title">Schedule</h1>
+      {/* <h1 className="schedule-title">Schedule</h1> */}
       <div className="tabs">
+        <button
+          className={`tab-link ${activeDay === "Day4" ? "active" : ""}`}
+          onClick={() => handleTabClick("Day4")}
+        >
+          Day 0
+        </button>
         <button
           className={`tab-link ${activeDay === "Day1" ? "active" : ""}`}
           onClick={() => handleTabClick("Day1")}
@@ -61,12 +67,6 @@ const Events = () => {
           onClick={() => handleTabClick("Day3")}
         >
           Day 3
-        </button>
-        <button
-          className={`tab-link ${activeDay === "Day4" ? "active" : ""}`}
-          onClick={() => handleTabClick("Day4")}
-        >
-          Day 4
         </button>
       </div>
       {
