@@ -10,7 +10,7 @@ const Ticket = () => {
         emailjs.send('service_25t30ys', 'template_m3z1erp', params, "Dyj81X6lDtQ5fmhvw")
           .then((result) => {
             console.log(result)
-              window.location.reload()  
+            //   window.location.reload()  
           }, (error) => {
               console.log(error);
           });
@@ -85,12 +85,12 @@ const Ticket = () => {
                         "name": name,
                         "phoneNo": contact,
                         "emailId": email,
-                        "ticketId": resData['ticketId'],
+                        "ticketId": resData['ticketid'],
                         "amt":amt/100,
                     }
                     sendEmail(params=params)
                     alert("Payment successful! Please check your email for ticket")
-                    window.location.href = '/'
+                    // window.location.href = '/'
                 }
                 
             },
