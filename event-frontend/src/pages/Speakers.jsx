@@ -1,6 +1,7 @@
 import React, { useState , useEffect } from 'react'
 import Speaker from '../components/Speaker'
 import "../static/Speakers.css"
+import FadeLoader from 'react-spinners/FadeLoader'
 
 const Speakers = () => {
 
@@ -37,13 +38,22 @@ const Speakers = () => {
   return (
     <>
       <h1 className="speakers-title">Speakers</h1>
+      {speakers.length>0 ?
+        
       <div className='speakers-container'>
       {
         speakers.map((spkr , index)=>(
           <Speaker key={index} image={spkr.image} name={spkr.name}  description={spkr.desc}/>
         ))
       }
-      </div>
+      </div>:
+      (
+        <div className="loading">
+          <FadeLoader color='#f76c6c' radius={6} height={20} width={5} />
+          <p>Loading Speakers...</p>
+        </div>
+        )
+      }
     </>
   )
 }
