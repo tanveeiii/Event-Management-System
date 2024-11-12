@@ -5,16 +5,6 @@ import FadeLoader from 'react-spinners/FadeLoader'
 
 const Speakers = () => {
 
-  // const speakers = [{name:"Mani" , image:"https://swiperjs.com/demos/images/nature-1.jpg" , title:"Entrepreneur" , description:"gtfdsgvbndbuk euerbgbuj srufhgb hberg hvbsjb gjdsfhb jhgbh ujsbg jdufb mdfhs bjdsfhgb jdsfhb j"} , 
-  //                   {name:"Manan" , image:"https://swiperjs.com/demos/images/nature-2.jpg" , title:"Gamer" , description:"gersagh"} , 
-  //                   {name:"Mani" , image:"https://swiperjs.com/demos/images/nature-3.jpg" , title:"Youtube Watcher" , description:"bdhjsbgfsvz"},
-  //                   {name:"Mani" , image:"https://swiperjs.com/demos/images/nature-1.jpg" , title:"Entrepreneur" , description:"ilfbnamendshjgb"} , 
-  //                   {name:"Manan" , image:"https://swiperjs.com/demos/images/nature-2.jpg" , title:"Gamer" , description:"gersagh"} , 
-  //                   {name:"Jeel" , image:"https://swiperjs.com/demos/images/nature-3.jpg" , title:"Youtube Watcher" , description:"bdhjsbgfsvz"},
-  //                   {name:"Jeel" , image:"https://swiperjs.com/demos/images/nature-1.jpg" , title:"Entrepreneur" , description:"ilfbnamendshjgb"} , 
-  //                   {name:"Jeel" , image:"https://swiperjs.com/demos/images/nature-2.jpg" , title:"Gamer" , description:"gersagh"} , 
-  //                   {name:"Jeel" , image:"https://swiperjs.com/demos/images/nature-3.jpg" , title:"Youtube Watcher" , description:"bdhjsbgfsvz"},
-  // ];
   const [speakers , setspeakers] = useState([]);
   
   useEffect( () => {
@@ -44,10 +34,12 @@ const Speakers = () => {
         ))
       }
       </div>:
-      (
-        <div className="loading">
-          <FadeLoader color='#f76c6c' radius={6} height={20} width={5} />
-          <p>Loading Speakers...</p>
+      ( 
+        <div className="speakers-loader">
+          <div className="loading">
+            <FadeLoader color='#f76c6c' radius={6} height={20} width={5} />
+            <p>Loading Speakers...</p>
+          </div>
         </div>
         )
       }
