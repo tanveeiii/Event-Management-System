@@ -6,8 +6,7 @@ import FadeLoader from 'react-spinners/FadeLoader'
 const Speakers = () => {
 
   const [speakers , setspeakers] = useState([]);
-  
-  useEffect( () => {
+ 
     const fetchspeakers = async () => {
       const apiurl = "http://localhost:8000/api/speaker/";
       try {
@@ -18,22 +17,11 @@ const Speakers = () => {
         console.log("Error fetching data");
       }
     }
-  useEffect( () => {
-    const fetchspeakers = async () => {
-      const apiurl = "http://localhost:8000/api/speaker/";
-      try {
-        const res = await fetch(apiurl);
-        const data = await res.json();
-        setspeakers(data);
-      } catch (error) {
-        console.log("Error fetching data");
-      }
-    }
-
-    fetchspeakers();
-  } , []); 
-    fetchspeakers();
-  } , []); 
+    useEffect(() => {
+      fetchspeakers()
+    }, [speakers])
+    
+     
 
   return (
     <>
