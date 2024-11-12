@@ -6,14 +6,14 @@ import emailjs from '@emailjs/browser';
 
 const Ticket = () => {
 
-    function sendEmail(params) {
-        emailjs.send('service_25t30ys', 'template_m3z1erp', params, "Dyj81X6lDtQ5fmhvw")
-          .then((result) => {
-            console.log(result)
-            //   window.location.reload()  
-          }, (error) => {
-              console.log(error);
-          });
+    async function sendEmail (params) {
+        try {
+            const result = await emailjs.send('service_25t30ys', 'template_m3z1erp', params, "Dyj81X6lDtQ5fmhvw");
+            return result;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
       }
     const fetchOrderId = async (amt) => {
         try {
@@ -66,7 +66,7 @@ const Ticket = () => {
                     "phoneNo":contact,
                     "accommodation":accommodation==="Yes"?1:0,
                     "amount":amt,
-                    "payment_id":response['razorpay_payment_id']
+                    "transactionId":response['razorpay_payment_id']
                 }
                 const res = await fetch("http://127.0.0.1:8000/api/attendees/",
                     {
@@ -88,9 +88,12 @@ const Ticket = () => {
                         "ticketId": resData['ticketid'],
                         "amt":amt/100,
                     }
-                    sendEmail(params=params)
-                    alert("Payment successful! Please check your email for ticket")
-                    // window.location.href = '/'
+                    const emailres = await sendEmail(params=params)
+                    console.log(emailres)
+                    if (emailres && emailres.status === 200) {
+                        alert("Payment successful! Please check your email for ticket");
+                        window.location.href = '/';
+                    }
                 }
                 
             },

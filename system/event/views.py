@@ -79,7 +79,7 @@ def team(request):
             team_members = cursor.fetchall()
         team_data=[]
         for member in team_members:
-            data_url = f"data:image/jpeg;base64,{member[8]}"
+            data_url = f"data:image/jpeg;base64,{member[9]}"
             team_data.append({"name": member[1],"password":member[5], "id": member[0],"image":data_url, "position": member[2], "teamName": member[8],  "phoneNo": member[3], "emailId": member[4], "instagramId": member[6], "linkedinId": member[7]})
         return JsonResponse(team_data, safe=False)
     
@@ -94,7 +94,7 @@ def team(request):
         instagramId = request.POST.get('instagramId')
         linkedinId = request.POST.get('linkedinId')
         teamName = request.POST.get('teamName')
-        image = request.FILES['image']
+        image = request.FILES.get('image')
         image_data = image.read()
         encoded_image = base64.b64encode(image_data).decode('utf-8')
         hashed_password = make_password(password)
