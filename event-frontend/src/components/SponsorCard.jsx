@@ -8,7 +8,7 @@ const SponsorCard = ({ sponsors }) => {
                 <div className="Scell">
                     <div key={index} className="Scard">
                         <a target='_blank' rel="noopener noreferrer" href={sponsor.link}>
-                            <img alt={sponsor.name} className="Scard-img" src={sponsor.logo} />
+                            <img alt={sponsor.name} className="Scard-img" src={sponsor.image} />
                         </a>
                         <div className="Scard-info">
                             <p className="Stext-name" style={{ color: "black" }}>
