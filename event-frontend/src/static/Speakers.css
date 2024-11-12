@@ -12,9 +12,21 @@
 .speakers-container{
     display: flex;
     flex-wrap: wrap;
-    gap: 75px;
-    justify-content: center; /* Center the cards horizontally */
-    align-items: center;     /* Center the cards vertically (optional) */
-    max-width: 1000px;       /* Adjust the max width as needed */
+    gap: 200px;
+    justify-content: center;  
+    align-items: center;      
+    max-width: 1000px;        
     margin: 100px auto;     
 }
+/* .speaker-container {
+    height: 100vh;
+    width: 100vw;
+    max-height: 600px;
+    max-width: 1200px;
+    min-height: 600px;
+    min-width: 1100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+  } */
