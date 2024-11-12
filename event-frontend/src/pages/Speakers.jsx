@@ -17,7 +17,20 @@ const Speakers = () => {
         console.log("Error fetching data");
       }
     }
+  useEffect( () => {
+    const fetchspeakers = async () => {
+      const apiurl = "http://localhost:8000/api/speaker/";
+      try {
+        const res = await fetch(apiurl);
+        const data = await res.json();
+        setspeakers(data);
+      } catch (error) {
+        console.log("Error fetching data");
+      }
+    }
 
+    fetchspeakers();
+  } , []); 
     fetchspeakers();
   } , []); 
 
@@ -31,7 +44,6 @@ const Speakers = () => {
         ))
       }
       </div>
-      {/* <Speaker /> */}
     </>
   )
 }
