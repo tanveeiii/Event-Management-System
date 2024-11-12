@@ -31,50 +31,7 @@ const Team = () => {
   };
 
   const team_names = ["events" , "hbnvfhjs" , "gesfvg" , "grsedfgvs"]
-  // const team_members = [{name:"Mani" , image:"https://swiperjs.com/demos/images/nature-1.jpg" , contacts:
-  //                       { 
-  //                         phone:"" ,
-  //                         email:"" ,
-  //                         instagram:"https://www.instagram.com/" ,
-  //                         facebook:"" ,
-  //                         linkedin:"" ,
-  //                       }
-  //                       } , 
-  //                       {name:"Mani" , image:"https://swiperjs.com/demos/images/nature-1.jpg" , contacts:{ 
-  //                         phone:"" ,
-  //                         email:"" ,
-  //                         instagram:"https://www.instagram.com/" ,
-  //                         facebook:"" ,
-  //                         linkedin:"" ,
-  //                       }} , 
-  //                       {name:"Mani" , image:"https://swiperjs.com/demos/images/nature-1.jpg" , contacts:{ 
-  //                         phone:"" ,
-  //                         email:"" ,
-  //                         instagram:"https://www.instagram.com/" ,
-  //                         facebook:"" ,
-  //                         linkedin:"" ,
-  //                       }} , 
-  //                       {name:"Mani" , image:"https://swiperjs.com/demos/images/nature-1.jpg" , contacts:{ 
-  //                         phone:"" ,
-  //                         email:"" ,
-  //                         instagram:"https://www.instagram.com/" ,
-  //                         facebook:"" ,
-  //                         linkedin:"" ,
-  //                       }} , 
-  //                       {name:"Mani" , image:"https://swiperjs.com/demos/images/nature-1.jpg" , contacts:{ 
-  //                         phone:"" ,
-  //                         email:"" ,
-  //                         instagram:"https://www.instagram.com/" ,
-  //                         facebook:"" ,
-  //                         linkedin:"" ,
-  //                       }} , 
-  //                       {name:"Mani" , image:"https://swiperjs.com/demos/images/nature-1.jpg" , contacts:{ 
-  //                         phone:"" ,
-  //                         email:"" ,
-  //                         instagram:"https://www.instagram.com/" ,
-  //                         facebook:"" ,
-  //                         linkedin:"" ,
-  //                       }}]
+
   return (
     <>
       <h1 className="teams-title">Team Members</h1>
@@ -89,7 +46,7 @@ const Team = () => {
           <div className='card-container'>
             {
               team.map((person , index) => (
-                <Teamcards className='card' key={index} name={person.name} image={person.image} contacts={person.contacts}/>
+                <Teamcards className='card' key={index} name={person.name} image={person.image} phoneNo={person.phoneNo} emailId = {person.emailId} instagramId={person.instagramId} linkedinId = {person.linkedinId} />
               ))
 
             }

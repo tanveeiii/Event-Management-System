@@ -10,9 +10,9 @@ import {
     FaLinkedin,
 } from "react-icons/fa";
 
-const Teamcards = ({ name, image, contacts }) => {
+const Teamcards = ({ name, image, phoneNo, emailId, instagramId, linkedinId }) => {
     console.log(contacts)
-    const emailId = "mailto:"+contacts.emailId
+    const emailIdfinal = "mailto:"+emailId
     return (
         <div className='team-card'>
                
@@ -25,27 +25,22 @@ const Teamcards = ({ name, image, contacts }) => {
                         {
                             <>
                                 <li>
-                                    <a href={contacts.phoneNo} target="_blank" rel="noopener noreferrer">
+                                    <a href={phoneNo} target="_blank" rel="noopener noreferrer">
                                         <FaPhone size={24} style={{ color: '#333', marginBottom: '15px' }} />
                                     </a>
                                 </li>
                                 <li>
-                                    <a href={emailId} target="_blank" rel="noopener noreferrer">
+                                    <a href={emailIdfinal} target="_blank" rel="noopener noreferrer">
                                         <FaEnvelope size={24} style={{ color: '#333', marginBottom: '15px' }} />
                                     </a>
                                 </li>
                                 <li>
-                                    <a href={contacts.instagramId} target="_blank" rel="noopener noreferrer">
+                                    <a href={instagramId} target="_blank" rel="noopener noreferrer">
                                         <FaInstagram size={24} style={{ color: '#333', marginBottom: '15px' }} />
                                     </a>
                                 </li>
                                 <li>
-                                    <a href={contacts.facebook} target="_blank" rel="noopener noreferrer">
-                                        <FaFacebook size={24} style={{ color: '#333', marginBottom: '15px' }} />
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href={contacts.linkedinId} target="_blank" rel="noopener noreferrer">
+                                    <a href={linkedinId} target="_blank" rel="noopener noreferrer">
                                         <FaLinkedin size={24} style={{ color: '#333', marginBottom: '15px' }} />
                                     </a>
                                 </li>
