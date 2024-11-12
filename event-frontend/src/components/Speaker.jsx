@@ -1,13 +1,25 @@
 import React from 'react';
+import "../static/Speaker.css"
 
-const Speaker = ({ image, name, title, description }) => {
+const Speaker = ({ image, name,  description }) => {
   return (
-    <div style={styles.card}>
-      <img src={image} alt="Profile" style={styles.image} />
-      <h2 style={styles.name}>{name}</h2>
-      <p style={styles.title}>{title}</p>
-      <p style={styles.description}>{description}</p>
-    </div>
+    <>
+      <div className="speaker-panel">
+        <div className="speaker-ring">
+          <div className="speaker-card card1"><img className="speaker-image"src={image} alt={name} /></div>
+          <div className="speaker-border">
+            <p className="speaker-title" style={{"textAlign":"center"}}>{name}</p>
+            <div className="speaker-slide">
+              <div className="speaker-line">
+                <h6 className="speaker-para">{description}</h6> <i className="fa speaker-fa-plane" aria-hidden="true"></i>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </>
   );
 };
 
@@ -30,13 +42,6 @@ const styles = {
     fontSize: '20px',
     color: '#333',
     margin: '0',
-  },
-  title: {
-    fontSize: '16px',
-    color: '#03022d', // Adjust color to your preference
-    margin: '5px 0',
-    fontFamily: "poppins , sans-serif" ,
-    fontWeight: "800",
   },
   description: {
     fontSize: '14px',

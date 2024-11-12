@@ -28,8 +28,13 @@ const Login = () => {
         console.log(message)
         if(message['status']=="success"){
             navigate('/dashboard', {state:{
-                rollNo: rollNo
+                rollNo: rollNo,
+                team: message['team'],
+                loggedIn: true
             }})
+        }else{
+            alert("User doesn't exists!")
+            window.location.reload()
         }
     }
 

@@ -32,9 +32,11 @@ const Competitions = () => {
       {compData.length > 0 ? (
         <CompSwiper competitions={compData} />
       ) : (
+        <div className="comp-loader">
         <div className="loading">
           <FadeLoader color='#f76c6c' radius={6} height={20} width={5}/>
           <p>Loading Competitions...</p>
+        </div>
         </div>
       )}
     </>

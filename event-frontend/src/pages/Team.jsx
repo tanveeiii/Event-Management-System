@@ -30,51 +30,8 @@ const Team = () => {
     }
   };
 
-  const team_names = ["events" , "hbnvfhjs" , "gesfvg" , "grsedfgvs"]
-  // const team_members = [{name:"Mani" , image:"https://swiperjs.com/demos/images/nature-1.jpg" , contacts:
-  //                       { 
-  //                         phone:"" ,
-  //                         email:"" ,
-  //                         instagram:"https://www.instagram.com/" ,
-  //                         facebook:"" ,
-  //                         linkedin:"" ,
-  //                       }
-  //                       } , 
-  //                       {name:"Mani" , image:"https://swiperjs.com/demos/images/nature-1.jpg" , contacts:{ 
-  //                         phone:"" ,
-  //                         email:"" ,
-  //                         instagram:"https://www.instagram.com/" ,
-  //                         facebook:"" ,
-  //                         linkedin:"" ,
-  //                       }} , 
-  //                       {name:"Mani" , image:"https://swiperjs.com/demos/images/nature-1.jpg" , contacts:{ 
-  //                         phone:"" ,
-  //                         email:"" ,
-  //                         instagram:"https://www.instagram.com/" ,
-  //                         facebook:"" ,
-  //                         linkedin:"" ,
-  //                       }} , 
-  //                       {name:"Mani" , image:"https://swiperjs.com/demos/images/nature-1.jpg" , contacts:{ 
-  //                         phone:"" ,
-  //                         email:"" ,
-  //                         instagram:"https://www.instagram.com/" ,
-  //                         facebook:"" ,
-  //                         linkedin:"" ,
-  //                       }} , 
-  //                       {name:"Mani" , image:"https://swiperjs.com/demos/images/nature-1.jpg" , contacts:{ 
-  //                         phone:"" ,
-  //                         email:"" ,
-  //                         instagram:"https://www.instagram.com/" ,
-  //                         facebook:"" ,
-  //                         linkedin:"" ,
-  //                       }} , 
-  //                       {name:"Mani" , image:"https://swiperjs.com/demos/images/nature-1.jpg" , contacts:{ 
-  //                         phone:"" ,
-  //                         email:"" ,
-  //                         instagram:"https://www.instagram.com/" ,
-  //                         facebook:"" ,
-  //                         linkedin:"" ,
-  //                       }}]
+  const team_names = ["backend-developer", "frontend-developer"]
+
   return (
     <>
       <h1 className="teams-title">Team Members</h1>
@@ -88,8 +45,8 @@ const Team = () => {
           <h1 className='teams-subheading'> {team_name}</h1>
           <div className='card-container'>
             {
-              team.map((person , index) => (
-                <Teamcards className='card' key={index} name={person.name} image={person.image} contacts={person.contacts}/>
+              team.filter(person=>person.position===team_name).map((person , index) => (
+                <Teamcards className='card' key={index} name={person.name} image={person.image} phoneNo={person.phoneNo} emailId = {person.emailId} instagramId={person.instagramId} linkedinId = {person.linkedinId} />
               ))
 
             }
@@ -101,9 +58,12 @@ const Team = () => {
       }
       </div>:
       (
+        <div className="team-loader" style={{marginTop:"20vh"}}>
+
         <div className="loading">
           <FadeLoader color='#f76c6c' radius={6} height={20} width={5} />
-          <p>Loading Partners...</p>
+          <p>Loading Members...</p>
+        </div>
         </div>
         )
       }

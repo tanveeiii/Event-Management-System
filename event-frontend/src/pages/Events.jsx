@@ -73,10 +73,13 @@ const Events = () => {
         !loading?(
       <Timeline events={eventsData} day={activeDay}/>):
       (
-      <div className="loading">
-        <FadeLoader color='#f76c6c' radius={6} height={20} width={5} />
-        <p>Loading Events...</p>
-      </div>
+        <div className="event-loader" style={{marginTop:"20vh"}}>
+
+        <div className="loading">
+          <FadeLoader color='#f76c6c' radius={6} height={20} width={5} />
+          <p>Loading Events...</p>
+        </div>
+        </div>
       )
       }
     </>

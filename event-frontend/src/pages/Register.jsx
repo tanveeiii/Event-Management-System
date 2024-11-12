@@ -21,14 +21,13 @@ const Register = () => {
     useEffect(() => {
         // console.log(data)
     }, [data])
-    function sendEmail(params) {
-        emailjs.send('service_25t30ys', 'template_nrj0scs', params, "Dyj81X6lDtQ5fmhvw")
-          .then((result) => {
-            console.log(result)
-              window.location.reload()  
-          }, (error) => {
-              console.log(error);
-          });
+    async function sendEmail(params) {
+        try{
+        const result = await emailjs.send('service_25t30ys', 'template_nrj0scs', params, "Dyj81X6lDtQ5fmhvw")
+        return result
+        }catch(e){
+            console.log(error)
+        }
       }
     const handleRegister = async()=>{
         const partName = document.getElementById('name').value
@@ -61,10 +60,13 @@ const Register = () => {
                 "registrationId": dataReg['registrationid'],
                 "compName": dataReg['competitionName']
             }
-            sendEmail(params=params)
-            alert("Registered succesfully!")
-            window.location.href = '/'
-        }
+            const emailres = await sendEmail(params=params)
+                    console.log(emailres)
+                    if (emailres && emailres.status === 200) {
+                        alert("Payment successful! Please check your email for ticket");
+                        window.location.href = '/';
+                    }
+                }
     }
     
     return (
@@ -87,7 +89,7 @@ const Register = () => {
                     <button type='button' onClick={handleRegister} className='pay'>Register</button>
                 </div>
                 <div className="R-poster poster">
-                    <img src={data.length>0?data[0]['poster']:"loading"} alt="" />
+                    <img src={data.length>0?data[0]['image']:"loading"} alt="" />
                 </div>
             </form>
         </>
