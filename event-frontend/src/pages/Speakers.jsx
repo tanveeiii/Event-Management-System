@@ -6,8 +6,7 @@ import FadeLoader from 'react-spinners/FadeLoader'
 const Speakers = () => {
 
   const [speakers , setspeakers] = useState([]);
-  
-  useEffect( () => {
+ 
     const fetchspeakers = async () => {
       const apiurl = "http://localhost:8000/api/speaker/";
       try {
@@ -18,9 +17,11 @@ const Speakers = () => {
         console.log("Error fetching data");
       }
     }
-
-    fetchspeakers();
-  } , []); 
+    useEffect(() => {
+      fetchspeakers()
+    }, [speakers])
+    
+     
 
   return (
     <>
@@ -30,7 +31,7 @@ const Speakers = () => {
       <div className='speakers-container'>
       {
         speakers.map((spkr , index)=>(
-          <Speaker key={index} image={spkr.image} name={spkr.name} title={spkr.title} description={spkr.description}/>
+          <Speaker key={index} image={spkr.image} name={spkr.name}  description={spkr.desc}/>
         ))
       }
       </div>:
