@@ -108,7 +108,7 @@ const Dashboard = () => {
                     showComponents[teamName] && (
                         <div key={index} className="table-wrapper">
                             <h1 className='table-name'>{teamName}</h1>
-                            <Table tableData={{ "data": tableData[teamName] || [], "api": url }} />
+                            <Table tableData={{ "data": tableData[teamName] || [], "api": url, "team":location.state.team }} />
                         </div>
                     )
                 ))}

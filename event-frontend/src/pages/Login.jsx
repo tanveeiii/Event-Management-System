@@ -32,6 +32,9 @@ const Login = () => {
                 team: message['team'],
                 loggedIn: true
             }})
+        }else{
+            alert("User doesn't exists!")
+            window.location.reload()
         }
     }
 
