@@ -89,7 +89,7 @@ const Register = () => {
                     <button type='button' onClick={handleRegister} className='pay'>Register</button>
                 </div>
                 <div className="R-poster poster">
-                    <img src={data.length>0?data[0]['poster']:"loading"} alt="" />
+                    <img src={data.length>0?data[0]['image']:"loading"} alt="" />
                 </div>
             </form>
         </>

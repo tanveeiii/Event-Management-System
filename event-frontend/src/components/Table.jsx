@@ -16,7 +16,7 @@ const Table = ( {tableData}) => {
     const [filteredData, setFilteredData] = useState(data);
     const [imageFile, setImageFile] = useState(null);
     console.log(data)
-    const isCoreTeam = team === 'core';
+    const isCoreTeam = team === 'Core';
 
     console.log(api)
     useEffect(() => {
