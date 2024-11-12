@@ -216,6 +216,27 @@ const Table = ( {tableData}) => {
         setImageFile(true)
         newRow['image'] = file
     };
+
+    const downloadCSV = () => {
+        const headers = Object.keys(data[0]);
+        const rows = filteredData.map(row => headers.map(header => `"${row[header] || ''}"`).join(','));
+
+        // Combine headers and rows
+        const csvContent = [headers.join(','), ...rows].join('\n');
+
+        // Create a Blob from the CSV content
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+
+        // Create a link to trigger the download
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "table_data.csv");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
     const renderColumnHeader = (column, label) => {
         if (searchStates[column]?.isSearching) {
             return (
@@ -255,7 +276,7 @@ const Table = ( {tableData}) => {
             {/* Toolbar */}
             <div className="toolbar">
             
-                <button style={{fontSize:"18px", fontWeight:"bolder",position:"relative"}} className="toolbar-button" title="Download">
+                <button style={{fontSize:"18px", fontWeight:"bolder",position:"relative"}} className="toolbar-button" title="Download" onClick={()=>downloadCSV()}>
                     ⤓
                 </button>
                 {isCoreTeam && (
