@@ -1,13 +1,37 @@
 import React from 'react';
+import "../static/Speaker.css"
 
 const Speaker = ({ image, name, title, description }) => {
   return (
-    <div style={styles.card}>
-      <img src={image} alt="Profile" style={styles.image} />
-      <h2 style={styles.name}>{name}</h2>
-      <p style={styles.title}>{title}</p>
-      <p style={styles.description}>{description}</p>
-    </div>
+    // <div style={styles.card}>
+    //   <img src={image} alt="Profile" style={styles.image} />
+    //   <h2 style={styles.name}>{name}</h2>
+    //   <p style={styles.title}>{title}</p>
+    //   <p style={styles.description}>{description}</p>
+    // </div>
+    <>
+      
+      <div className="speaker-panel">
+        <div className="speaker-ring">
+          <div className="speaker-card card1"><img className="speaker-image"src={image} alt={name} /></div>
+          <div className="speaker-border">
+            <p className="speaker-title">{name}</p>
+            <div className="speaker-slide">
+              <h6 className="speaker-para">{title}</h6>
+              <div className="speaker-line">
+                <h6 className="speaker-para">{description}</h6> <i className="fa speaker-fa-plane" aria-hidden="true"></i>
+                {/* <h6 className="speaker-para">£849</h6> */}
+              </div>
+              {/* <div className="speaker-line"> */}
+                {/* <h6 className="speaker-para">RTN</h6> <i className="fa speaker-fa-plane" aria-hidden="true"></i> */}
+                {/* <h6 className="speaker-para">£659</h6> */}
+              {/* </div> */}
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </>
   );
 };
 
