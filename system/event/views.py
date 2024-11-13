@@ -128,11 +128,12 @@ def event(request):
         return JsonResponse(event_data, safe=False)
     if(request.method=="POST"):
         data = json.loads(request.body)
+        print(data)
         name = data["name"]
         venue = data["venue"]
         time = data["time"]
         desc = data["desc"]
-        date = data['date']
+        date = data['eventDate']
         dayNo = data['dayNo']
         query = """
                     insert into event_event (eventName, eventVenue, eventTime, eventDesc, dayNo, eventDate) values(%s,%s,%s,%s,%s,%s)"""
@@ -300,14 +301,16 @@ def login(request):
             cursor.execute(query)
             result = cursor.fetchone()
             if(result is None):
-                return JsonResponse({"status":"failure", "message":"User not found"})
+                return JsonResponse({"status":"failure", "message":"User not found", "loggedIn":False})
             else:
                 password_stored = result[0]
                 teamName = result[1]
                 if(check_password(password, password_stored)):
-                    return JsonResponse({"status":"success", "message": "User exists... Login successful", "rollNo" : rollNo, "team": teamName}) 
+                    request.session['loggedin'] = True
+                    # request.session.modified = True
+                    return JsonResponse({"status":"success", "message": "User exists... Login successful", "rollNo" : rollNo, "team": teamName, "loggedIn":True}) 
                 else:
-                    return JsonResponse({"status":"failure", "message":"User not found"}) 
+                    return JsonResponse({"status":"failure", "message":"User not found", "loggedIn": False}) 
 
 @csrf_exempt
 def gallery(request):
@@ -336,3 +339,8 @@ def gallery(request):
         return JsonResponse(images_data, safe=False)
 
 
+def check_login(request):
+    is_logged_in = request.session.get('loggedin')
+
+    print(is_logged_in)
+    return JsonResponse({'loggedIn': is_logged_in})

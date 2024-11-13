@@ -19,13 +19,18 @@ const Speakers = () => {
     }
     useEffect(() => {
       fetchspeakers()
+    }, [])
+
+    useEffect(() => {
+      
     }, [speakers])
+    
     
      
 
   return (
     <>
-      <h1 className="speakers-title">Speakers</h1>
+      {/* <h1 className="speakers-title">Speakers</h1> */}
       {speakers.length>0 ?
         
       <div className='speakers-container'>

@@ -27,7 +27,7 @@
   }
   .speaker-panel:hover .speaker-ring:before,
   .speaker-panel:hover .speaker-ring:after {
-    transform: translateX(-50%) translateY(-50%) rotate(310deg);
+    transform: translateX(-50%) translateY(-50%) rotate(410deg);
   }
   
   .speaker-ring,
@@ -47,6 +47,7 @@
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
     font-size: 210px;
+    /* box-shadow: 1px 1px 10px white; */
   }
   
   .speaker-card {

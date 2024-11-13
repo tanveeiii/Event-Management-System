@@ -1,9 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'; // Import eye icons
 import '../static/Login.css';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+    const [loggedIn, setLoggedIn] = useState(false)
+
+    async function checkLogin(){
+        const res = await fetch("http://localhost:8000/api/check_login/")
+        const data = await res.json()
+        setLoggedIn(data['loggedIn'])
+    }
+
+    useEffect(() => {
+      checkLogin()
+    }, [])
+
+    useEffect(() => {
+    }, [loggedIn])
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate()
     const togglePasswordVisibility = () => {
@@ -40,6 +54,11 @@ const Login = () => {
 
     return (
         <>
+        {   loggedIn? navigate('/dashboard', {state:{
+                rollNo: rollNo,
+                team: message['team'],
+                loggedIn: true
+            }}): (
             <form method='post' onSubmit={login}>
                 <h3>Welcome</h3>
                 <label htmlFor="username" type="number">Roll No.</label>
@@ -61,7 +80,8 @@ const Login = () => {
                     </span>
                 </div>
                 <button className='post-btn'type='submit'>Log In</button>
-            </form>
+            </form>)
+}
         </>
     );
 }
