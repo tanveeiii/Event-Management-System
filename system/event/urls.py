@@ -12,4 +12,5 @@ urlpatterns = [
     path('api/login/', views.login, name="login"),
     path('api/gallery/', views.gallery, name="gallery"),
     path('api/create_order/', views.create_order, name="create_order"),
+    path('api/check_login/', views.check_login, name="check_login"),
 ]

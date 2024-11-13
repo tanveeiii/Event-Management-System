@@ -6,7 +6,7 @@ import FadeLoader from 'react-spinners/FadeLoader'
 
 const Events = () => {
 
-  const [activeDay, setActiveDay] = useState("Day1");
+  const [activeDay, setActiveDay] = useState("Day0");
   const [loading, setloading] = useState(true)
 
   const handleTabClick = (day) => {
@@ -45,8 +45,8 @@ const Events = () => {
       {/* <h1 className="schedule-title">Schedule</h1> */}
       <div className="tabs">
         <button
-          className={`tab-link ${activeDay === "Day4" ? "active" : ""}`}
-          onClick={() => handleTabClick("Day4")}
+          className={`tab-link ${activeDay === "Day0" ? "active" : ""}`}
+          onClick={() => handleTabClick("Day0")}
         >
           Day 0
         </button>

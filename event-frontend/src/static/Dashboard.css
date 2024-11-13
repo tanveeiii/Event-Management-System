@@ -34,25 +34,24 @@
     margin-top: 20px;
     transition: opacity 0.3s ease;
     opacity: 1;
+    margin-left: 200px;
 }
 
 .table-wrapper.hidden {
     opacity: 0;
     height: 0;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 
 .table-sidebar {
     width: 280px;
+    height: 100%;
     margin-top: 80px;
-    /* height: 100%; */
-    /* background-color: #181818; */
     padding: 20px;
     color: #ffffff;
-    /* border-radius: 2px; */
-    /* border-width: 5px; */
-    /* border-color: white; */
+    position: fixed;
+    border-right: 2px solid rgba(255, 255, 255, 0.2);
   }
   
   .table-sidebar-title {

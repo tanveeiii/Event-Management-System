@@ -23,6 +23,7 @@ const Dashboard = () => {
             navigate('/login');
         }
     }, [location.state, navigate]);
+    
 
     const [showComponents, setShowComponents] = useState(teamDictionary);
     const [tableData, setTableData] = useState({}); // Holds data for each table

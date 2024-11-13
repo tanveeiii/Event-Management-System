@@ -44,7 +44,7 @@ const CompSwiper = ({ competitions }) => {
                   <div className="card__content--container | flow">
                     <h2 className="card__title">{comp.name}</h2>
                     <p className="card__description">
-                      {comp.prizeMoney}
+                      ₹{comp.prizeMoney}
                     </p>
                   </div>
                   <Link to={`/register/${comp.id}`}>
