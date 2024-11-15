@@ -3,7 +3,7 @@ import '../static/Ticket.css'
 import LogoImg from "../assets/pronites.jpeg"
 import { useEffect } from 'react'
 import emailjs from '@emailjs/browser';
-
+import logo from "../assets/logo2.png"
 const Ticket = () => {
 
     async function sendEmail (params) {
@@ -56,7 +56,7 @@ const Ticket = () => {
             currency: "INR",
             name: "FLUXUS-IIT INDORE",
             description: "Ticket Purchase",
-            image: "https://example.com/your_logo",
+            image: logo,
             order_id: orderId,
             handler: async function (response) {
                 console.log(response)
