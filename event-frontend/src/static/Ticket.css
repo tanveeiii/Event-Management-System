@@ -47,18 +47,14 @@
     border-bottom: 3px solid #f76c6c !important;
 }
 
-/* autofill css not working */
-/* .T-input:-webkit-autofill {
-    color: white !important;
-    } */
 input:-webkit-autofill {
     -webkit-text-fill-color: white;
-    -webkit-box-shadow: 0 0 0 50px rgb(0, 0, 19) inset;
+    -webkit-box-shadow: 0 0 0 50px #FFFFFF12 inset;
     transition: background-color 2000s ease-in-out 0s !important;
 }
 
 input:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0 50px rgb(0, 0, 19) inset;
+    -webkit-box-shadow: 0 0 0 50px #FFFFFF12 inset;
     -webkit-text-fill-color: white;
 }
 
