@@ -12,6 +12,7 @@ const MainLayout = () => {
     <>  
         <Starfield/>
         <Navbar />
+        <ChatAssistant />
         <div style={pageContainerStyle}>
           <div style={contentStyle}>
             <Outlet />
