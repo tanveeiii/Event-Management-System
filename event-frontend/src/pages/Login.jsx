@@ -5,21 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
-    // const [loggedIn, setLoggedIn] = useState(false)
     const [Roll, setRoll] = useState()
     const [team, setteam] = useState()
     const {loggedIn, setLoggedIn, rollNo, setRollNo, teamName, setTeamName} = useAuth()
-    // async function checkLogin() {
-    //     const res = await fetch("http://localhost:8000/api/check_login/")
-    //     const data = await res.json()
-    //     setLoggedIn(data['loggedIn'])
-    //     setRoll(data['rollNo'])
-    //     setteam(data['teamName'])
-    // }
-
-    // useEffect(() => {
-    //     checkLogin()
-    // }, [])
 
     useEffect(() => {
         if (loggedIn) {
