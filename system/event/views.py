@@ -306,8 +306,7 @@ def login(request):
                 password_stored = result[0]
                 teamName = result[1]
                 if(check_password(password, password_stored)):
-                    request.session['loggedin'] = True
-                    # request.session.modified = True
+                    
                     return JsonResponse({"status":"success", "message": "User exists... Login successful", "rollNo" : rollNo, "team": teamName, "loggedIn":True}) 
                 else:
                     return JsonResponse({"status":"failure", "message":"User not found", "loggedIn": False}) 
@@ -337,10 +336,3 @@ def gallery(request):
                 "imageId":image[1]
             })
         return JsonResponse(images_data, safe=False)
-
-
-def check_login(request):
-    is_logged_in = request.session.get('loggedin')
-
-    print(is_logged_in)
-    return JsonResponse({'loggedIn': is_logged_in})

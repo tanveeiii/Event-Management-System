@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Table from '../components/Table';
 import '../static/Dashboard.css';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Dashboard = () => {
     const teamDictionary = {
@@ -15,14 +16,17 @@ const Dashboard = () => {
         "Events": false,
     };
 
-    const location = useLocation();
-    const navigate = useNavigate();
     
+    const {loggedIn, setLoggedIn, rollNo, setRollNo, teamName, setTeamName} = useAuth()
+    const [teamname, setteamname] = useState()
+    let  login;
     useEffect(() => {
-        if (!location.state?.loggedIn) {
-            navigate('/login');
+        if(!loggedIn){
+            window.location.href = '/login'
         }
-    }, [location.state, navigate]);
+        setteamname(teamName)
+        console.log(teamname)
+    }, []);
     
 
     const [showComponents, setShowComponents] = useState(teamDictionary);
@@ -109,7 +113,7 @@ const Dashboard = () => {
                     showComponents[teamName] && (
                         <div key={index} className="table-wrapper">
                             <h1 className='table-name'>{teamName}</h1>
-                            <Table tableData={{ "data": tableData[teamName] || [], "api": url, "team":location.state.team }} />
+                            <Table tableData={{ "data": tableData[teamName] || [], "api": url, "team":teamname }} />
                         </div>
                     )
                 ))}
