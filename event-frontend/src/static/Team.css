@@ -21,14 +21,6 @@
     margin-top: 50px;
 }
 
-.teams-box{
-    /* display:flex; */
-}
-
-.sidebar{
-    position:fixed;
-}
-
 .card{
     flex: 0 0 30%;
     max-width: 30%;
@@ -37,11 +29,11 @@
 .teams-subheading{
     font-size: 2em;
     font-family: poppins , sans-serif ;
-    margin-bottom: 20px;
+    margin-bottom: 70px;
     color: #f76c6c;
     margin-top: 70px;
     text-align:center;
-    text-shadow: 0px 0px 30px #f76c6c;
+    /* text-shadow: 0px 0px 30px #f76c6c; */
     text-transform: uppercase;
     margin-left: 150px ;
 }

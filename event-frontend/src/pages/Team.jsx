@@ -34,7 +34,7 @@ const Team = () => {
 
   return (
     <>
-      <h1 className="teams-title">Team Members</h1>
+      <h1 className="teams-title"></h1>
       
       <Sidebar className='sidebar' title={"Teams"} list_names={team_names} />
       { team.length>0?
