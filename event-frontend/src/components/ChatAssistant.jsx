@@ -43,7 +43,6 @@ const ChatAssistant = () => {
     `);
     iframe.contentWindow.document.close();
 
-    // Cleanup on component unmount
     return () => {
       document.body.removeChild(divElement);
       const lipyWebchatDiv = document.getElementById('lipy-webchat');
