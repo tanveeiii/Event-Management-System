@@ -20,6 +20,11 @@ const Navbar = () => {
 
     useEffect(() => {
     }, [loggedIn])
+
+    function handleLogout() {
+        setLoggedIn(false)
+        sessionStorage.clear()
+    }
     
 
     return (
@@ -38,7 +43,7 @@ const Navbar = () => {
                     {loggedIn ? (
                         <>
                         <NavLink to="/dashboard">Dashboard</NavLink>
-                        <NavLink to="/login">Logout</NavLink>
+                        <NavLink to="/login" onClick={()=>handleLogout()}>Logout</NavLink>
                         </>
                     ) : (
                         <NavLink to="/login">Login</NavLink>
