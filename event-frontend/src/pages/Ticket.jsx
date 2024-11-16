@@ -4,7 +4,17 @@ import LogoImg from "../assets/pronites.jpeg"
 import { useEffect } from 'react'
 import emailjs from '@emailjs/browser';
 import logo from "../assets/logo2.png"
+
+import { useAuth } from '../context/AuthContext';
 const Ticket = () => {
+    const {loggedIn, setLoggedIn, rollNo, setRollNo, teamName, setTeamName} = useAuth()
+  useEffect(() => {
+    const storedInfo = JSON.parse(sessionStorage.getItem("user"))
+    if(storedInfo && storedInfo.loggedIn){
+      setLoggedIn(true)
+      setTeamName(storedInfo.teamName)
+    }
+  }, [])
 
     async function sendEmail (params) {
         try {

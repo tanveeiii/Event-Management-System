@@ -2,10 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import LogoImg from '../assets/pronites.jpeg'
 import emailjs from '@emailjs/browser';
-
+import { useAuth } from '../context/AuthContext';
 const Register = () => {
     const [data, setdata] = useState([])
     const { index } = useParams();
+
+    const {loggedIn, setLoggedIn, rollNo, setRollNo, teamName, setTeamName} = useAuth()
+  useEffect(() => {
+    const storedInfo = JSON.parse(sessionStorage.getItem("user"))
+    if(storedInfo && storedInfo.loggedIn){
+      setLoggedIn(true)
+      setTeamName(storedInfo.teamName)
+    }
+  }, [])
     // const params = {"id": index}
     const participantListURL = "http://localhost:8000/api/participants/";
     const getCompDetails=async()=>{

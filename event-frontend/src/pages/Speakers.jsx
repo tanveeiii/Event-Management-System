@@ -2,10 +2,13 @@ import React, { useState , useEffect } from 'react'
 import Speaker from '../components/Speaker'
 import "../static/Speakers.css"
 import FadeLoader from 'react-spinners/FadeLoader'
+import { useAuth } from '../context/AuthContext'
+
 
 const Speakers = () => {
 
   const [speakers , setspeakers] = useState([]);
+  const {loggedIn, setLoggedIn, rollNo, setRollNo, teamName, setTeamName} = useAuth()
  
     const fetchspeakers = async () => {
       const apiurl = "http://localhost:8000/api/speaker/";
@@ -25,6 +28,13 @@ const Speakers = () => {
       
     }, [speakers])
     
+    useEffect(() => {
+      const storedInfo = JSON.parse(sessionStorage.getItem("user"))
+      if(storedInfo && storedInfo.loggedIn){
+        setLoggedIn(true)
+        setTeamName(storedInfo.teamName)
+      }
+    }, [])
     
      
 

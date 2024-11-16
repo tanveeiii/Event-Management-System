@@ -12,15 +12,14 @@ const MainLayout = () => {
     <>  
         <Starfield/>
         <Navbar />
-        {/* <ChatAssistant /> */}
         <div style={pageContainerStyle}>
           <div style={contentStyle}>
             <Outlet />
             <ToastContainer />
           </div>
         </div>
-        {/* <ChatAssistant /> */}
         <Footer />
+        <ChatAssistant />
     </>
   );
 };

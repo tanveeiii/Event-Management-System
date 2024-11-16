@@ -5,18 +5,7 @@ import { useAuth } from '../context/AuthContext';
 
 const Navbar = () => {
 
-    // const [loggedIn, setLoggedIn] = useState(false)
     const { loggedIn, setLoggedIn } = useAuth();
-
-    // async function checkLogin(){
-    //     const res = await fetch("http://localhost:8000/api/check_login/")
-    //     const data = await res.json()
-    //     setLoggedIn(data['loggedIn'])
-    // }
-
-    // useEffect(() => {
-    //   checkLogin()
-    // }, [])
 
     useEffect(() => {
     }, [loggedIn])

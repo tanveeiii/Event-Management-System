@@ -3,9 +3,19 @@ import '../static/Partners.css'
 import FadeLoader from 'react-spinners/FadeLoader'
 import { useState, useEffect } from 'react'
 import SponsorCard from '../components/SponsorCard'
+import { useAuth } from '../context/AuthContext'
 
 const Partners = () => {
 const [sponsors, setSponsorsData] = useState([])
+
+const {loggedIn, setLoggedIn, rollNo, setRollNo, teamName, setTeamName} = useAuth()
+  useEffect(() => {
+    const storedInfo = JSON.parse(sessionStorage.getItem("user"))
+    if(storedInfo && storedInfo.loggedIn){
+      setLoggedIn(true)
+      setTeamName(storedInfo.teamName)
+    }
+  }, [])
 
 const sponsorListURL = 'http://localhost:8000/api/sponsors/'
   useEffect(() => {
