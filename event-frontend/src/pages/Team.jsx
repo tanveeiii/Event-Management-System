@@ -58,7 +58,7 @@ const Team = () => {
       }
       </div>:
       (
-        <div className="team-loader" style={{marginTop:"20vh"}}>
+        <div className="team-loader" style={{marginTop:"45vh"}}>
 
         <div className="loading">
           <FadeLoader color='#f76c6c' radius={6} height={20} width={5} />

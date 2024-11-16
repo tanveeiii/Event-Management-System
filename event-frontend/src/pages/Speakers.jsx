@@ -41,7 +41,7 @@ const Speakers = () => {
       }
       </div>:
       ( 
-        <div className="speakers-loader">
+        <div className="speakers-loader" style={{marginTop:"45vh"}}>
           <div className="loading">
             <FadeLoader color='#f76c6c' radius={6} height={20} width={5} />
             <p>Loading Speakers...</p>
