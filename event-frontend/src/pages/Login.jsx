@@ -5,16 +5,28 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
-    const [Roll, setRoll] = useState()
-    const [team, setteam] = useState()
     const {loggedIn, setLoggedIn, rollNo, setRollNo, teamName, setTeamName} = useAuth()
 
+    useEffect(() => {
+        const storedUser = sessionStorage.getItem("user");
+        console.log(storedUser)
+        if(storedUser){
+            setLoggedIn(true)
+            setRollNo(storedUser['rollNo'])
+            setTeamName(storedUser['teamName'])
+            console.log(storedUser)
+        }
+    }, [])
+    useEffect(() => {
+        console.log(teamName)
+    }, [teamName])
+    
     useEffect(() => {
         if (loggedIn) {
             navigate('/dashboard', {
                 state: {
-                    rollNo: Roll,
-                    team: team,
+                    rollNo: rollNo,
+                    team: teamName,
                     loggedIn: true
                 }
             })
@@ -47,10 +59,13 @@ const Login = () => {
             setLoggedIn(true)
             setRollNo(rollNo)
             setTeamName(message['team'])
+            const userInfo = {"loggedIn": true, "rollNo": rollNo, "teamName": message['team']}
+            // console.log(userInfo)
+            sessionStorage.setItem("user",JSON.stringify(userInfo))
             navigate('/dashboard', {
                 state: {
                     rollNo: rollNo,
-                    team: message['team'],
+                    team: teamName? teamName: message['team'],
                     loggedIn: true
                 }
             })
