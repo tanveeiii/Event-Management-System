@@ -4,6 +4,7 @@ import Sidebar from '../components/Sidebar';
 import "../static/Team.css"
 import Teamcards from '../components/Teamcards';
 import FadeLoader from 'react-spinners/FadeLoader'
+import { useAuth } from '../context/AuthContext';
 import {
   FaPhone,
   FaTwitter,
@@ -15,10 +16,20 @@ import {
 
 const Team = () => {
   const teamListURL = 'http://localhost:8000/api/team/'
+
+  const {loggedIn, setLoggedIn, rollNo, setRollNo, teamName, setTeamName} = useAuth()
   const [team, setTeamData] = useState([])
   useEffect(() => {
     fetchTeam();
   }, []);
+
+  useEffect(() => {
+    const storedInfo = JSON.parse(sessionStorage.getItem("user"))
+    if(storedInfo && storedInfo.loggedIn){
+      setLoggedIn(true)
+      setTeamName(storedInfo.teamName)
+    }
+  }, [])
   const fetchTeam = async () => {
     try {
       const response = await fetch(teamListURL);

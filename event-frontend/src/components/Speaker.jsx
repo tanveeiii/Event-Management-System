@@ -1,7 +1,7 @@
 import React from 'react';
 import "../static/Speaker.css"
 
-const Speaker = ({ image, name,  description }) => {
+const Speaker = ({ image, name,  description }) => {  
   return (
     <>
       <div className="speaker-panel">
