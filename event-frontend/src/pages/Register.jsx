@@ -3,11 +3,15 @@ import { useParams } from 'react-router-dom'
 import LogoImg from '../assets/pronites.jpeg'
 import emailjs from '@emailjs/browser';
 import { useAuth } from '../context/AuthContext';
+import { ToastContainer, toast } from 'react-toastify';
 const Register = () => {
     const [data, setdata] = useState([])
     const { index } = useParams();
 
     const {loggedIn, setLoggedIn, rollNo, setRollNo, teamName, setTeamName} = useAuth()
+    const notify = (message)=>{
+        toast(message)
+    }
   useEffect(() => {
     const storedInfo = JSON.parse(sessionStorage.getItem("user"))
     if(storedInfo && storedInfo.loggedIn){
@@ -75,7 +79,25 @@ const Register = () => {
                         alert("Registration successful! Please check your email for ticket");
                         window.location.href = '/';
                     }
-                }
+        }else{
+            const message = dataReg['message']
+            notify(message)
+            return(
+                <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                transition:Bounce
+            />
+            )
+        }
     }
     
     return (
