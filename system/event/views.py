@@ -227,6 +227,14 @@ def speakers(request):
             cursor.execute(query, (name, desc, encoded_image))
         transaction.commit()
         return JsonResponse({"status":"success", "message": "Speaker data added successfully"})
+    if(request.method =="DELETE"):
+        data = json.loads(request.body)
+        id = data['id']
+        with connection.cursor() as cursor:
+            query = f"delete from event_speakers where speakerId={id}"
+            cursor.execute(query)
+        transaction.commit()
+        return JsonResponse({"status": "success", "message": "Speaker data deleted successfully"})
 
 @csrf_exempt
 def attendees(request):
