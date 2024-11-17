@@ -122,14 +122,15 @@
   }
   
   .speaker-slide {
-    height: 260px;
-    width: 180px;
+    height: 280px;
+    width: 230px;
     position: absolute;
     border: 1px solid black;
     bottom: -270px;
     background: rgba(0, 0, 0, 0.5);
     transition: bottom 1s;
     flex-direction: column;
+    border-radius:20px;
   }
   
   .speaker-fa-plane {
