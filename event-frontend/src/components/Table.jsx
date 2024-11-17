@@ -9,8 +9,9 @@ const Table = ( {tableData}) => {
     const data = tableData["data"]
     const api = tableData["api"]
     const team = tableData["team"]
-    const [isEditing, setIsEditing] = useState(false);
+    // const [isEditing, setIsEditing] = useState(false);
     const [editedData, setEditedData] = useState(data);
+    const [isDeleting, setIsDeleting] = useState(false);
     const [newRow, setNewRow] = useState(null);
     const [searchStates, setSearchStates] = useState({});
     const [filteredData, setFilteredData] = useState(data);
@@ -104,12 +105,12 @@ const Table = ( {tableData}) => {
             [column]: { ...prev[column], value }
         }));
     };
-    const toggleEdit = () => {
-        setIsEditing(!isEditing);
-        if (isEditing) {
-            setNewRow(null);
-        }
-    };
+    // const toggleEdit = () => {
+    //     setIsEditing(!isEditing);
+    //     if (isEditing) {
+    //         setNewRow(null);
+    //     }
+    // };
     const handleCellChange = (id, field, value) => {
         if (newRow && id === newRow.id) {
             setNewRow(prev => ({ ...prev, [field]: value }));
@@ -282,11 +283,11 @@ const Table = ( {tableData}) => {
                 {isCoreTeam && (
                     <>
                 <button 
-                    className={`toolbar-button ${isEditing ? 'active' : ''}`} 
-                    title={isEditing ? "Save" : "Edit"}
-                    onClick={toggleEdit}
+                    className={`toolbar-button ${isDeleting ? 'active' : ''}`} 
+                    title={isDeleting ? "Save" : "Delete"}
+                    onClick={() => setIsDeleting(!isDeleting)}
                 >
-                    {isEditing ? '✓' : '✎'}
+                    {isDeleting ? '✓' : '×'}
                 </button>
                 
                 <button 
@@ -308,7 +309,7 @@ const Table = ( {tableData}) => {
                         {Object.keys(data[0] || {}).map((column) => (
                              <th key={column}>{renderColumnHeader(column, column.charAt(0).toUpperCase() + column.slice(1))}</th>
                          ))}
-                        {(isEditing || newRow) && <th>Action</th>}
+                        {(isDeleting || newRow) && <th>Action</th>}
                     </tr>
                 </thead>
                 <tbody>
@@ -317,7 +318,7 @@ const Table = ( {tableData}) => {
                             {Object.keys(item).map((field) => (
                                  <td key={field}>{renderCell(item, field)}</td>
                              ))}
-                            {isEditing && (
+                            {isDeleting && (
                                 <td>
                                     <button 
                                         className="delete-button"
