@@ -67,7 +67,7 @@ def competitions(request):
     if(request.method=="DELETE"):
         data = json.loads(request.body)
         competitionId = data['id']
-        query = f"delete from event_competitions where competitionId_id = {competitionId}"
+        query = f"delete from event_competitions where competitionId = {competitionId}"
         with connection.cursor() as cursor:
             cursor.execute(query)
         transaction.commit()
@@ -196,7 +196,10 @@ def participants(request):
             query = """
                         insert into event_participants (name, phoneNo, emailId, registrationId,  competitionId_id) values(%s,%s,%s,%s,%s)
                     """
-            cursor.execute(query, (name, phoneNo, emailId, registrationId, competitionId ))
+            try:
+                cursor.execute(query, (name, phoneNo, emailId, registrationId, competitionId ))
+            except OperationalError:
+                return JsonResponse({"status":"failure","message":"Duplicate registration... You are already registered for this competition"})
         transaction.commit()
         return JsonResponse({'status':'success', 'message': 'Successfully registered for the competition', 'registrationid': registrationId, "competitionName":competitionName})
     if(request.method=="GET"):
