@@ -28,7 +28,7 @@ class Attendees(models.Model):
     name = models.CharField(max_length=50)
     phoneNo = models.CharField(max_length=20)
     emailId = models.EmailField()
-    ticketId = models.UUIDField(primary_key=True , editable=False, default=uuid.uuid4)
+    ticketId = models.CharField(max_length=36)
     accommodation = models.BooleanField()
     transactionId = models.CharField(max_length=100)
 
@@ -43,7 +43,7 @@ class Participants(models.Model):
     name = models.CharField(max_length=50)
     phoneNo = models.CharField(max_length=20)
     emailId = models.EmailField()
-    registrationId = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
+    registrationId = models.CharField(max_length=36)
     competitionId = models.ForeignKey(Competitions, on_delete=models.CASCADE)
 
 class Speakers(models.Model):
