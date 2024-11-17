@@ -19,7 +19,7 @@ const MainLayout = () => {
           </div>
         </div>
         <Footer />
-        <ChatAssistant />
+        {/* <ChatAssistant /> */}
     </>
   );
 };
