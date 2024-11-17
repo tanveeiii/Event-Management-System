@@ -13,6 +13,7 @@ const Dashboard = () => {
         "Sponsors": false,
         "Participants": false,
         "Events": false,
+        "Gallery": false,
     };
 
     
@@ -62,6 +63,9 @@ const Dashboard = () => {
                 break;
             case "Events":
                 apiUrl = 'http://localhost:8000/api/event/';
+                break;
+            case "Gallery":
+                apiUrl = 'http://localhost:8000/api/gallery/';
                 break;
             default:
                 return;
