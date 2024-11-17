@@ -52,7 +52,7 @@ def competitions(request):
         image_data = image.read()
         encoded_image = base64.b64encode(image_data).decode('utf-8')
         query = """
-                    insert into event_competitions(competitionName, prizeMoney, poster, eventId) values (%s,%s,%s,%s)
+                    insert into event_competitions(competitionName, prizeMoney, poster, eventId_id) values (%s,%s,%s,%s)
                 """
         with connection.cursor() as cursor:
             cursor.execute(query, (name, prizeMoney, encoded_image, eventId))
