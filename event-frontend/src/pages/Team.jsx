@@ -41,7 +41,7 @@ const Team = () => {
     }
   };
 
-  const team_names = ["backend-developer", "frontend-developer"]
+  const team_names = ["Backend Developer", "Frontend Developer"]
 
   return (
     <>
