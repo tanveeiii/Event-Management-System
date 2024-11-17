@@ -174,7 +174,7 @@ def participants(request):
         competitionName = data['competitionName']
         registrationId = uuid.uuid4()
         with connection.cursor() as cursor:
-            query = f"select competitionId_id from event_competitions where competitionName= '{competitionName}'"
+            query = f"select competitionId from event_competitions where competitionName= '{competitionName}'"
             cursor.execute(query)
             competitionId = cursor.fetchone()[0]
             print(competitionId)

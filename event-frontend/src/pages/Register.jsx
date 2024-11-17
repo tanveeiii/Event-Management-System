@@ -72,7 +72,7 @@ const Register = () => {
             const emailres = await sendEmail(params=params)
                     console.log(emailres)
                     if (emailres && emailres.status === 200) {
-                        alert("Payment successful! Please check your email for ticket");
+                        alert("Registration successful! Please check your email for ticket");
                         window.location.href = '/';
                     }
                 }
