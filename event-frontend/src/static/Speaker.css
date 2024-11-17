@@ -126,7 +126,7 @@
     width: 230px;
     position: absolute;
     border: 1px solid black;
-    bottom: -270px;
+    bottom: -280px;
     background: rgba(0, 0, 0, 0.5);
     transition: bottom 1s;
     flex-direction: column;
