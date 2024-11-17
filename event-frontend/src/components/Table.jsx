@@ -147,14 +147,56 @@ const Table = ({ tableData }) => {
                         method: "POST",
                         body: formData
                     })
+                    const resData = await res.json()
+                    console.log(resData)
+                    if(resData['status'] = 'failure'){
+                        const message = resData['message']
+                        notify(message)
+                        return (
+                            <ToastContainer
+                            position="top-right"
+                            autoClose={5000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                            theme="light"
+                            transition:Bounce
+                        />
+                        )
+                    }
                 } else {
-                    await fetch(api, {
+                    res = await fetch(api, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
                         },
                         body: JSON.stringify(newRow)
                     })
+                    const resData = await res.json()
+                    console.log(resData)
+                    if(resData['status'] = 'failure'){
+                        const message = resData['message']
+                        notify(message)
+                        return (
+                            <ToastContainer
+                            position="top-right"
+                            autoClose={5000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                            theme="light"
+                            transition:Bounce
+                        />
+                        )
+                    }
                 }
             } catch (e) {
                 console.log(e)
