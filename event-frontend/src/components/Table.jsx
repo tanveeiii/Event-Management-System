@@ -350,11 +350,11 @@ const Table = ({ tableData }) => {
                 {isCoreTeam && (
                     <>
                         <button
-                            className={`toolbar-button ${isEditing ? 'active' : ''}`}
-                            title={isEditing ? "Save" : "Edit"}
-                            onClick={toggleEdit}
+                            className={`toolbar-button ${isDeleting ? 'active' : ''}`}
+                            title={isDeleting ? "Save" : "Edit"}
+                            onClick={() => setIsDeleting(!isDeleting)}
                         >
-                            {isEditing ? '✓' : '✘'}
+                            {isDeleting ? '✓' : '✘'}
                         </button>
 
                         <button
@@ -377,7 +377,7 @@ const Table = ({ tableData }) => {
                             {Object.keys(data[0] || {}).map((column) => (
                                 <th key={column}>{renderColumnHeader(column, column.charAt(0).toUpperCase() + column.slice(1))}</th>
                             ))}
-                            {(isEditing || newRow) && <th>Action</th>}
+                            {(isDeleting || newRow) && <th>Action</th>}
                         </tr>
                     </thead>
                     <tbody>
@@ -386,7 +386,7 @@ const Table = ({ tableData }) => {
                                 {Object.keys(item).map((field) => (
                                     <td key={field}>{renderCell(item, field)}</td>
                                 ))}
-                                {isEditing && (
+                                {isDeleting && (
                                     <td>
                                         <button
                                             className="delete-button"
