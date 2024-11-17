@@ -3,11 +3,20 @@ import Timeline from '../components/Timeline';
 import React, { useState, useEffect } from "react";
 import axios from 'axios'
 import FadeLoader from 'react-spinners/FadeLoader'
+import { useAuth } from "../context/AuthContext";
 
 const Events = () => {
 
-  const [activeDay, setActiveDay] = useState("Day1");
+  const [activeDay, setActiveDay] = useState("Day0");
   const [loading, setloading] = useState(true)
+  const {loggedIn, setLoggedIn, rollNo, setRollNo, teamName, setTeamName} = useAuth()
+  useEffect(() => {
+    const storedInfo = JSON.parse(sessionStorage.getItem("user"))
+    if(storedInfo && storedInfo.loggedIn){
+      setLoggedIn(true)
+      setTeamName(storedInfo.teamName)
+    }
+  }, [])
 
   const handleTabClick = (day) => {
     setActiveDay(day);
@@ -42,8 +51,14 @@ const Events = () => {
 
   return (
     <>
-      <h1 className="schedule-title">Schedule</h1>
+      {/* <h1 className="schedule-title">Schedule</h1> */}
       <div className="tabs">
+        <button
+          className={`tab-link ${activeDay === "Day0" ? "active" : ""}`}
+          onClick={() => handleTabClick("Day0")}
+        >
+          Day 0
+        </button>
         <button
           className={`tab-link ${activeDay === "Day1" ? "active" : ""}`}
           onClick={() => handleTabClick("Day1")}
@@ -62,18 +77,12 @@ const Events = () => {
         >
           Day 3
         </button>
-        <button
-          className={`tab-link ${activeDay === "Day4" ? "active" : ""}`}
-          onClick={() => handleTabClick("Day4")}
-        >
-          Day 4
-        </button>
       </div>
       {
         !loading?(
       <Timeline events={eventsData} day={activeDay}/>):
       (
-        <div className="event-loader" style={{marginTop:"20vh"}}>
+        <div className="event-loader" style={{marginTop:"25vh"}}>
 
         <div className="loading">
           <FadeLoader color='#f76c6c' radius={6} height={20} width={5} />

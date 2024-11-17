@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Table from '../components/Table';
 import '../static/Dashboard.css';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Dashboard = () => {
     const teamDictionary = {
@@ -13,25 +13,36 @@ const Dashboard = () => {
         "Sponsors": false,
         "Participants": false,
         "Events": false,
+        "Gallery": false,
     };
 
-    const location = useLocation();
-    const navigate = useNavigate();
     
+    const {loggedIn, setLoggedIn, rollNo, setRollNo, teamName, setTeamName} = useAuth()
+    const [teamname, setteamname] = useState()
+
     useEffect(() => {
-        if (!location.state?.loggedIn) {
-            navigate('/login');
+        if (!loggedIn) {
+            window.location.href = '/login';
+        } else {
+            const storedUser = JSON.parse(sessionStorage.getItem("user"));
+            if (storedUser && storedUser.teamName) {
+                setTeamName(storedUser.teamName); 
+            }
         }
-    }, [location.state, navigate]);
+    }, [loggedIn]);
+    useEffect(() => {
+      
+    }, [teamname])
+    
+    
 
     const [showComponents, setShowComponents] = useState(teamDictionary);
-    const [tableData, setTableData] = useState({}); // Holds data for each table
+    const [tableData, setTableData] = useState({}); 
     const [url, seturl] = useState('')
     let apiUrl = '';
-    // Function to fetch data based on team name
-    const fetchTableData = async (teamName) => {
+    const fetchTableData = async (team) => {
 
-        switch (teamName) {
+        switch (team) {
             case "Team":
                 apiUrl = 'http://localhost:8000/api/team/';
                 break;
@@ -53,6 +64,9 @@ const Dashboard = () => {
             case "Events":
                 apiUrl = 'http://localhost:8000/api/event/';
                 break;
+            case "Gallery":
+                apiUrl = 'http://localhost:8000/api/gallery/';
+                break;
             default:
                 return;
 
@@ -62,21 +76,19 @@ const Dashboard = () => {
         try {
             const response = await fetch(apiUrl);
             const data = await response.json();
-            setTableData(prevData => ({ ...prevData, [teamName]: data }));
+            setTableData(prevData => ({ ...prevData, [team]: data }));
         } catch (error) {
-            console.error(`Error fetching data for ${teamName}:`, error);
+            console.error(`Error fetching data for ${team}:`, error);
         }
     };
 
-    const handleToggleTable = (teamName) => {
+    const handleToggleTable = (team) => {
         setShowComponents(prev => ({
             ...teamDictionary,
-            [teamName]: !prev[teamName],
+            [team]: !prev[team],
         }));
-
-        // Fetch data for the selected table if it hasn’t been loaded
-        if (!tableData[teamName]) {
-            fetchTableData(teamName);
+        if (!tableData[team]) {
+            fetchTableData(team);
         }
     };
     useEffect(() => {
@@ -89,13 +101,13 @@ const Dashboard = () => {
             <div className='table-sidebar-box'>
                 <div className="table-sidebar">
                     <ul className="table-sidebar-list">
-                        {Object.keys(teamDictionary).map((teamName, index) => (
+                        {Object.keys(teamDictionary).map((team, index) => (
                             <li key={index}>
                                 <button
                                     className="table-toggle-button"
-                                    onClick={() => handleToggleTable(teamName)}
+                                    onClick={() => handleToggleTable(team)}
                                 >
-                                    {teamName}
+                                    {team}
                                 </button>
                             </li>
                         ))}
@@ -104,11 +116,11 @@ const Dashboard = () => {
             </div>
 
             <div className="team-login-container">
-                {Object.keys(teamDictionary).map((teamName, index) => (
-                    showComponents[teamName] && (
+                {Object.keys(teamDictionary).map((team, index) => (
+                    showComponents[team] && (
                         <div key={index} className="table-wrapper">
-                            <h1 className='table-name'>{teamName}</h1>
-                            <Table tableData={{ "data": tableData[teamName] || [], "api": url, "team":location.state.team }} />
+                            <h1 className='table-name'>{team}</h1>
+                            <Table tableData={{ "data": tableData[team] || [], "api": url, "team":teamName }} />
                         </div>
                     )
                 ))}

@@ -1,20 +1,20 @@
-import React from 'react'
-import { useState } from 'react';
-import '../static/Homepage.css'
-import { NavLink } from "react-router-dom"
-
+import React, { useState, useEffect } from 'react';
+import { NavLink } from "react-router-dom";
+import '../static/Homepage.css';
+import { useAuth } from '../context/AuthContext';
 
 const Navbar = () => {
 
-    const [isDropdownVisible, setDropdownVisible] = useState(false);
+    const { loggedIn, setLoggedIn } = useAuth();
 
-    const handleMouseEnter = () => {
-        setDropdownVisible(true);
-    };
+    useEffect(() => {
+    }, [loggedIn])
 
-    const handleMouseLeave = () => {
-        setDropdownVisible(false);
-    };
+    function handleLogout() {
+        setLoggedIn(false)
+        sessionStorage.clear()
+    }
+    
 
     return (
         <>
@@ -29,12 +29,18 @@ const Navbar = () => {
                     <NavLink to="/gallery">Gallery</NavLink>
                     <NavLink to="/partners">Partners</NavLink>
                     <NavLink to="/team">Team</NavLink>
-                    <NavLink to="/login">Login</NavLink>
+                    {loggedIn ? (
+                        <>
+                        <NavLink to="/dashboard">Dashboard</NavLink>
+                        <NavLink to="/login" onClick={()=>handleLogout()}>Logout</NavLink>
+                        </>
+                    ) : (
+                        <NavLink to="/login">Login</NavLink>
+                    )}
                 </div>
             </header>
-
         </>
-    )
+    );
 }
 
-export default Navbar
+export default Navbar;

@@ -224,7 +224,7 @@ p {
 
 @media (any-hover: hover) and (any-pointer: fine) {
   .card__content {
-    transform: translateY(62%);
+    transform: translateY(55%);
     transition: transform 500ms ease-out;
     transition-delay: 500ms;
   }

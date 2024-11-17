@@ -18,8 +18,8 @@ const MainLayout = () => {
             <ToastContainer />
           </div>
         </div>
-        {/* <ChatAssistant /> */}
         <Footer />
+        {/* <ChatAssistant /> */}
     </>
   );
 };

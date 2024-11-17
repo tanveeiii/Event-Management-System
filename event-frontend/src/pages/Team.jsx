@@ -4,6 +4,7 @@ import Sidebar from '../components/Sidebar';
 import "../static/Team.css"
 import Teamcards from '../components/Teamcards';
 import FadeLoader from 'react-spinners/FadeLoader'
+import { useAuth } from '../context/AuthContext';
 import {
   FaPhone,
   FaTwitter,
@@ -15,10 +16,20 @@ import {
 
 const Team = () => {
   const teamListURL = 'http://localhost:8000/api/team/'
+
+  const {loggedIn, setLoggedIn, rollNo, setRollNo, teamName, setTeamName} = useAuth()
   const [team, setTeamData] = useState([])
   useEffect(() => {
     fetchTeam();
   }, []);
+
+  useEffect(() => {
+    const storedInfo = JSON.parse(sessionStorage.getItem("user"))
+    if(storedInfo && storedInfo.loggedIn){
+      setLoggedIn(true)
+      setTeamName(storedInfo.teamName)
+    }
+  }, [])
   const fetchTeam = async () => {
     try {
       const response = await fetch(teamListURL);
@@ -30,11 +41,11 @@ const Team = () => {
     }
   };
 
-  const team_names = ["events" , "hbnvfhjs" , "gesfvg" , "grsedfgvs"]
+  const team_names = ["Backend Developer", "Frontend Developer"]
 
   return (
     <>
-      <h1 className="teams-title">Team Members</h1>
+      <h1 className="teams-title"></h1>
       
       <Sidebar className='sidebar' title={"Teams"} list_names={team_names} />
       { team.length>0?
@@ -45,7 +56,7 @@ const Team = () => {
           <h1 className='teams-subheading'> {team_name}</h1>
           <div className='card-container'>
             {
-              team.map((person , index) => (
+              team.filter(person=>person.position===team_name).map((person , index) => (
                 <Teamcards className='card' key={index} name={person.name} image={person.image} phoneNo={person.phoneNo} emailId = {person.emailId} instagramId={person.instagramId} linkedinId = {person.linkedinId} />
               ))
 
@@ -58,7 +69,7 @@ const Team = () => {
       }
       </div>:
       (
-        <div className="team-loader" style={{marginTop:"20vh"}}>
+        <div className="team-loader" style={{marginTop:"45vh"}}>
 
         <div className="loading">
           <FadeLoader color='#f76c6c' radius={6} height={20} width={5} />

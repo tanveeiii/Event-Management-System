@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../static/Competitions.css'
 import CompSwiper from '../components/CompSwiper';
-
+import { useAuth } from '../context/AuthContext';
 import FadeLoader from 'react-spinners/FadeLoader'
 
 const Competitions = () => {
@@ -10,6 +10,15 @@ const Competitions = () => {
   // const compListURL = 'https://run.mocky.io/v3/2a6fbd11-ed93-4cb8-b8d8-883b5a041d74';
   const compListURL = "http://localhost:8000/api/competitions/";
   const [compData, setCompData] = useState([]);
+
+  const {loggedIn, setLoggedIn, rollNo, setRollNo, teamName, setTeamName} = useAuth()
+  useEffect(() => {
+    const storedInfo = JSON.parse(sessionStorage.getItem("user"))
+    if(storedInfo && storedInfo.loggedIn){
+      setLoggedIn(true)
+      setTeamName(storedInfo.teamName)
+    }
+  }, [])
 
   useEffect(() => {
     fetchCompetitions();

@@ -141,3 +141,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # CORS_ALLOWED_ORIGINS = ["http://localhost:5173","http://127.0.0.1:5173"]
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+SESSION_COOKIE_AGE = 1209600  # Two weeks (in seconds)
+SESSION_SAVE_EVERY_REQUEST = True

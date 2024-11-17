@@ -3,12 +3,22 @@ import HoneycombGallery from '../components/HoneycombGallery'
 import '../static/Gallery.css'
 import { useState, useEffect } from 'react'
 import FadeLoader from 'react-spinners/FadeLoader'
-
+import { useAuth } from '../context/AuthContext'
 
 const Gallery = () => {
   const [gallery, setGalleryData] = useState([])
+  const {loggedIn, setLoggedIn, rollNo, setRollNo, teamName, setTeamName} = useAuth()
+  useEffect(() => {
+    const storedInfo = JSON.parse(sessionStorage.getItem("user"))
+    if(storedInfo && storedInfo.loggedIn){
+      setLoggedIn(true)
+      setTeamName(storedInfo.teamName)
+    }
+  }, [])
 
-const galleryListURL = 'https://run.mocky.io/v3/4a6fb8af-4dbd-4e18-832b-bcb413050438'
+
+
+const galleryListURL = 'http://127.0.0.1:8000/api/gallery/'
   useEffect(() => {
     fetchGallery();
   }, []);

@@ -8,6 +8,7 @@ import base64
 import razorpay
 from dotenv import load_dotenv
 import os
+from django.db import IntegrityError
 
 load_dotenv()
 RAZORPAY_ID = os.getenv("RAZORPAY_ID")
@@ -40,22 +41,21 @@ def competitions(request):
             competitions_list=cursor.fetchall()
         competitions_data = []
         for competition in competitions_list:
-            data_url = f"data:image/jpeg;base64,{competition[4]}"
-            competitions_data.append({"name": competition[0], "prizeMoney": competition[1], "date": competition[2], "id": competition[3], "image":data_url})
+            data_url = f"data:image/jpeg;base64,{competition[2]}"
+            competitions_data.append({"name": competition[0], "prizeMoney": competition[1], "id": competition[3], "image":data_url, "eventId": competition[4]})
         return JsonResponse(competitions_data, safe=False)
     if(request.method=="POST"):
         name = request.POST.get('name')
         prizeMoney = request.POST.get('prizeMoney')
-        date = request.POST.get("date")
         image = request.FILES.get('image')
-        print(name, prizeMoney, date, image)
+        eventId = request.POST.get('eventId')
         image_data = image.read()
         encoded_image = base64.b64encode(image_data).decode('utf-8')
         query = """
-                    insert into event_competitions(competitionName, prizeMoney, date, poster) values (%s,%s,%s,%s)
+                    insert into event_competitions(competitionName, prizeMoney, poster, eventId_id) values (%s,%s,%s,%s)
                 """
         with connection.cursor() as cursor:
-            cursor.execute(query, (name, prizeMoney, date, encoded_image))
+            cursor.execute(query, (name, prizeMoney, encoded_image, eventId))
         
         transaction.commit()
         return JsonResponse({'status': 'success', 'message': 'Competition added successfully.'})
@@ -63,7 +63,7 @@ def competitions(request):
     if(request.method=="DELETE"):
         data = json.loads(request.body)
         competitionId = data['id']
-        query = f"delete from event_competitions where competitionId = {competitionId}"
+        query = f"delete from event_competitions where competitionId_id = {competitionId}"
         with connection.cursor() as cursor:
             cursor.execute(query)
         transaction.commit()
@@ -84,7 +84,6 @@ def team(request):
         return JsonResponse(team_data, safe=False)
     
     if(request.method=="POST"):
-        # data = json.loads(request.body)
         name = request.POST.get('name')
         rollNo = request.POST.get('id')
         position = request.POST.get('position')
@@ -124,22 +123,36 @@ def event(request):
             event_list= cursor.fetchall()
         event_data = []
         for event in event_list:
-            event_data.append({"name": event[0], "venue": event[1], "time": event[2], "id": event[3], "desc": event[4], "dayNo":event[5], "eventDate":event[6]})
+            query = f"select name from event_team where rollNo = {event[7]}"
+            with connection.cursor() as cursor:
+                cursor.execute(query)
+                managedBy = cursor.fetchone()[0]
+                event_data.append({"name": event[0], "venue": event[1], "time": event[4], "id": event[6], "desc": event[5], "dayNo":event[2], "eventDate":event[3], "managedBy": managedBy})
         return JsonResponse(event_data, safe=False)
     if(request.method=="POST"):
-        data = json.loads(request.body)
-        name = data["name"]
-        venue = data["venue"]
-        time = data["time"]
-        desc = data["desc"]
-        date = data['date']
-        dayNo = data['dayNo']
-        query = """
-                    insert into event_event (eventName, eventVenue, eventTime, eventDesc, dayNo, eventDate) values(%s,%s,%s,%s,%s,%s)"""
-        with connection.cursor() as cursor:
-            cursor.execute(query, (name, venue, time, desc, dayNo, date))
-        transaction.commit()
-        return JsonResponse({'status': 'success', 'message': 'Event added successfully.'})
+        try:
+            data = json.loads(request.body)
+            print(data)
+            name = data["name"]
+            venue = data["venue"]
+            time = data["time"]
+            desc = data["desc"]
+            date = data['eventDate']
+            dayNo = data['dayNo']
+            managedBy = data['managedBy']
+            query = """
+                        insert into event_event (eventName, eventVenue, eventTime, eventDesc, dayNo, eventDate, rollNo_id) values(%s,%s,%s,%s,%s,%s,%s)"""
+            query2 = f"select rollNo from event_team where name='{managedBy}'"
+            with connection.cursor() as cursor:
+                cursor.execute(query2)
+                rollNo = cursor.fetchone()[0]
+                cursor.execute(query, (name, venue, time, desc, dayNo, date,rollNo))
+            transaction.commit()
+            return JsonResponse({'status': 'success', 'message': 'Event added successfully.'})
+        except IntegrityError as e:
+            if "Cannot schedule an event in the past" in str(e):
+                return JsonResponse({"error": "Cannot schedule an event in the past."}, status=400)
+            return JsonResponse({"error": "Database error occurred."}, status=500)
     if(request.method=="DELETE"):
         data = json.loads(request.body)
         id = data['id']
@@ -159,7 +172,6 @@ def participants(request):
         phoneNo = data['phoneNo']
         emailId = data['emailId']
         competitionName = data['competitionName']
-        # accommodation = data['accommodation']
         registrationId = uuid.uuid4()
         with connection.cursor() as cursor:
             query = f"select competitionId from event_competitions where competitionName= '{competitionName}'"
@@ -185,7 +197,7 @@ def participants(request):
         data = json.loads(request.body)
         id = data['id']
         with connection.cursor() as cursor:
-            query = f"delete from event_participants where eventId = {id}"
+            query = f"delete from event_participants where registrationId = {id}"
             cursor.execute(query)
         transaction.commit()
         return JsonResponse({"status":"success", "message":"Participant deleted successfully"})
@@ -199,8 +211,8 @@ def speakers(request):
             speakers_list = cursor.fetchall()
         speakers_data = []
         for speaker in speakers_list:
-            data_url = f"data:image/jpeg;base64,{speaker[2]}"
-            speakers_data.append({"name": speaker[0], "desc" : speaker[1], "image" : data_url, "id":speaker[3]})
+            data_url = f"data:image/jpeg;base64,{speaker[3]}"
+            speakers_data.append({"name": speaker[1], "desc" : speaker[2], "image" : data_url, "id":speaker[0]})
         return JsonResponse(speakers_data, safe=False)
     if(request.method=="POST"):
         name = request.POST.get('name')
@@ -215,6 +227,14 @@ def speakers(request):
             cursor.execute(query, (name, desc, encoded_image))
         transaction.commit()
         return JsonResponse({"status":"success", "message": "Speaker data added successfully"})
+    if(request.method =="DELETE"):
+        data = json.loads(request.body)
+        id = data['id']
+        with connection.cursor() as cursor:
+            query = f"delete from event_speakers where speakerId={id}"
+            cursor.execute(query)
+        transaction.commit()
+        return JsonResponse({"status": "success", "message": "Speaker data deleted successfully"})
 
 @csrf_exempt
 def attendees(request):
@@ -265,7 +285,7 @@ def sponsors(request):
         for sponsor in sponsors_list:
             data_url = f"data:image/jpeg;base64,{sponsor[1]}"
             # print(sponsor)
-            sponsors_data.append({"name": sponsor[2], "amt" : sponsor[3], "dealBy" : sponsor[4], "phoneNo":sponsor[5], "emailId": sponsor[6], "image": data_url, "link": sponsor[8], "title":sponsor[7]})
+            sponsors_data.append({"name": sponsor[2], "amt" : sponsor[3], "dealBy" : sponsor[8], "phoneNo":sponsor[4], "emailId": sponsor[5], "image": data_url, "link": sponsor[7], "title":sponsor[6], "id": sponsor[0]})
         return JsonResponse(sponsors_data, safe=False)
     if(request.method=="POST"):
         name = request.POST.get('name')
@@ -283,11 +303,19 @@ def sponsors(request):
             cursor.execute(fetch_rollNo)
             dealBy_rollNo = cursor.fetchone()[0]
             query = """
-                        insert into event_sponsors (name, sponsorshipAmount, logo, dealBy, phoneNo, emailId, title, link) values (%s,%s,%s,%s,%s,%s,%s,%s)
+                        insert into event_sponsors (name, sponsorshipAmount, logo, dealBy_Id, phoneNo, emailId, title, link) values (%s,%s,%s,%s,%s,%s,%s,%s)
                     """
             cursor.execute(query, (name, amt, encoded_image, dealBy_rollNo, phoneNo, emailId, title, link))
         transaction.commit()
         return JsonResponse({"status":"success", "message": "Sponsor data added successfully"})
+    if(request.method=="DELETE"):
+        data = json.loads(request.body)
+        id = data['id']
+        query = f"delete from event_sponsors where sponsorId={id}"
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+        transaction.commit()
+        return JsonResponse({"status":"success","message":"Sponsor data deleted successfully"})
     
 @csrf_exempt
 def login(request):
@@ -300,14 +328,15 @@ def login(request):
             cursor.execute(query)
             result = cursor.fetchone()
             if(result is None):
-                return JsonResponse({"status":"failure", "message":"User not found"})
+                return JsonResponse({"status":"failure", "message":"User not found", "loggedIn":False})
             else:
                 password_stored = result[0]
                 teamName = result[1]
                 if(check_password(password, password_stored)):
-                    return JsonResponse({"status":"success", "message": "User exists... Login successful", "rollNo" : rollNo, "team": teamName}) 
+                    
+                    return JsonResponse({"status":"success", "message": "User exists... Login successful", "rollNo" : rollNo, "team": teamName, "loggedIn":True}) 
                 else:
-                    return JsonResponse({"status":"failure", "message":"User not found"}) 
+                    return JsonResponse({"status":"failure", "message":"User not found", "loggedIn": False}) 
 
 @csrf_exempt
 def gallery(request):
@@ -331,8 +360,14 @@ def gallery(request):
             image_url = f"data:image/jpeg;base64,{image[0]}"
             images_data.append({
                 "image":image_url,
-                "imageId":image[1]
+                "id":image[1]
             })
         return JsonResponse(images_data, safe=False)
-
-
+    if(request.method=="DELETE"):
+        data = json.loads(request.body)
+        id = data['id']
+        query = f"delete from event_gallery where imageId = {id}"
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+        transaction.commit()
+        return JsonResponse({"status":"success",",message":"Image deleted successfully"})

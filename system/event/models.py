@@ -1,6 +1,7 @@
 from django.db import models
 import uuid
 
+
 class Team(models.Model):
     rollNo = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=50)
@@ -12,7 +13,7 @@ class Team(models.Model):
     linkedinId = models.URLField()
     teamName = models.CharField(max_length=50)
     image = models.TextField()
-
+    
 class Event(models.Model):
     eventName = models.CharField(max_length=50)
     eventVenue = models.CharField(max_length=100)
@@ -21,19 +22,20 @@ class Event(models.Model):
     eventTime = models.TimeField()
     eventDesc = models.CharField(max_length=250)
     eventId = models.AutoField(primary_key=True)
+    rollNo = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True)
 
 class Attendees(models.Model):
     name = models.CharField(max_length=50)
     phoneNo = models.CharField(max_length=20)
     emailId = models.EmailField()
-    ticketId = models.UUIDField(primary_key=True , editable=False, default=uuid.uuid4)
+    ticketId = models.CharField(max_length=36)
     accommodation = models.BooleanField()
     transactionId = models.CharField(max_length=100)
 
 class Competitions(models.Model):
     competitionName = models.CharField(max_length=50)
     prizeMoney = models.IntegerField()
-    date = models.DateField()
+    eventid = models.ForeignKey(Event , on_delete=models.CASCADE)
     poster = models.TextField()
     competitionId = models.AutoField(primary_key=True)
 
@@ -41,8 +43,7 @@ class Participants(models.Model):
     name = models.CharField(max_length=50)
     phoneNo = models.CharField(max_length=20)
     emailId = models.EmailField()
-    registrationId = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
-    # accommodation = models.BooleanField()
+    registrationId = models.CharField(max_length=36)
     competitionId = models.ForeignKey(Competitions, on_delete=models.CASCADE)
 
 class Speakers(models.Model):
