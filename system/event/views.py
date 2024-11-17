@@ -9,6 +9,7 @@ import razorpay
 from dotenv import load_dotenv
 import os
 from django.db import IntegrityError
+from django.db.utils import OperationalError
 
 load_dotenv()
 RAZORPAY_ID = os.getenv("RAZORPAY_ID")
@@ -55,7 +56,10 @@ def competitions(request):
                     insert into event_competitions(competitionName, prizeMoney, poster, eventId_id) values (%s,%s,%s,%s)
                 """
         with connection.cursor() as cursor:
-            cursor.execute(query, (name, prizeMoney, encoded_image, eventId))
+            try:
+                cursor.execute(query, (name, prizeMoney, encoded_image, eventId))
+            except OperationalError:
+                return JsonResponse({'status':'failure', "message": "Invalid Input"})
         
         transaction.commit()
         return JsonResponse({'status': 'success', 'message': 'Competition added successfully.'})
@@ -101,7 +105,10 @@ def team(request):
                     insert into event_team (rollNo, name, position, phoneNo, emailId, password, instagramId, linkedinId, teamName, image) values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) 
                 """
         with connection.cursor() as cursor:
-            cursor.execute(query, (rollNo, name, position, phoneNo, emailId, hashed_password, instagramId, linkedinId, teamName, encoded_image))
+            try:
+                cursor.execute(query, (rollNo, name, position, phoneNo, emailId, hashed_password, instagramId, linkedinId, teamName, encoded_image))
+            except OperationalError:
+                return JsonResponse({'status':"failure", "message":"Invalid Input"})
         transaction.commit()
         return JsonResponse({'status': 'success', 'message': 'Team Member added successfully.'})
     if(request.method=="DELETE"):
@@ -123,10 +130,14 @@ def event(request):
             event_list= cursor.fetchall()
         event_data = []
         for event in event_list:
+            print(event)
             query = f"select name from event_team where rollNo = {event[7]}"
             with connection.cursor() as cursor:
-                cursor.execute(query)
-                managedBy = cursor.fetchone()[0]
+                if(event[7] is not None):
+                    cursor.execute(query)
+                    managedBy = cursor.fetchone()[0]
+                else:
+                    managedBy = "Unassigned"
                 event_data.append({"name": event[0], "venue": event[1], "time": event[4], "id": event[6], "desc": event[5], "dayNo":event[2], "eventDate":event[3], "managedBy": managedBy})
         return JsonResponse(event_data, safe=False)
     if(request.method=="POST"):
@@ -145,13 +156,19 @@ def event(request):
             query2 = f"select rollNo from event_team where name='{managedBy}'"
             with connection.cursor() as cursor:
                 cursor.execute(query2)
-                rollNo = cursor.fetchone()[0]
-                cursor.execute(query, (name, venue, time, desc, dayNo, date,rollNo))
+                rollNoData = cursor.fetchone()
+                if(rollNoData):
+                    rollNo = rollNoData[0]
+                    cursor.execute(query, (name, venue, time, desc, dayNo, date,rollNo))
+                else:
+                    return JsonResponse({"status": "failure", "message":"No such team member"})
             transaction.commit()
             return JsonResponse({'status': 'success', 'message': 'Event added successfully.'})
-        except IntegrityError as e:
+        except OperationalError as e:
             if "Cannot schedule an event in the past" in str(e):
-                return JsonResponse({"error": "Cannot schedule an event in the past."}, status=400)
+                return JsonResponse({"status":"failure", "message": "Cannot schedule an event in the past."})
+            if 'Event time conflicts with an existing event. Please choose a different time.' in str(e):
+                return JsonResponse({"status":"failure", "message":"Cannot schedule two events at the same time"})
             return JsonResponse({"error": "Database error occurred."}, status=500)
     if(request.method=="DELETE"):
         data = json.loads(request.body)
@@ -161,8 +178,6 @@ def event(request):
             cursor.execute(query)
         transaction.commit()
         return JsonResponse({"status":"success", "message":"Event deleted successfully"})
-
-    
 
 @csrf_exempt
 def participants(request):
@@ -224,7 +239,10 @@ def speakers(request):
             query = """
                         insert into event_speakers (name, description, image) values (%s,%s,%s)
                     """
-            cursor.execute(query, (name, desc, encoded_image))
+            try:
+                cursor.execute(query, (name, desc, encoded_image))
+            except OperationalError:
+                return JsonResponse({"status":"failure","message":"Invalid input data"})
         transaction.commit()
         return JsonResponse({"status":"success", "message": "Speaker data added successfully"})
     if(request.method =="DELETE"):
@@ -301,13 +319,21 @@ def sponsors(request):
         with connection.cursor() as cursor:
             fetch_rollNo = f"select rollNo from event_team where name = '{dealBy}'"
             cursor.execute(fetch_rollNo)
-            dealBy_rollNo = cursor.fetchone()[0]
-            query = """
-                        insert into event_sponsors (name, sponsorshipAmount, logo, dealBy_Id, phoneNo, emailId, title, link) values (%s,%s,%s,%s,%s,%s,%s,%s)
-                    """
-            cursor.execute(query, (name, amt, encoded_image, dealBy_rollNo, phoneNo, emailId, title, link))
-        transaction.commit()
-        return JsonResponse({"status":"success", "message": "Sponsor data added successfully"})
+            dealBy_rollNoData = cursor.fetchone()
+            if(dealBy_rollNoData):
+                dealBy_rollNo = dealBy_rollNoData[0]
+                query = """
+                            insert into event_sponsors (name, sponsorshipAmount, logo, dealBy_Id, phoneNo, emailId, title, link) values (%s,%s,%s,%s,%s,%s,%s,%s)
+                        """
+                try:
+                    cursor.execute(query, (name, amt, encoded_image, dealBy_rollNo, phoneNo, emailId, title, link))
+                except OperationalError:
+                    return JsonResponse({"status":"failure", "message":"Invalid input"})
+                transaction.commit()
+                return JsonResponse({"status":"success", "message": "Sponsor data added successfully"})
+            else:
+                return JsonResponse({"status":"failure","message":"No such team member"})
+
     if(request.method=="DELETE"):
         data = json.loads(request.body)
         id = data['id']
@@ -327,16 +353,19 @@ def login(request):
             query = f"select password, teamName from event_team where rollNo = {rollNo}"
             cursor.execute(query)
             result = cursor.fetchone()
-            if(result is None):
-                return JsonResponse({"status":"failure", "message":"User not found", "loggedIn":False})
-            else:
-                password_stored = result[0]
-                teamName = result[1]
-                if(check_password(password, password_stored)):
-                    
-                    return JsonResponse({"status":"success", "message": "User exists... Login successful", "rollNo" : rollNo, "team": teamName, "loggedIn":True}) 
+            if(result):
+                if(result is None):
+                    return JsonResponse({"status":"failure", "message":"User not found", "loggedIn":False})
                 else:
-                    return JsonResponse({"status":"failure", "message":"User not found", "loggedIn": False}) 
+                    password_stored = result[0]
+                    teamName = result[1]
+                    if(check_password(password, password_stored)):
+                        
+                        return JsonResponse({"status":"success", "message": "User exists... Login successful", "rollNo" : rollNo, "team": teamName, "loggedIn":True}) 
+                    else:
+                        return JsonResponse({"status":"failure", "message":"Incorrect password", "loggedIn": False})
+            else:
+                return JsonResponse({"status":"failure", "message":"User doesn't exist!"})
 
 @csrf_exempt
 def gallery(request):

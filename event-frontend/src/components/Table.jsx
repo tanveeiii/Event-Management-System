@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Search, X } from 'lucide-react';
 import '../static/Table.css';
 import { Form } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Table = ({ tableData }) => {
@@ -39,6 +41,10 @@ const Table = ({ tableData }) => {
         setEditedData(data);
         setFilteredData(data);
     }, [data]);
+
+    const notify = (message)=>{
+        toast(message) 
+    }
 
     const deleteRowFromServer = async (id) => {
         try {
@@ -142,14 +148,56 @@ const Table = ({ tableData }) => {
                         method: "POST",
                         body: formData
                     })
+                    const resData = await res.json()
+                    console.log(resData)
+                    if(resData['status'] = 'failure'){
+                        const message = resData['message']
+                        notify(message)
+                        return (
+                            <ToastContainer
+                            position="top-right"
+                            autoClose={5000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                            theme="light"
+                            transition:Bounce
+                        />
+                        )
+                    }
                 } else {
-                    await fetch(api, {
+                    res = await fetch(api, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
                         },
                         body: JSON.stringify(newRow)
                     })
+                    const resData = await res.json()
+                    console.log(resData)
+                    if(resData['status'] = 'failure'){
+                        const message = resData['message']
+                        notify(message)
+                        return (
+                            <ToastContainer
+                            position="top-right"
+                            autoClose={5000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                            theme="light"
+                            transition:Bounce
+                        />
+                        )
+                    }
                 }
             } catch (e) {
                 console.log(e)
@@ -159,7 +207,23 @@ const Table = ({ tableData }) => {
             setNewRow(null);
             setImageFile(false)
         } else {
-            console.log("Please fill in all fields before saving the new row.");
+            const message = "Please fill in all fields before saving"
+            notify(message)
+            return(
+                <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                transition:Bounce
+            />
+            )
         }
     };
 

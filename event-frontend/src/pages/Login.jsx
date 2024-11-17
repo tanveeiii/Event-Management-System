@@ -3,6 +3,7 @@ import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'; // Import eye ic
 import '../static/Login.css';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Login = () => {
     const {loggedIn, setLoggedIn, rollNo, setRollNo, teamName, setTeamName} = useAuth()
@@ -34,6 +35,9 @@ const Login = () => {
     }, [loggedIn])
 
     const [showPassword, setShowPassword] = useState(false);
+    const notify = (message)=>{
+        toast(message)
+    }
     const navigate = useNavigate()
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -70,8 +74,23 @@ const Login = () => {
                 }
             })
         } else {
-            alert("User doesn't exists!")
-            window.location.reload()
+            const notification = message['message']
+            notify(notification)
+            return(
+                <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                transition:Bounce
+            />
+            )
         }
     }
 
