@@ -303,7 +303,7 @@ def sponsors(request):
             cursor.execute(fetch_rollNo)
             dealBy_rollNo = cursor.fetchone()[0]
             query = """
-                        insert into event_sponsors (name, sponsorshipAmount, logo, dealBy, phoneNo, emailId, title, link) values (%s,%s,%s,%s,%s,%s,%s,%s)
+                        insert into event_sponsors (name, sponsorshipAmount, logo, dealBy_Id, phoneNo, emailId, title, link) values (%s,%s,%s,%s,%s,%s,%s,%s)
                     """
             cursor.execute(query, (name, amt, encoded_image, dealBy_rollNo, phoneNo, emailId, title, link))
         transaction.commit()
