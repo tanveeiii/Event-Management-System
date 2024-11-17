@@ -365,7 +365,7 @@ def login(request):
                     else:
                         return JsonResponse({"status":"failure", "message":"Incorrect password", "loggedIn": False})
             else:
-                return JsonResponse({"status":"failure", "message":"User doesn't exists!"})
+                return JsonResponse({"status":"failure", "message":"User doesn't exist!"})
 
 @csrf_exempt
 def gallery(request):
