@@ -285,7 +285,7 @@ def sponsors(request):
         for sponsor in sponsors_list:
             data_url = f"data:image/jpeg;base64,{sponsor[1]}"
             # print(sponsor)
-            sponsors_data.append({"name": sponsor[2], "amt" : sponsor[3], "dealBy" : sponsor[8], "phoneNo":sponsor[4], "emailId": sponsor[5], "image": data_url, "link": sponsor[7], "title":sponsor[6]})
+            sponsors_data.append({"name": sponsor[2], "amt" : sponsor[3], "dealBy" : sponsor[8], "phoneNo":sponsor[4], "emailId": sponsor[5], "image": data_url, "link": sponsor[7], "title":sponsor[6], "id": sponsor[0]})
         return JsonResponse(sponsors_data, safe=False)
     if(request.method=="POST"):
         name = request.POST.get('name')
@@ -308,6 +308,14 @@ def sponsors(request):
             cursor.execute(query, (name, amt, encoded_image, dealBy_rollNo, phoneNo, emailId, title, link))
         transaction.commit()
         return JsonResponse({"status":"success", "message": "Sponsor data added successfully"})
+    if(request.method=="DELETE"):
+        data = json.loads(request.body)
+        id = data['id']
+        query = f"delete from event_sponsors where sponsorId={id}"
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+        transaction.commit()
+        return JsonResponse({"status":"success","message":"Sponsor data deleted successfully"})
     
 @csrf_exempt
 def login(request):
@@ -352,6 +360,14 @@ def gallery(request):
             image_url = f"data:image/jpeg;base64,{image[0]}"
             images_data.append({
                 "image":image_url,
-                "imageId":image[1]
+                "id":image[1]
             })
         return JsonResponse(images_data, safe=False)
+    if(request.method=="DELETE"):
+        data = json.loads(request.body)
+        id = data['id']
+        query = f"delete from event_gallery where imageId = {id}"
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+        transaction.commit()
+        return JsonResponse({"status":"success",",message":"Image deleted successfully"})
