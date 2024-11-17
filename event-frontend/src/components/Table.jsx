@@ -73,7 +73,7 @@ const Table = ({ tableData }) => {
     };
 
     const addRowToServer = async () => {
-        setIsEditing(false);
+        // setIsEditing(false);
         console.log(editedData)
         const newId = Math.max(...editedData.map((item, index) => {
             return index
@@ -235,10 +235,12 @@ const Table = ({ tableData }) => {
     const renderCell = (item, field) => {
         const value = item[field];
         if (field === 'image') {
-            if (value && (!isEditing || (newRow && item.id !== newRow.id))) {
+            // if (value && (!isEditing || (newRow && item.id !== newRow.id)))
+            if (value && (newRow && item.id !== newRow.id)) {
                 return <img src={value} alt="row-image" style={{ width: '50px', height: '50px' }} />;
             }
-            console.log(isEditing, newRow, item.id)
+            // console.log(isEditing, newRow, item.id)
+            console.log(newRow, item.id)
             console.log("hello")
             return (
                 <input
@@ -265,8 +267,8 @@ const Table = ({ tableData }) => {
                 </div>
             );
         }
-
-        if ((isEditing && !newRow) || (newRow && item.id === newRow.id)) {
+        // if ((isEditing && !newRow) || (newRow && item.id === newRow.id))
+        if ((newRow && item.id === newRow.id)) {
             return (
                 <input
                     type="text"
