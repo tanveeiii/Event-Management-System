@@ -11,9 +11,8 @@ const Table = ({ tableData }) => {
     const data = tableData["data"]
     const api = tableData["api"]
     const team = tableData["team"]
-    // const [isEditing, setIsEditing] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
     const [editedData, setEditedData] = useState(data);
-    const [isDeleting, setIsDeleting] = useState(false);
     const [newRow, setNewRow] = useState(null);
     const [searchStates, setSearchStates] = useState({});
     const [filteredData, setFilteredData] = useState(data);
@@ -73,7 +72,7 @@ const Table = ({ tableData }) => {
     };
 
     const addRowToServer = async () => {
-        // setIsEditing(false);
+        setIsEditing(false);
         console.log(editedData)
         const newId = Math.max(...editedData.map((item, index) => {
             return index
@@ -111,12 +110,12 @@ const Table = ({ tableData }) => {
             [column]: { ...prev[column], value }
         }));
     };
-    // const toggleEdit = () => {
-    //     setIsEditing(!isEditing);
-    //     if (isEditing) {
-    //         setNewRow(null);
-    //     }
-    // };
+    const toggleEdit = () => {
+        setIsEditing(!isEditing);
+        if (isEditing) {
+            setNewRow(null);
+        }
+    };
     const handleCellChange = (id, field, value) => {
         if (newRow && id === newRow.id) {
             setNewRow(prev => ({ ...prev, [field]: value }));
@@ -235,12 +234,10 @@ const Table = ({ tableData }) => {
     const renderCell = (item, field) => {
         const value = item[field];
         if (field === 'image') {
-            // if (value && (!isEditing || (newRow && item.id !== newRow.id)))
-            if (value && (newRow && item.id !== newRow.id)) {
+            if (value && (!isEditing || (newRow && item.id !== newRow.id))) {
                 return <img src={value} alt="row-image" style={{ width: '50px', height: '50px' }} />;
             }
-            // console.log(isEditing, newRow, item.id)
-            console.log(newRow, item.id)
+            console.log(isEditing, newRow, item.id)
             console.log("hello")
             return (
                 <input
@@ -267,8 +264,8 @@ const Table = ({ tableData }) => {
                 </div>
             );
         }
-        // if ((isEditing && !newRow) || (newRow && item.id === newRow.id))
-        if ((newRow && item.id === newRow.id)) {
+
+        if ((isEditing && !newRow) || (newRow && item.id === newRow.id)) {
             return (
                 <input
                     type="text"
@@ -352,11 +349,11 @@ const Table = ({ tableData }) => {
                 {isCoreTeam && (
                     <>
                         <button
-                            className={`toolbar-button ${isDeleting ? 'active' : ''}`}
-                            title={isDeleting ? "Save" : "Edit"}
-                            onClick={() => setIsDeleting(!isDeleting)}
+                            className={`toolbar-button ${isEditing ? 'active' : ''}`}
+                            title={isEditing ? "Save" : "Edit"}
+                            onClick={toggleEdit}
                         >
-                            {isDeleting ? '✓' : '✘'}
+                            {isEditing ? '✓' : '✘'}
                         </button>
 
                         <button
@@ -379,7 +376,7 @@ const Table = ({ tableData }) => {
                             {Object.keys(data[0] || {}).map((column) => (
                                 <th key={column}>{renderColumnHeader(column, column.charAt(0).toUpperCase() + column.slice(1))}</th>
                             ))}
-                            {(isDeleting || newRow) && <th>Action</th>}
+                            {(isEditing || newRow) && <th>Action</th>}
                         </tr>
                     </thead>
                     <tbody>
@@ -388,7 +385,7 @@ const Table = ({ tableData }) => {
                                 {Object.keys(item).map((field) => (
                                     <td key={field}>{renderCell(item, field)}</td>
                                 ))}
-                                {isDeleting && (
+                                {isEditing && (
                                     <td>
                                         <button
                                             className="delete-button"
@@ -431,4 +428,5 @@ const Table = ({ tableData }) => {
 };
 
 export default Table;
+
 
