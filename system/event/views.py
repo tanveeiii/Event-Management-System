@@ -327,16 +327,19 @@ def login(request):
             query = f"select password, teamName from event_team where rollNo = {rollNo}"
             cursor.execute(query)
             result = cursor.fetchone()
-            if(result is None):
-                return JsonResponse({"status":"failure", "message":"User not found", "loggedIn":False})
-            else:
-                password_stored = result[0]
-                teamName = result[1]
-                if(check_password(password, password_stored)):
-                    
-                    return JsonResponse({"status":"success", "message": "User exists... Login successful", "rollNo" : rollNo, "team": teamName, "loggedIn":True}) 
+            if(result):
+                if(result is None):
+                    return JsonResponse({"status":"failure", "message":"User not found", "loggedIn":False})
                 else:
-                    return JsonResponse({"status":"failure", "message":"User not found", "loggedIn": False}) 
+                    password_stored = result[0]
+                    teamName = result[1]
+                    if(check_password(password, password_stored)):
+                        
+                        return JsonResponse({"status":"success", "message": "User exists... Login successful", "rollNo" : rollNo, "team": teamName, "loggedIn":True}) 
+                    else:
+                        return JsonResponse({"status":"failure", "message":"Incorrect password", "loggedIn": False})
+            else:
+                return JsonResponse({"status":"failure", "message":"User doesn't exists!"})
 
 @csrf_exempt
 def gallery(request):
