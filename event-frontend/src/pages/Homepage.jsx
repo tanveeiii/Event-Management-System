@@ -4,6 +4,7 @@ import Countdown from '../components/Countdown'
 import FluxusTitle from '../components/FluxusTitle'
 import { useAuth } from '../context/AuthContext'
 import { useState } from 'react'
+import ChatAssistant from '../components/ChatAssistant'
 
 const Homepage = () => {
 
@@ -19,6 +20,7 @@ const Homepage = () => {
         <>
             <Countdown />
             <FluxusTitle/>
+            <ChatAssistant/>
         </>
     )
 }
