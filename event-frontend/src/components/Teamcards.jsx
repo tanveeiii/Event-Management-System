@@ -27,22 +27,22 @@ const Teamcards = ({ name, image, phoneNo, emailId, instagramId, linkedinId }) =
                         <>
                             <li>
                                 <a href={phoneNo} target="_blank" rel="noopener noreferrer">
-                                    <FaPhone size={24} style={{ color: '#333', marginBottom: '15px' }} />
+                                    <FaPhone size={24} style={{ color: 'black', marginBottom: '15px' }} />
                                 </a>
                             </li>
                             <li>
                                 <a href={emailIdfinal} target="_blank" rel="noopener noreferrer">
-                                    <FaEnvelope size={24} style={{ color: '#333', marginBottom: '15px' }} />
+                                    <FaEnvelope size={24} style={{ color: 'black', marginBottom: '15px' }} />
                                 </a>
                             </li>
                             <li>
                                 <a href={instagramId} target="_blank" rel="noopener noreferrer">
-                                    <FaInstagram size={24} style={{ color: '#333', marginBottom: '15px' }} />
+                                    <FaInstagram size={24} style={{ color: 'black', marginBottom: '15px' }} />
                                 </a>
                             </li>
                             <li>
                                 <a href={linkedinId} target="_blank" rel="noopener noreferrer">
-                                    <FaLinkedin size={24} style={{ color: '#333', marginBottom: '15px' }} />
+                                    <FaLinkedin size={24} style={{ color: 'black', marginBottom: '15px' }} />
                                 </a>
                             </li>
                         </>

@@ -88,7 +88,7 @@
   color: #fff;
   padding: 10px 20px;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 500;
   border-width: 2px;
   border-color: white;
   border-radius: 5px;
@@ -97,6 +97,7 @@
   width: 200px;
   text-align: left;
   letter-spacing: 1px;
+  font-family: "Montserrat", sans-serif;
 }
 
 /* Click (active) effect */
@@ -114,5 +115,7 @@
     color: white;
     text-transform: uppercase;
     margin-top: 35px;
-    letter-spacing: 7px;
+    /* letter-spacing: 7px; */
+    font-family: "CustomFont",sans-serif;
+    letter-spacing: 4px;
 }

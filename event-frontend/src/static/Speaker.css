@@ -4,19 +4,19 @@
     width: 190px;
     position: relative;
   }
-  .speaker-panel:hover .speaker-card {
+  /* .speaker-panel:hover .speaker-card {
     filter: blur(1.5px);
-  }
-  .speaker-panel:hover .speaker-card1 {
+  } */
+  /* .speaker-panel:hover .speaker-card1 {
     background-size: 215% 135%;
-  }
+  } */
   /* .speaker-panel:hover .speaker-card2 {
     background-size: 115% 115%;
   }
   .speaker-panel:hover .speaker-card3 {
     background-size: 155% 115%;
   } */
-  .speaker-panel:hover .speaker-title {
+  /* .speaker-panel:hover .speaker-title {
     color: rgba(255, 255, 255, 0.2);
   }
   .speaker-panel:hover .speaker-border {
@@ -29,7 +29,7 @@
   .speaker-panel:hover .speaker-ring:after {
     transform: translateX(-50%) translateY(-50%) rotate(410deg);
   }
-  
+   */
   .speaker-ring,
   .speaker-card,
   .speaker-border,
@@ -55,8 +55,8 @@
     border-radius:20px;
     position: relative;
     transition: all 1s;
-    height: 300px;
-    width: 250px;
+    height: 294px;
+    width: 244px;
     border: 1px solid #0f2341;
     box-shadow: 0 0 20px #1b3a69;
   }
@@ -98,7 +98,11 @@
     transition: all 1s;
     top: 0;
     margin-top: 175px;
-    text-shadow: 0 0 20px #00dcff;
+    /* text-shadow: 0 0 20px #00dcff; */
+    font-family: "Bebas Neue", sans-serif;
+    letter-spacing: 3px;
+    width: 100%;
+    background-color: black;
   }
   
   .speaker-para {

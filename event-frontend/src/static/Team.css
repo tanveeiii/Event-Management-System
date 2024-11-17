@@ -1,6 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@font-face {
+    font-family: 'CustomFont';
+    src: url('../assets/fonts/Hey Comic.ttf') format('truetype');
+    font-weight: normal; /* Adjust as needed */
+    font-style: normal; /* Adjust as needed */
+  }
+
 .teams-title {
     font-size: 5em;
-    font-family: poppins , sans-serif ;
     margin-bottom: 0px;
     color: white;
     margin-top: 100px;
@@ -28,7 +36,9 @@
 
 .teams-subheading{
     font-size: 2em;
-    font-family: poppins , sans-serif ;
+    /* font-family: poppins , sans-serif ; */
+    font-family: "CustomFont",sans-serif;
+    letter-spacing: 4px;
     margin-bottom: 70px;
     color: #f76c6c;
     margin-top: 70px;

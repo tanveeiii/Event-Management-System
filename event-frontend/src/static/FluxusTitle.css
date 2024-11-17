@@ -29,7 +29,9 @@
     font-size: 25px;
     color: #FFE997;
     letter-spacing: 2px;
-    text-shadow: 0 0 20px white;
+    text-shadow: 0 0 30px white;
+    background-color: black;
+    font-family: "Montserrat", sans-serif;
   }
   
   @keyframes text {

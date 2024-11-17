@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 .header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    padding: 15px 80px;
+    padding: 15px 50px;
     background: black;
     display: flex;
     justify-content: space-between;
@@ -48,7 +50,7 @@
 
 .navbar {
     display: flex;
-    gap: 40px;
+    gap: 35px;
 }
 
 .navbar a {
@@ -58,6 +60,7 @@
     text-decoration: none;
     /* margin-left: 35px; */
     transition: 0.3s;
+    font-family: "Montserrat", sans-serif;
 }
 
 .navbar a:hover {
