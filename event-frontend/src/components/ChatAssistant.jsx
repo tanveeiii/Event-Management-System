@@ -31,6 +31,11 @@ const ChatAssistant = () => {
               window.LipyWebchat({
                 apiKey: "GrQJIvoHOUx6IWdXu0pJUKj7YTscQE", // Add your API Key
                 orgId: "nmGlPoYzXdw3l4mz", // Add your Org ID
+                styles:{
+                  btnContainerStyle:{
+                    right:36,bottom:40
+                  }
+                }
               });
             };
             script.onerror = function () {
