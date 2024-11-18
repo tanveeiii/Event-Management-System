@@ -41,6 +41,10 @@ const Table = ({ tableData }) => {
         setFilteredData(data);
     }, [data]);
 
+    useEffect(() => {
+    }, [editedData])
+    
+
     const notify = (message)=>{
         toast(message) 
     }
