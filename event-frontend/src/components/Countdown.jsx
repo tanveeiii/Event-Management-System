@@ -4,7 +4,7 @@ import Button from './Button';
 
 function Countdown() {
   const calculateTimeLeft = () => {
-    const targetDate = new Date("2026-12-31T00:00:00");
+    const targetDate = new Date("2025-12-31T00:00:00");
     const now = new Date();
     const difference = targetDate - now;
 
