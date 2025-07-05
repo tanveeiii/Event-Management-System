@@ -27,7 +27,7 @@ const Ticket = () => {
       }
     const fetchOrderId = async (amt) => {
         try {
-            const response = await fetch("https://mananjiwnani.pythonanywhere.com//api/create_order/", {
+            const response = await fetch("http://127.0.0.1:8000/api/create_order/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -78,7 +78,7 @@ const Ticket = () => {
                     "amount":amt,
                     "transactionId":response['razorpay_payment_id']
                 }
-                const res = await fetch("https://mananjiwnani.pythonanywhere.com//api/attendees/",
+                const res = await fetch("http://127.0.0.1:8000/api/attendees/",
                     {
                         method: "POST",
                         headers: {

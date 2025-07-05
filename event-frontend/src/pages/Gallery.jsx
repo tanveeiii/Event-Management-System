@@ -18,7 +18,7 @@ const Gallery = () => {
 
 
 
-const galleryListURL = 'https://mananjiwnani.pythonanywhere.com//api/gallery/'
+const galleryListURL = 'http://127.0.0.1:8000/api/gallery/'
   useEffect(() => {
     fetchGallery();
   }, []);
