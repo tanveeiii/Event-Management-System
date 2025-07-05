@@ -44,28 +44,28 @@ const Dashboard = () => {
 
         switch (team) {
             case "Team":
-                apiUrl = 'http://localhost:8000/api/team/';
+                apiUrl = 'https://mananjiwnani.pythonanywhere.com//api/team/';
                 break;
             case "Attendees":
-                apiUrl = 'http://localhost:8000/api/attendees/';
+                apiUrl = 'https://mananjiwnani.pythonanywhere.com//api/attendees/';
                 break;
             case "Competitions":
-                apiUrl = 'http://localhost:8000/api/competitions/';
+                apiUrl = 'https://mananjiwnani.pythonanywhere.com//api/competitions/';
                 break;
             case "Speakers":
-                apiUrl = 'http://localhost:8000/api/speaker/';
+                apiUrl = 'https://mananjiwnani.pythonanywhere.com//api/speaker/';
                 break;
             case "Sponsors":
-                apiUrl = 'http://localhost:8000/api/sponsors/';
+                apiUrl = 'https://mananjiwnani.pythonanywhere.com//api/sponsors/';
                 break;
             case "Participants":
-                apiUrl = 'http://localhost:8000/api/participants/';
+                apiUrl = 'https://mananjiwnani.pythonanywhere.com//api/participants/';
                 break;
             case "Events":
-                apiUrl = 'http://localhost:8000/api/event/';
+                apiUrl = 'https://mananjiwnani.pythonanywhere.com//api/event/';
                 break;
             case "Gallery":
-                apiUrl = 'http://localhost:8000/api/gallery/';
+                apiUrl = 'https://mananjiwnani.pythonanywhere.com//api/gallery/';
                 break;
             default:
                 return;

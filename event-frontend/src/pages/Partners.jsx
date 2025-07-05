@@ -17,7 +17,7 @@ const {loggedIn, setLoggedIn, rollNo, setRollNo, teamName, setTeamName} = useAut
     }
   }, [])
 
-const sponsorListURL = 'http://localhost:8000/api/sponsors/'
+const sponsorListURL = 'https://mananjiwnani.pythonanywhere.com//api/sponsors/'
   useEffect(() => {
     fetchSponsors();
   }, []);

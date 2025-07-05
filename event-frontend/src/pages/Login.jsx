@@ -42,7 +42,7 @@ const Login = () => {
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
-    const apiurl = "http://localhost:8000/api/login/";
+    const apiurl = "https://mananjiwnani.pythonanywhere.com//api/login/";
     const login = async (event) => {
         event.preventDefault()
         const rollNo = event.target.username.value

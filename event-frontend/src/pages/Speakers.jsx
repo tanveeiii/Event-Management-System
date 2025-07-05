@@ -11,7 +11,7 @@ const Speakers = () => {
   const {loggedIn, setLoggedIn, rollNo, setRollNo, teamName, setTeamName} = useAuth()
  
     const fetchspeakers = async () => {
-      const apiurl = "http://localhost:8000/api/speaker/";
+      const apiurl = "https://mananjiwnani.pythonanywhere.com//api/speaker/";
       try {
         const res = await fetch(apiurl);
         const data = await res.json();

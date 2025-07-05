@@ -25,7 +25,7 @@ const Events = () => {
   const [eventsData, setEventsData] = useState([])
 
 
-  const eventListURL = 'http://localhost:8000/api/event/'
+  const eventListURL = 'https://mananjiwnani.pythonanywhere.com//api/event/'
   useEffect(() => {
     fetchEvents();
   }, []);

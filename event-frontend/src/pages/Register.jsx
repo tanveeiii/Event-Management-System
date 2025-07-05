@@ -20,9 +20,9 @@ const Register = () => {
     }
   }, [])
     // const params = {"id": index}
-    const participantListURL = "http://localhost:8000/api/participants/";
+    const participantListURL = "https://mananjiwnani.pythonanywhere.com//api/participants/";
     const getCompDetails=async()=>{
-    const res = await fetch(`http://localhost:8000/api/competitions/?id=${index}`, {
+    const res = await fetch(`https://mananjiwnani.pythonanywhere.com//api/competitions/?id=${index}`, {
         method: "GET",
     })
     const resData = await res.json()

@@ -15,7 +15,7 @@ import {
 } from "react-icons/fa";
 
 const Team = () => {
-  const teamListURL = 'http://localhost:8000/api/team/'
+  const teamListURL = 'https://mananjiwnani.pythonanywhere.com//api/team/'
 
   const {loggedIn, setLoggedIn, rollNo, setRollNo, teamName, setTeamName} = useAuth()
   const [team, setTeamData] = useState([])
